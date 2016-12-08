@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>GTMRefreshExample.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>267115411DF6AE0D00F27CEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>267115571DF6AEAA00F27CEA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

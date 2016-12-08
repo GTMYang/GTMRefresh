@@ -7,13 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		267115471DF6AE0D00F27CEA /* GTMRefresh.h in Headers */ = {isa = PBXBuildFile; fileRef = 267115451DF6AE0D00F27CEA /* GTMRefresh.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */; };
+		267115521DF6AE4E00F27CEA /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2671154F1DF6AE4E00F27CEA /* LICENSE */; };
+		267115531DF6AE4E00F27CEA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 267115501DF6AE4E00F27CEA /* README.md */; };
+		2671155B1DF6AEAA00F27CEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2671155A1DF6AEAA00F27CEA /* AppDelegate.swift */; };
+		2671155D1DF6AEAA00F27CEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2671155C1DF6AEAA00F27CEA /* ViewController.swift */; };
+		267115601DF6AEAA00F27CEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2671155E1DF6AEAA00F27CEA /* Main.storyboard */; };
+		267115621DF6AEAA00F27CEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 267115611DF6AEAA00F27CEA /* Assets.xcassets */; };
+		267115651DF6AEAA00F27CEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267115631DF6AEAA00F27CEA /* LaunchScreen.storyboard */; };
+		2671156D1DF6AEDD00F27CEA /* GTMRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267115421DF6AE0D00F27CEA /* GTMRefresh.framework */; };
+		2671156E1DF6AEDD00F27CEA /* GTMRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 267115421DF6AE0D00F27CEA /* GTMRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		26B9A9781DF7AFDA00D0BAA6 /* GTMRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A9771DF7AFDA00D0BAA6 /* GTMRefreshComponent.swift */; };
+		26B9A97C1DF7DD9900D0BAA6 /* GTMRefreshExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A97B1DF7DD9900D0BAA6 /* GTMRefreshExtension.swift */; };
+		26B9A97E1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A97D1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift */; };
+		26B9A9801DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A97F1DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift */; };
+		26B9A9821DF8088900D0BAA6 /* GTMRefreshConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A9811DF8088900D0BAA6 /* GTMRefreshConstant.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2671156B1DF6AECF00F27CEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 267115391DF6AE0D00F27CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 267115411DF6AE0D00F27CEA;
+			remoteInfo = GTMRefresh;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2671156F1DF6AEDD00F27CEA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2671156E1DF6AEDD00F27CEA /* GTMRefresh.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		267115421DF6AE0D00F27CEA /* GTMRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		267115451DF6AE0D00F27CEA /* GTMRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTMRefresh.h; sourceTree = "<group>"; };
 		267115461DF6AE0D00F27CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GTMRefresh.podspec; sourceTree = "<group>"; };
+		2671154F1DF6AE4E00F27CEA /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		267115501DF6AE4E00F27CEA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		267115581DF6AEAA00F27CEA /* GTMRefreshExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GTMRefreshExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2671155A1DF6AEAA00F27CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2671155C1DF6AEAA00F27CEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2671155F1DF6AEAA00F27CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		267115611DF6AEAA00F27CEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		267115641DF6AEAA00F27CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		267115661DF6AEAA00F27CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26B9A9771DF7AFDA00D0BAA6 /* GTMRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMRefreshComponent.swift; sourceTree = "<group>"; };
+		26B9A97B1DF7DD9900D0BAA6 /* GTMRefreshExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMRefreshExtension.swift; sourceTree = "<group>"; };
+		26B9A97D1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMRefreshHeader.swift; sourceTree = "<group>"; };
+		26B9A97F1DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMLoadMoreFooter.swift; sourceTree = "<group>"; };
+		26B9A9811DF8088900D0BAA6 /* GTMRefreshConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMRefreshConstant.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,13 +76,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		267115551DF6AEAA00F27CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2671156D1DF6AEDD00F27CEA /* GTMRefresh.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		267115381DF6AE0D00F27CEA = {
 			isa = PBXGroup;
 			children = (
+				2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */,
+				2671154F1DF6AE4E00F27CEA /* LICENSE */,
+				267115501DF6AE4E00F27CEA /* README.md */,
 				267115441DF6AE0D00F27CEA /* GTMRefresh */,
+				267115591DF6AEAA00F27CEA /* GTMRefreshExample */,
 				267115431DF6AE0D00F27CEA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -39,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				267115421DF6AE0D00F27CEA /* GTMRefresh.framework */,
+				267115581DF6AEAA00F27CEA /* GTMRefreshExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -46,10 +111,35 @@
 		267115441DF6AE0D00F27CEA /* GTMRefresh */ = {
 			isa = PBXGroup;
 			children = (
-				267115451DF6AE0D00F27CEA /* GTMRefresh.h */,
-				267115461DF6AE0D00F27CEA /* Info.plist */,
+				26B9A9811DF8088900D0BAA6 /* GTMRefreshConstant.swift */,
+				26B9A9771DF7AFDA00D0BAA6 /* GTMRefreshComponent.swift */,
+				26B9A97D1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift */,
+				26B9A97F1DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift */,
+				26B9A97B1DF7DD9900D0BAA6 /* GTMRefreshExtension.swift */,
+				2671154D1DF6AE2E00F27CEA /* Supporting Files */,
 			);
 			path = GTMRefresh;
+			sourceTree = "<group>";
+		};
+		2671154D1DF6AE2E00F27CEA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				267115461DF6AE0D00F27CEA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		267115591DF6AEAA00F27CEA /* GTMRefreshExample */ = {
+			isa = PBXGroup;
+			children = (
+				2671155A1DF6AEAA00F27CEA /* AppDelegate.swift */,
+				2671155C1DF6AEAA00F27CEA /* ViewController.swift */,
+				2671155E1DF6AEAA00F27CEA /* Main.storyboard */,
+				267115611DF6AEAA00F27CEA /* Assets.xcassets */,
+				267115631DF6AEAA00F27CEA /* LaunchScreen.storyboard */,
+				267115661DF6AEAA00F27CEA /* Info.plist */,
+			);
+			path = GTMRefreshExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -59,7 +149,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				267115471DF6AE0D00F27CEA /* GTMRefresh.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,16 +173,41 @@
 			productReference = 267115421DF6AE0D00F27CEA /* GTMRefresh.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		267115571DF6AEAA00F27CEA /* GTMRefreshExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 267115671DF6AEAA00F27CEA /* Build configuration list for PBXNativeTarget "GTMRefreshExample" */;
+			buildPhases = (
+				267115541DF6AEAA00F27CEA /* Sources */,
+				267115551DF6AEAA00F27CEA /* Frameworks */,
+				267115561DF6AEAA00F27CEA /* Resources */,
+				2671156F1DF6AEDD00F27CEA /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2671156C1DF6AECF00F27CEA /* PBXTargetDependency */,
+			);
+			name = GTMRefreshExample;
+			productName = GTMRefreshExample;
+			productReference = 267115581DF6AEAA00F27CEA /* GTMRefreshExample.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		267115391DF6AE0D00F27CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = luoyang;
 				TargetAttributes = {
 					267115411DF6AE0D00F27CEA = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = BCGYF9W329;
+						ProvisioningStyle = Automatic;
+					};
+					267115571DF6AEAA00F27CEA = {
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = BCGYF9W329;
 						ProvisioningStyle = Automatic;
@@ -106,6 +220,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 267115381DF6AE0D00F27CEA;
 			productRefGroup = 267115431DF6AE0D00F27CEA /* Products */;
@@ -113,6 +228,7 @@
 			projectRoot = "";
 			targets = (
 				267115411DF6AE0D00F27CEA /* GTMRefresh */,
+				267115571DF6AEAA00F27CEA /* GTMRefreshExample */,
 			);
 		};
 /* End PBXProject section */
@@ -122,6 +238,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				267115521DF6AE4E00F27CEA /* LICENSE in Resources */,
+				267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		267115561DF6AEAA00F27CEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				267115651DF6AEAA00F27CEA /* LaunchScreen.storyboard in Resources */,
+				267115621DF6AEAA00F27CEA /* Assets.xcassets in Resources */,
+				267115601DF6AEAA00F27CEA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,10 +260,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B9A97C1DF7DD9900D0BAA6 /* GTMRefreshExtension.swift in Sources */,
+				26B9A97E1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift in Sources */,
+				26B9A9821DF8088900D0BAA6 /* GTMRefreshConstant.swift in Sources */,
+				26B9A9781DF7AFDA00D0BAA6 /* GTMRefreshComponent.swift in Sources */,
+				26B9A9801DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift in Sources */,
+				267115531DF6AE4E00F27CEA /* README.md in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		267115541DF6AEAA00F27CEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2671155D1DF6AEAA00F27CEA /* ViewController.swift in Sources */,
+				2671155B1DF6AEAA00F27CEA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2671156C1DF6AECF00F27CEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 267115411DF6AE0D00F27CEA /* GTMRefresh */;
+			targetProxy = 2671156B1DF6AECF00F27CEA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2671155E1DF6AEAA00F27CEA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2671155F1DF6AEAA00F27CEA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		267115631DF6AEAA00F27CEA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				267115641DF6AEAA00F27CEA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		267115481DF6AE0D00F27CEA /* Debug */ = {
@@ -179,7 +349,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -226,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -275,6 +445,36 @@
 			};
 			name = Release;
 		};
+		267115681DF6AEAA00F27CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BCGYF9W329;
+				INFOPLIST_FILE = GTMRefreshExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.luoyang.GTMRefreshExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		267115691DF6AEAA00F27CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = BCGYF9W329;
+				INFOPLIST_FILE = GTMRefreshExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.luoyang.GTMRefreshExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -294,6 +494,16 @@
 				2671154C1DF6AE0D00F27CEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		267115671DF6AEAA00F27CEA /* Build configuration list for PBXNativeTarget "GTMRefreshExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				267115681DF6AEAA00F27CEA /* Debug */,
+				267115691DF6AEAA00F27CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
