@@ -1,8 +1,8 @@
-GTMActivityIndicatorView
+GTMRefresh
 ===================
 
 # Introduction
-`GTMActivityIndicatorView` 是一个Loadding动画库
+`GTMRefresh` 是一个Loadding动画库
 
 本库是在 [NVActivityIndicatorView](https://github.com/gontovnik/DGActivityIndicatorView), 的基础上做了一些方便使用的改进
 
@@ -50,12 +50,12 @@ Install Cocoapods if need be.
 $ gem install cocoapods
 ```
 
-Add `GTMActivityIndicatorView` in your `Podfile`.
+Add `GTMRefresh` in your `Podfile`.
 
 ```ruby
 use_frameworks!
 
-pod 'GTMActivityIndicatorView'
+pod 'GTMRefresh'
 ```
 
 Then, run the following command.
@@ -67,9 +67,9 @@ $ pod install
 
 ## Manual
 
-Copy `GTMActivityIndicatorView` folder to your project. That's it.
+Copy `GTMRefresh` folder to your project. That's it.
 
-_**Note:** Make sure that all files in `GTMActivityIndicatorView` included in Compile Sources in Build Phases._
+_**Note:** Make sure that all files in `GTMRefresh` included in Compile Sources in Build Phases._
 
 # Migration
 
@@ -79,21 +79,21 @@ This version requires Xcode 8.0 and Swift 3.
 
 # Usage
 
-Firstly, import `GTMActivityIndicatorView`.
+Firstly, import `GTMRefresh`.
 
 ```swift
-import GTMActivityIndicatorView
+import GTMRefresh
 ```
 
 ## Initialization
 
-Then, there are two ways you can create GTMActivityIndicatorView:
+Then, there are two ways you can create GTMRefresh:
 
 
-- By code, using initializer. All parameters other than `frame` are optional and `GTMActivityIndicatorView.DEFAULT_*` are used as default values.
+- By code, using initializer. All parameters other than `frame` are optional and `GTMRefresh.DEFAULT_*` are used as default values.
 
 ```swift
-GTMActivityIndicatorView(frame: frame, type: type, color: color, padding: padding)
+GTMRefresh(frame: frame, type: type, color: color, padding: padding)
 ```
 
 _**Note:** Check [DEFAULTS](#defaults) for default values._
@@ -151,7 +151,7 @@ NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
 
 ## DEFAULTS
 
-There are global defaults for all `GTMActivityIndicatorView` instances.
+There are global defaults for all `GTMRefresh` instances.
 
 - Default animation type.
 
@@ -162,19 +162,19 @@ There are global defaults for all `GTMActivityIndicatorView` instances.
 - Default color of activity indicator view.
 
 ```swift
-GTMActivityIndicatorView.DEFAULT_COLOR = UIColor.whiteColor()
+GTMRefresh.DEFAULT_COLOR = UIColor.whiteColor()
 ```
 
 - Default padding of activity indicator view.
 
 ```swift
-GTMActivityIndicatorView.DEFAULT_PADDING = CGFloat(0)
+GTMRefresh.DEFAULT_PADDING = CGFloat(0)
 ```
 
 - Default size of activity indicator view used in UI blocker.
 
 ```swift
-GTMActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSizeMake(60, 60)
+GTMRefresh.DEFAULT_BLOCKER_SIZE = CGSizeMake(60, 60)
 ```
 
 - Default display time threshold.
@@ -182,7 +182,7 @@ GTMActivityIndicatorView.DEFAULT_BLOCKER_SIZE = CGSizeMake(60, 60)
 > Default time that has to be elapsed (between calls of `startAnimating()` and `stopAnimating()`) in order to actually display UI blocker. It should be set thinking about what the minimum duration of an activity is to be worth showing it to the user. If the activity ends before this time threshold, then it will not be displayed at all.
 
 ```swift
-GTMActivityIndicatorView.DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD = 0 // in milliseconds
+GTMRefresh.DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD = 0 // in milliseconds
 ```
 
 - Default minimum display time.
@@ -190,19 +190,19 @@ GTMActivityIndicatorView.DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD = 0 // in millis
 > Default minimum display time of UI blocker. Its main purpose is to avoid flashes showing and hiding it so fast. For instance, setting it to 200ms will force UI blocker to be shown for at least this time (regardless of calling `stopAnimating()` ealier).
 
 ```swift
-GTMActivityIndicatorView.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 0 // in milliseconds
+GTMRefresh.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 0 // in milliseconds
 ```
 
 - Default message displayed in UI blocker.
 
 ```swift
-GTMActivityIndicatorView.DEFAULT_BLOCKER_MESSAGE: String? = nil
+GTMRefresh.DEFAULT_BLOCKER_MESSAGE: String? = nil
 ```
 
 - Default font of message displayed in UI blocker.
 
 ```swift
-GTMActivityIndicatorView.DEFAULT_BLOCKER_MESSAGE_FONT = UIFont.boldSystemFont(ofSize: 20)
+GTMRefresh.DEFAULT_BLOCKER_MESSAGE_FONT = UIFont.boldSystemFont(ofSize: 20)
 ```
 
 

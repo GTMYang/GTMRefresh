@@ -7,28 +7,24 @@
 //
 
 import UIKit
+import ObjectiveC
 
 extension UIScrollView {
-    private var gtmAssociatedKeyRefreshHeader: String {
-        get { return "gtmHeader" } set { }
-    }
-    private var gtmAssociatedKeyLoadMoreFooter: String {
-        get { return "gtmFooter" } set { }
-    }
+    
     private var gtmHeader: GTMRefreshHeader? {
         get {
-            return objc_getAssociatedObject(self, &gtmAssociatedKeyRefreshHeader) as? GTMRefreshHeader
+            return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader) as? GTMRefreshHeader
         }
         set {
-            objc_setAssociatedObject(self, &gtmAssociatedKeyRefreshHeader, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+           objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     private var gtmFooter: GTMLoadMoreFooter? {
         get {
-            return objc_getAssociatedObject(self, &gtmAssociatedKeyLoadMoreFooter) as? GTMLoadMoreFooter
+            return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter) as? GTMLoadMoreFooter
         }
         set {
-            objc_setAssociatedObject(self, &gtmAssociatedKeyLoadMoreFooter, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -40,6 +36,9 @@ extension UIScrollView {
     public func gtm_addRefreshHeaderView(_ refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) {
         if let _: SubGTMRefreshHeaderProtocol = self as? SubGTMRefreshHeaderProtocol {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
+        }
+        if let header: DefaultGTMRefreshHeader = refreshHeader as? DefaultGTMRefreshHeader {
+            header.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: 60.0)
         }
         if gtmHeader != refreshHeader {
             gtmHeader?.removeFromSuperview()
@@ -58,6 +57,7 @@ extension UIScrollView {
     ///   - loadMoreFooter: 上拉加载动效View必须继承GTMLoadMoreFooter，不传值的时候默认使用 DefaultGTMLoadMoreFooter
     ///   - refreshBlock: 加载更多数据Block
     public func gtm_addLoadMoreFooterView(_ loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) {
+        
         if let _: SubGTMLoadMoreFooterProtocol = self as? SubGTMLoadMoreFooterProtocol {
             fatalError("loadMoreFooter must implement SubGTMLoadMoreFooterProtocol")
         }
@@ -70,6 +70,10 @@ extension UIScrollView {
                 self.gtmFooter = footer
             }
         }
+    }
+    
+    public func endRefreshing() {
+        self.gtmHeader?.endRefresing()
     }
 }
 
@@ -196,6 +200,15 @@ extension UIView {
         set {
             var frame = self.frame
             frame.origin = newValue
+            self.frame = frame
+        }
+    }
+    
+    var mj_center: CGPoint {
+        get { return CGPoint(x: (frame.size.width-frame.origin.x)*0.5, y: (frame.size.height-frame.origin.y)*0.5) }
+        set {
+            var frame = self.frame
+            frame.origin = CGPoint(x: newValue.x - frame.size.width*0.5, y: newValue.y - frame.size.height*0.5)
             self.frame = frame
         }
     }

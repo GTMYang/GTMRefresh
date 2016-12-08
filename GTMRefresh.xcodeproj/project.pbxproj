@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2655CB3A1DF94569001C50CF /* arrow_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB381DF94569001C50CF /* arrow_down@3x.png */; };
+		2655CB3B1DF94569001C50CF /* success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB391DF94569001C50CF /* success@3x.png */; };
+		2655CB3E1DF945A0001C50CF /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB401DF945A0001C50CF /* Localize.strings */; };
+		2655CB4B1DF9564B001C50CF /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2655CB4A1DF9564B001C50CF /* SectionModel.swift */; };
 		267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */; };
 		267115521DF6AE4E00F27CEA /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2671154F1DF6AE4E00F27CEA /* LICENSE */; };
 		267115531DF6AE4E00F27CEA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 267115501DF6AE4E00F27CEA /* README.md */; };
@@ -49,6 +53,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2655CB381DF94569001C50CF /* arrow_down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@3x.png"; sourceTree = "<group>"; };
+		2655CB391DF94569001C50CF /* success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@3x.png"; sourceTree = "<group>"; };
+		2655CB3F1DF945A0001C50CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localize.strings; sourceTree = "<group>"; };
+		2655CB421DF945DD001C50CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localize.strings"; sourceTree = "<group>"; };
+		2655CB4A1DF9564B001C50CF /* SectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
 		267115421DF6AE0D00F27CEA /* GTMRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		267115461DF6AE0D00F27CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GTMRefresh.podspec; sourceTree = "<group>"; };
@@ -87,6 +96,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2655CB371DF9453D001C50CF /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2655CB381DF94569001C50CF /* arrow_down@3x.png */,
+				2655CB391DF94569001C50CF /* success@3x.png */,
+				2655CB401DF945A0001C50CF /* Localize.strings */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		2655CB431DF95617001C50CF /* CurveMask */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CurveMask;
+			sourceTree = "<group>";
+		};
+		2655CB441DF95617001C50CF /* DianPing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DianPing;
+			sourceTree = "<group>";
+		};
+		2655CB451DF95617001C50CF /* QQRefresh */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QQRefresh;
+			sourceTree = "<group>";
+		};
+		2655CB461DF95617001C50CF /* QQVideo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QQVideo;
+			sourceTree = "<group>";
+		};
+		2655CB471DF95617001C50CF /* TaoBao */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TaoBao;
+			sourceTree = "<group>";
+		};
+		2655CB481DF95617001C50CF /* YahooWeather */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YahooWeather;
+			sourceTree = "<group>";
+		};
+		2655CB491DF95617001C50CF /* YouKu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = YouKu;
+			sourceTree = "<group>";
+		};
 		267115381DF6AE0D00F27CEA = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +179,7 @@
 		267115441DF6AE0D00F27CEA /* GTMRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				2655CB371DF9453D001C50CF /* Resource */,
 				26B9A9811DF8088900D0BAA6 /* GTMRefreshConstant.swift */,
 				26B9A9771DF7AFDA00D0BAA6 /* GTMRefreshComponent.swift */,
 				26B9A97D1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift */,
@@ -132,8 +201,16 @@
 		267115591DF6AEAA00F27CEA /* GTMRefreshExample */ = {
 			isa = PBXGroup;
 			children = (
+				2655CB431DF95617001C50CF /* CurveMask */,
+				2655CB441DF95617001C50CF /* DianPing */,
+				2655CB451DF95617001C50CF /* QQRefresh */,
+				2655CB461DF95617001C50CF /* QQVideo */,
+				2655CB471DF95617001C50CF /* TaoBao */,
+				2655CB481DF95617001C50CF /* YahooWeather */,
+				2655CB491DF95617001C50CF /* YouKu */,
 				2671155A1DF6AEAA00F27CEA /* AppDelegate.swift */,
 				2671155C1DF6AEAA00F27CEA /* ViewController.swift */,
+				2655CB4A1DF9564B001C50CF /* SectionModel.swift */,
 				2671155E1DF6AEAA00F27CEA /* Main.storyboard */,
 				267115611DF6AEAA00F27CEA /* Assets.xcassets */,
 				267115631DF6AEAA00F27CEA /* LaunchScreen.storyboard */,
@@ -221,6 +298,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 267115381DF6AE0D00F27CEA;
 			productRefGroup = 267115431DF6AE0D00F27CEA /* Products */;
@@ -238,7 +316,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2655CB3E1DF945A0001C50CF /* Localize.strings in Resources */,
 				267115521DF6AE4E00F27CEA /* LICENSE in Resources */,
+				2655CB3B1DF94569001C50CF /* success@3x.png in Resources */,
+				2655CB3A1DF94569001C50CF /* arrow_down@3x.png in Resources */,
 				267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +356,7 @@
 			files = (
 				2671155D1DF6AEAA00F27CEA /* ViewController.swift in Sources */,
 				2671155B1DF6AEAA00F27CEA /* AppDelegate.swift in Sources */,
+				2655CB4B1DF9564B001C50CF /* SectionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +371,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2655CB401DF945A0001C50CF /* Localize.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2655CB3F1DF945A0001C50CF /* Base */,
+				2655CB421DF945DD001C50CF /* zh-Hans */,
+			);
+			name = Localize.strings;
+			sourceTree = "<group>";
+		};
 		2671155E1DF6AEAA00F27CEA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -312,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -365,6 +457,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
