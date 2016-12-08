@@ -29,7 +29,7 @@ public protocol SubGTMRefreshComponentProtocol {
     func scollViewPanStateDidChange(_ change: [NSKeyValueChangeKey : Any]?)
 }
 
-public class GTMRefreshComponent: UIView {
+open class GTMRefreshComponent: UIView {
     
     public weak var scrollView: UIScrollView?
     
@@ -52,7 +52,7 @@ public class GTMRefreshComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func draw(_ rect: CGRect) {
+    override open func draw(_ rect: CGRect) {
         super.draw(rect)
         
         if self.state == .willRefresh {
@@ -61,7 +61,7 @@ public class GTMRefreshComponent: UIView {
         }
     }
     
-    override public func willMove(toSuperview newSuperview: UIView?) {
+    override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
         guard (newSuperview?.isKind(of: UIScrollView.self))! else {

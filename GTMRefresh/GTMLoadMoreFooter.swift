@@ -12,13 +12,11 @@ public protocol SubGTMLoadMoreFooterProtocol {
     
 }
 
-public class GTMLoadMoreFooter: GTMRefreshComponent {
-    
+open class GTMLoadMoreFooter: GTMRefreshComponent {
     
     /// 加载更多Block
     var loadMoreBlock: () -> Void = {}
 
-    
 
 }
 

@@ -12,11 +12,12 @@ public protocol SubGTMRefreshHeaderProtocol {
     func headerToNormalState()
     func headerToRefreshingState()
     func headerToPullingState()
-    func headerSet(pullingPercent: CGFloat)
     func headerToWillRefreshState()
+    func headerSet(pullingPercent: CGFloat)
+    func willBeginEndRefershing(isSuccess: Bool)
 }
 
-public class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
+open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
     
     /// 刷新数据Block
     var refreshBlock: () -> Void = { print("refreshBlock") }
@@ -87,7 +88,7 @@ public class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtoc
 
     // MARK: Life Cycle
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         self.addSubview(self.contentView)
@@ -100,7 +101,7 @@ public class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtoc
     
     // MARK: Layout
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         // change frame
@@ -201,11 +202,12 @@ public class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtoc
     // MARK: Public
     
     /// 结束刷新
-    final public func endRefresing() {
-        
-        print("header.endRefresing()")
-        DispatchQueue.main.async {
-           self.state = .idle
+    final public func endRefresing(isSuccess: Bool) {
+        let sub: SubGTMRefreshHeaderProtocol? = self as? SubGTMRefreshHeaderProtocol
+        sub?.willBeginEndRefershing(isSuccess: isSuccess)
+        let deadlineTime = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+            self.state = .idle
         }
     }
     
@@ -271,6 +273,9 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         print("-------> headerToNormalState() ")
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
+        
+        messageLabel.text =  GTMRHeaderString.pullDownToRefresh
+        pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
     }
     func headerToRefreshingState() {
         print("-------> headerToRefreshingState() ")
@@ -305,6 +310,20 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     func headerSet(pullingPercent: CGFloat) {
 //        let angle = CGFloat(-M_PI) * pullingPercent + 0.000001
 //        pullingIndicator.transform = CGAffineTransform(rotationAngle: angle)
+    }
+    
+    func willBeginEndRefershing(isSuccess: Bool) {
+        self.pullingIndicator.transform = CGAffineTransform.identity
+        self.loaddingIndicator.isHidden = true
+        
+        if isSuccess {
+            messageLabel.text =  GTMRHeaderString.refreshSuccess
+            pullingIndicator.image = UIImage(named: "success", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+        } else {
+            messageLabel.text =  GTMRHeaderString.refreshFailure
+            pullingIndicator.image = UIImage(named: "failure", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+        }
+        
     }
 }
 

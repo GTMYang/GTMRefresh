@@ -19,7 +19,7 @@ class ViewController: UITableViewController {
         let section0 = SectionModel(rowsCount: 1,
                                     sectionTitle:"Build In",
                                     rowsTitles: ["QQ Style",],
-                                    rowsTargetControlerNames:["QQHeaderTableViewController"])
+                                    rowsTargetControlerNames:["QQStyleHeaderViewController"])
      
         let section1 = SectionModel(rowsCount: 6,
                                     sectionTitle:"Customize",
@@ -52,7 +52,7 @@ class ViewController: UITableViewController {
     }
     
     func endRefresing() {
-        self.tableView.endRefreshing()
+        self.tableView.endRefreshing(isSuccess: true)
     }
 
     // MARK: Table View
@@ -84,7 +84,7 @@ class ViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let sectionModel = models[(indexPath as NSIndexPath).section]
         var className = sectionModel.rowsTargetControlerNames[(indexPath as NSIndexPath).row]
-        className = "PullToRefreshKit.\(className)"
+        className = "GTMRefreshExample.\(className)"
         if let cls = NSClassFromString(className) as? UIViewController.Type{
             let dvc = cls.init()
             self.navigationController?.pushViewController(dvc, animated: true)

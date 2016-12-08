@@ -72,8 +72,8 @@ extension UIScrollView {
         }
     }
     
-    public func endRefreshing() {
-        self.gtmHeader?.endRefresing()
+    public func endRefreshing(isSuccess: Bool) {
+        self.gtmHeader?.endRefresing(isSuccess: isSuccess)
     }
 }
 

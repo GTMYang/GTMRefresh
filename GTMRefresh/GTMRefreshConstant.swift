@@ -23,21 +23,21 @@ class GTMRefreshConstant {
     static var associatedObjectGtmFooter = 1
 }
 
-func GTMRLocalize(_ string:String)->String{
+public func GTMRLocalize(_ string:String)->String{
     return NSLocalizedString(string, tableName: "Localize", bundle: Bundle(for: DefaultGTMRefreshHeader.self), value: "", comment: "")
 }
-struct GTMRHeaderString{
-    static let pullDownToRefresh = GTMRLocalize("pullDownToRefresh")
-    static let releaseToRefresh = GTMRLocalize("releaseToRefresh")
-    static let refreshSuccess = GTMRLocalize("refreshSuccess")
-    static let refreshFailure = GTMRLocalize("refreshFailure")
-    static let refreshing = GTMRLocalize("refreshing")
+public struct GTMRHeaderString{
+    static public let pullDownToRefresh = GTMRLocalize("pullDownToRefresh")
+    static public let releaseToRefresh = GTMRLocalize("releaseToRefresh")
+    static public let refreshSuccess = GTMRLocalize("refreshSuccess")
+    static public let refreshFailure = GTMRLocalize("refreshFailure")
+    static public let refreshing = GTMRLocalize("refreshing")
 }
 
-struct GTMRFooterString{
-    static let pullUpToRefresh = GTMRLocalize("pullUpToRefresh")
-    static let refreshing = GTMRLocalize("refreshing")
-    static let noMoreData = GTMRLocalize("noMoreData")
-    static let tapToRefresh = GTMRLocalize("tapToRefresh")
-    static let scrollAndTapToRefresh = GTMRLocalize("scrollAndTapToRefresh")
+public struct GTMRFooterString{
+    static public let pullUpToRefresh = GTMRLocalize("pullUpToRefresh")
+    static public let refreshing = GTMRLocalize("refreshing")
+    static public let noMoreData = GTMRLocalize("noMoreData")
+    static public let tapToRefresh = GTMRLocalize("tapToRefresh")
+    static public let scrollAndTapToRefresh = GTMRLocalize("scrollAndTapToRefresh")
 }

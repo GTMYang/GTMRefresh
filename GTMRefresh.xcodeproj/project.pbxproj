@@ -11,6 +11,11 @@
 		2655CB3B1DF94569001C50CF /* success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB391DF94569001C50CF /* success@3x.png */; };
 		2655CB3E1DF945A0001C50CF /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB401DF945A0001C50CF /* Localize.strings */; };
 		2655CB4B1DF9564B001C50CF /* SectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2655CB4A1DF9564B001C50CF /* SectionModel.swift */; };
+		2655CB4D1DF95AFE001C50CF /* QQStylePullingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2655CB4C1DF95AFE001C50CF /* QQStylePullingIndicator.swift */; };
+		2655CB4F1DF95B64001C50CF /* QQStyleRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2655CB4E1DF95B64001C50CF /* QQStyleRefreshHeader.swift */; };
+		2655CB511DF9638A001C50CF /* failure@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB501DF9638A001C50CF /* failure@3x.png */; };
+		2655CB531DF9676E001C50CF /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2655CB521DF9676E001C50CF /* BaseTableViewController.swift */; };
+		2655CB551DF96796001C50CF /* QQStyleHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2655CB541DF96796001C50CF /* QQStyleHeaderViewController.swift */; };
 		267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */; };
 		267115521DF6AE4E00F27CEA /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2671154F1DF6AE4E00F27CEA /* LICENSE */; };
 		267115531DF6AE4E00F27CEA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 267115501DF6AE4E00F27CEA /* README.md */; };
@@ -58,6 +63,11 @@
 		2655CB3F1DF945A0001C50CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localize.strings; sourceTree = "<group>"; };
 		2655CB421DF945DD001C50CF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localize.strings"; sourceTree = "<group>"; };
 		2655CB4A1DF9564B001C50CF /* SectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionModel.swift; sourceTree = "<group>"; };
+		2655CB4C1DF95AFE001C50CF /* QQStylePullingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQStylePullingIndicator.swift; sourceTree = "<group>"; };
+		2655CB4E1DF95B64001C50CF /* QQStyleRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQStyleRefreshHeader.swift; sourceTree = "<group>"; };
+		2655CB501DF9638A001C50CF /* failure@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "failure@3x.png"; sourceTree = "<group>"; };
+		2655CB521DF9676E001C50CF /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		2655CB541DF96796001C50CF /* QQStyleHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQStyleHeaderViewController.swift; sourceTree = "<group>"; };
 		267115421DF6AE0D00F27CEA /* GTMRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTMRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		267115461DF6AE0D00F27CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GTMRefresh.podspec; sourceTree = "<group>"; };
@@ -99,6 +109,7 @@
 		2655CB371DF9453D001C50CF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				2655CB501DF9638A001C50CF /* failure@3x.png */,
 				2655CB381DF94569001C50CF /* arrow_down@3x.png */,
 				2655CB391DF94569001C50CF /* success@3x.png */,
 				2655CB401DF945A0001C50CF /* Localize.strings */,
@@ -123,6 +134,9 @@
 		2655CB451DF95617001C50CF /* QQRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				2655CB4C1DF95AFE001C50CF /* QQStylePullingIndicator.swift */,
+				2655CB4E1DF95B64001C50CF /* QQStyleRefreshHeader.swift */,
+				2655CB541DF96796001C50CF /* QQStyleHeaderViewController.swift */,
 			);
 			path = QQRefresh;
 			sourceTree = "<group>";
@@ -210,6 +224,7 @@
 				2655CB491DF95617001C50CF /* YouKu */,
 				2671155A1DF6AEAA00F27CEA /* AppDelegate.swift */,
 				2671155C1DF6AEAA00F27CEA /* ViewController.swift */,
+				2655CB521DF9676E001C50CF /* BaseTableViewController.swift */,
 				2655CB4A1DF9564B001C50CF /* SectionModel.swift */,
 				2671155E1DF6AEAA00F27CEA /* Main.storyboard */,
 				267115611DF6AEAA00F27CEA /* Assets.xcassets */,
@@ -318,6 +333,7 @@
 			files = (
 				2655CB3E1DF945A0001C50CF /* Localize.strings in Resources */,
 				267115521DF6AE4E00F27CEA /* LICENSE in Resources */,
+				2655CB511DF9638A001C50CF /* failure@3x.png in Resources */,
 				2655CB3B1DF94569001C50CF /* success@3x.png in Resources */,
 				2655CB3A1DF94569001C50CF /* arrow_down@3x.png in Resources */,
 				267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */,
@@ -354,9 +370,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2655CB531DF9676E001C50CF /* BaseTableViewController.swift in Sources */,
 				2671155D1DF6AEAA00F27CEA /* ViewController.swift in Sources */,
 				2671155B1DF6AEAA00F27CEA /* AppDelegate.swift in Sources */,
 				2655CB4B1DF9564B001C50CF /* SectionModel.swift in Sources */,
+				2655CB4F1DF95B64001C50CF /* QQStyleRefreshHeader.swift in Sources */,
+				2655CB551DF96796001C50CF /* QQStyleHeaderViewController.swift in Sources */,
+				2655CB4D1DF95AFE001C50CF /* QQStylePullingIndicator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
