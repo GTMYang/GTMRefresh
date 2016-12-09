@@ -55,8 +55,8 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     /// Loadding动画显示区域的高度(特殊的控件需要重写该方法，返回不同的数值)
     ///
     /// - Returns: Loadding动画显示区域的高度
-    public override func refreshingHoldHeith() -> CGFloat {
-        return 35.0
+    public override func refreshingHoldHeight() -> CGFloat {
+        return 40.0
     }
     
     

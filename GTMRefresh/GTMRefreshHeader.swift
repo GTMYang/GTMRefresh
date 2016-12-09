@@ -79,7 +79,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                         guard let originInset = self.scrollViewOriginalInset else {
                             return
                         }
-                        let top: CGFloat = originInset.top + self.refreshingHoldHeith()
+                        let top: CGFloat = originInset.top + self.refreshingHoldHeight()
                         // 增加滚动区域top
                         self.scrollView?.mj_insetT = top
                         // 设置滚动位置
@@ -130,7 +130,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     /// Loadding动画显示区域的高度(特殊的控件需要重写该方法，返回不同的数值)
     ///
     /// - Returns: Loadding动画显示区域的高度
-    open func refreshingHoldHeith() -> CGFloat {
+    open func refreshingHoldHeight() -> CGFloat {
        return self.mj_h
     }
     
@@ -149,7 +149,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
             }
             // 考虑SectionHeader停留时的高度
             var insetT: CGFloat = -scrollV.mj_offsetY > originalInset.top ? -scrollV.mj_offsetY : originalInset.top;
-            insetT = insetT > self.mj_h + originalInset.top ? self.mj_h + originalInset.top : insetT;
+            insetT = insetT > self.refreshingHoldHeight() + originalInset.top ? self.refreshingHoldHeight() + originalInset.top : insetT;
             
             scrollV.mj_insetT = insetT;
             self.insetTDelta = originalInset.top - insetT;

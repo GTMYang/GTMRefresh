@@ -17,6 +17,7 @@ class QQStyleHeaderViewController: BaseTableViewController {
         let qqHeader = QQStyleRefreshHeader()
         self.tableView.gtm_addRefreshHeaderView(refreshHeader: qqHeader) {
             [unowned self] in
+            print("excute refreshBlock")
             self.refresh()
         }
     }

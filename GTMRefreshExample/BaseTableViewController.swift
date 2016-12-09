@@ -9,7 +9,21 @@
 import UIKit
 
 class BaseTableViewController: UITableViewController {
-    var models = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    var models = ["1、你若安好，便是晴天。",
+                  "2、人生没有彩排，每一天都是现场直播。",
+                  "3、我们走得太快，灵魂都跟不上了。",
+                  "4、人生就像一杯茶，不会苦一辈子，但总会苦一阵子。",
+                  "5、人生如果错了方向，停止就是进步。",
+                  "6、理想很丰满，现实很骨感。",
+                  "7、男人一有钱就变坏，女人一边坏就有钱。",
+                  "8、择一城终老，遇一人白首。",
+                  "9、低头要有勇气，抬头要有底气。",
+                  "10、愿得一人心，白首不分离。",
+                  "11、一个人炫耀什么，说明内心缺少什么。",
+                  "12、试金可以用火，试女人可以用金，试男人可以用女人。",
+                  "13、时间就像一张网，你撒在哪里，你的收获就在哪里。",
+                  "14、学习要加，骄傲要减，机会要乘，懒惰要除。",
+                  "15、如果你简单，这个世界就对你简单。"]
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -24,7 +38,7 @@ class BaseTableViewController: UITableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-            cell?.backgroundColor = UIColor(colorLiteralRed: 0.2, green: 0.1, blue: 0.1, alpha: 1.0)
+            cell?.backgroundColor = UIColor(colorLiteralRed: 249/255, green: 148/255, blue: 28/255, alpha: 1.0)
         }
         cell?.textLabel?.text = "\(models[(indexPath as NSIndexPath).row])"
         return cell!
