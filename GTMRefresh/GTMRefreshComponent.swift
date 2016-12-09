@@ -24,14 +24,13 @@ public enum GTMRefreshState {
 }
 
 public protocol SubGTMRefreshComponentProtocol {
-    func scollViewContentOffsetDidChange(_ change: [NSKeyValueChangeKey : Any]?)
-    func scollViewContentSizeDidChange(_ change: [NSKeyValueChangeKey : Any]?)
-    func scollViewPanStateDidChange(_ change: [NSKeyValueChangeKey : Any]?)
+    func scollViewContentOffsetDidChange(change: [NSKeyValueChangeKey : Any]?)
+    func scollViewContentSizeDidChange(change: [NSKeyValueChangeKey : Any]?)
 }
 
 open class GTMRefreshComponent: UIView {
     
-    public weak var scrollView: UIScrollView?
+    public var scrollView: UIScrollView?
     
     public var scrollViewOriginalInset: UIEdgeInsets?
     
@@ -64,7 +63,7 @@ open class GTMRefreshComponent: UIView {
     override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
-        guard (newSuperview?.isKind(of: UIScrollView.self))! else {
+        guard newSuperview is UIScrollView else {
             return
         }
         
@@ -91,13 +90,11 @@ open class GTMRefreshComponent: UIView {
     private func addObserver() {
         scrollView?.addObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset, options: .new, context: nil)
         scrollView?.addObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize, options: .new, context: nil)
-        scrollView?.panGestureRecognizer.addObserver(self, forKeyPath: GTMRefreshConstant.keyPathPanState, options: .new, context: nil)
     }
     
     private func removeAbserver() {
         scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset)
         scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize)
-        scrollView?.panGestureRecognizer.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathPanState)
     }
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -107,7 +104,7 @@ open class GTMRefreshComponent: UIView {
         
         if let sub: SubGTMRefreshComponentProtocol = self as? SubGTMRefreshComponentProtocol {
             if keyPath == GTMRefreshConstant.keyPathContentSize {
-                sub.scollViewContentSizeDidChange(change)
+                sub.scollViewContentSizeDidChange(change: change)
             }
             
             guard !self.isHidden else {
@@ -115,9 +112,7 @@ open class GTMRefreshComponent: UIView {
             }
             
             if keyPath == GTMRefreshConstant.keyPathContentOffset {
-                sub.scollViewContentOffsetDidChange(change)
-            } else if keyPath == GTMRefreshConstant.keyPathPanState {
-                sub.scollViewPanStateDidChange(change)
+                sub.scollViewContentOffsetDidChange(change: change)
             }
             
         }

@@ -9,18 +9,23 @@
 import UIKit
 
 public protocol SubGTMRefreshHeaderProtocol {
-    func headerToNormalState()
-    func headerToRefreshingState()
-    func headerToPullingState()
-    func headerToWillRefreshState()
-    func headerSet(pullingPercent: CGFloat)
+    func toNormalState()
+    func toRefreshingState()
+    func toPullingState()
+    func toWillRefreshState()
+    func changePullingPercent(percent: CGFloat)
     func willBeginEndRefershing(isSuccess: Bool)
+    
+    /// 控件的高度
+    ///
+    /// - Returns: 控件的高度
+    func contentHeith() -> CGFloat
 }
 
 open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
     
     /// 刷新数据Block
-    var refreshBlock: () -> Void = { print("refreshBlock") }
+    var refreshBlock: () -> Void = { }
     
     var contentView: UIView = {
         let view = UIView()
@@ -30,22 +35,22 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     
     var insetTDelta: CGFloat = 0
     
+    public var subProtocol: SubGTMRefreshHeaderProtocol? {
+        get { return self as? SubGTMRefreshHeaderProtocol }
+    }
+    
     var pullingPercent: CGFloat = 0 {
         didSet {
-            let sub: SubGTMRefreshHeaderProtocol? = self as? SubGTMRefreshHeaderProtocol
-            sub?.headerSet(pullingPercent: pullingPercent)
+            subProtocol?.changePullingPercent(percent: pullingPercent)
         }
     }
     
     override var state: GTMRefreshState {
-        // FIXME: get方法可能死循环，需要测试
-        //get { return self.state }
         didSet {
             guard oldValue != state else {
                 return
             }
             
-            let sub: SubGTMRefreshHeaderProtocol? = self as? SubGTMRefreshHeaderProtocol
             switch state {
             case .idle:
                 guard oldValue == GTMRefreshState.refreshing else {
@@ -54,15 +59,17 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                 // 恢复Inset
                 UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
                     self.scrollView?.mj_insetT += self.insetTDelta
-                    sub?.headerToNormalState()
+                }, completion: { (isFinish) in
+                    // 执行刷新操作
+                    self.subProtocol?.toNormalState()
                 })
             case .pulling:
                 DispatchQueue.main.async {
-                    sub?.headerToPullingState()
+                    self.subProtocol?.toPullingState()
                 }
             case .willRefresh:
                 DispatchQueue.main.async {
-                    sub?.headerToWillRefreshState()
+                    self.subProtocol?.toWillRefreshState()
                 }
             case .refreshing:
                 DispatchQueue.main.async {
@@ -76,7 +83,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                         // 设置滚动位置
                         self.scrollView?.contentOffset = CGPoint(x: 0, y: -top)
                     }, completion: { (isFinish) in
-                        sub?.headerToRefreshingState()
+                        self.subProtocol?.toRefreshingState()
                         // 执行刷新操作
                         self.refreshBlock()
                     })
@@ -99,22 +106,42 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         fatalError("init(coder:) has not been implemented")
     }
     
+    open override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+        
+        guard newSuperview != nil else {
+            // newSuperview == nil 被移除的时候
+            return
+        }
+        
+        // newSuperview != nil 被添加到新的View上
+        self.mj_y = -self.mj_h
+    }
+    
     // MARK: Layout
     
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        // change frame
-        var f = frame
-        f.origin.y = -frame.size.height
-        self.frame = f
-        print("f.origin.y = \(f.origin.y) frame.size.height = \(frame.size.height)")
-        
         self.contentView.frame = self.bounds
     }
     
+    /// 控件拖动到该高度处松开就刷新(特殊的控件需要重写该方法，返回不同的数值)
+    ///
+    /// - Returns: 触发刷新的高度
+    func triggerRefreshHeith() -> CGFloat {
+        return self.mj_h
+    }
+    
+    /// Loadding动画显示区域的高度(特殊的控件需要重写该方法，返回不同的数值)
+    ///
+    /// - Returns: Loadding动画显示区域的高度
+    func refreshingHoldHeith() -> CGFloat {
+       return self.mj_h
+    }
+    
     // MARK: SubGTMRefreshComponentProtocol
-    open func scollViewContentOffsetDidChange(_ change: [NSKeyValueChangeKey : Any]?) {
+    open func scollViewContentOffsetDidChange(change: [NSKeyValueChangeKey : Any]?) {
         
         guard let scrollV = self.scrollView else {
             return
@@ -123,8 +150,6 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         let originalInset = self.scrollViewOriginalInset!
         
         if state == .refreshing {
-            
-            // FIXME: need debug
             guard let _ = self.window else {
                 return
             }
@@ -160,12 +185,10 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                     state = .pulling
                 }
             case .pulling:
-               // print("offsetY = \(offsetY)  idle2pullingOffsetY = \(idle2pullingOffsetY)")
                 if offsetY <= idle2pullingOffsetY {
                     state = .willRefresh
                 } else {
                     self.pullingPercent = (headerInOffsetY - offsetY) / self.mj_h;
-//                    print("headerInOffsetY = \(headerInOffsetY)  idle2pullingOffsetY = \(idle2pullingOffsetY)  offsetY = \(offsetY)  pullingPercent = \(pullingPercent)")
                 }
             case .willRefresh:
                 if offsetY > idle2pullingOffsetY {
@@ -192,19 +215,15 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
             }
         }
     }
-    open func scollViewContentSizeDidChange(_ change: [NSKeyValueChangeKey : Any]?) {
-        
-    }
-    open func scollViewPanStateDidChange(_ change: [NSKeyValueChangeKey : Any]?) {
-        
+    open func scollViewContentSizeDidChange(change: [NSKeyValueChangeKey : Any]?) {
+        // here do nothing
     }
     
     // MARK: Public
     
     /// 结束刷新
     final public func endRefresing(isSuccess: Bool) {
-        let sub: SubGTMRefreshHeaderProtocol? = self as? SubGTMRefreshHeaderProtocol
-        sub?.willBeginEndRefershing(isSuccess: isSuccess)
+        subProtocol?.willBeginEndRefershing(isSuccess: isSuccess)
         let deadlineTime = DispatchTime.now() + .seconds(1)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
             self.state = .idle
@@ -217,7 +236,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     
     lazy var pullingIndicator: UIImageView = {
         let pindicator = UIImageView()
-        pindicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+        pindicator.image = UIImage(named: "arrow_down", in: Bundle(for: GTMRefreshHeader.self), compatibleWith: nil)
         
         return pindicator
     }()
@@ -269,22 +288,26 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     
     // MARK: SubGTMRefreshHeaderProtocol
     
-    func headerToNormalState() {
-        print("-------> headerToNormalState() ")
+    /// 控件的高度
+    ///
+    /// - Returns: 控件的高度
+    func contentHeith() -> CGFloat {
+        return 60.0
+    }
+    
+    func toNormalState() {
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
         
         messageLabel.text =  GTMRHeaderString.pullDownToRefresh
         pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
     }
-    func headerToRefreshingState() {
-        print("-------> headerToRefreshingState() ")
+    func toRefreshingState() {
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
         messageLabel.text = GTMRHeaderString.refreshing
     }
-    func headerToPullingState() {
-        print("-------> headerToPullingState() ")
+    func toPullingState() {
         self.loaddingIndicator.isHidden = true
         messageLabel.text = GTMRHeaderString.pullDownToRefresh
         
@@ -295,8 +318,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             self.pullingIndicator.transform = CGAffineTransform.identity
         })
     }
-    func headerToWillRefreshState() {
-        print("-------> headerToWillRefreshState() ")
+    func toWillRefreshState() {
         messageLabel.text = GTMRHeaderString.releaseToRefresh
         self.loaddingIndicator.isHidden = true
         
@@ -307,9 +329,8 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
         })
     }
-    func headerSet(pullingPercent: CGFloat) {
-//        let angle = CGFloat(-M_PI) * pullingPercent + 0.000001
-//        pullingIndicator.transform = CGAffineTransform(rotationAngle: angle)
+    func changePullingPercent(percent: CGFloat) {
+        // here do nothing
     }
     
     func willBeginEndRefershing(isSuccess: Bool) {
@@ -325,26 +346,6 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         }
         
     }
-}
-
-class WaterIndicator: UIView {
-    let maxRadius: CGFloat = 15.0
-    
-    /// 指示器进度
-    var progress: CGFloat {
-        get { return self.progress }
-        set {
-            if progress != newValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    
-    override func draw(_ rect: CGRect) {
-//        let tCircleRadis = maxRadius
-//        let bCircleRadis = maxRadius * (1 - progress)
-    }
-    
 }
 
 

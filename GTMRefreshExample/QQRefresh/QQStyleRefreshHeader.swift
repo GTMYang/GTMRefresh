@@ -9,7 +9,7 @@
 import UIKit
 import GTMRefresh
 
-class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol{
+class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
 
     let control:QQStylePullingIndicator
     open let textLabel:UILabel = UILabel(frame: CGRect(x: 0,y: 0,width: 120,height: 40))
@@ -19,8 +19,7 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol{
     
     override public init(frame: CGRect) {
         control = QQStylePullingIndicator(frame: frame)
-        let adjustFrame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: totalHegiht)
-        super.init(frame: adjustFrame)
+        super.init(frame: frame)
         
         self.autoresizingMask = .flexibleWidth
         self.backgroundColor = UIColor.white
@@ -49,30 +48,34 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol{
     
     
     // MARK: SubGTMRefreshHeaderProtocol
-    func headerToNormalState() {
+    func contentHeith() -> CGFloat {
+        return 80.0
+    }
+    
+    func toNormalState() {
         
         self.control.isHidden = false
         self.imageView.isHidden = true
         self.textLabel.isHidden = true
     }
-    func headerToRefreshingState() {
+    func toRefreshingState() {
         
         self.control.animating = true
     }
-    func headerToPullingState() {
+    func toPullingState() {
     }
-    func headerSet(pullingPercent: CGFloat) {
+    func changePullingPercent(percent: CGFloat) {
         
         self.control.animating = false
-        if pullingPercent > 0.5 && pullingPercent <= 1.0{
-            self.control.progress = (pullingPercent - 0.5)/0.5
-        }else if pullingPercent <= 0.5{
+        if percent > 0.5 && percent <= 1.0{
+            self.control.progress = (percent - 0.5)/0.5
+        }else if percent <= 0.5{
             self.control.progress = 0.0
         }else{
             self.control.progress = 1.0
         }
     }
-    func headerToWillRefreshState() {
+    func toWillRefreshState() {
     }
     
     func willBeginEndRefershing(isSuccess: Bool) {
@@ -90,42 +93,5 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol{
             imageView.image = UIImage(named: "failure", in: Bundle(for: GTMRefreshHeader.self), compatibleWith: nil)
         }
     }
-//    open override func willMove(toSuperview newSuperview: UIView?) {
-//        super.willMove(toSuperview: newSuperview)
-//        if let superView = newSuperview{
-//            self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: superView.frame.size.width, height: self.frame.size.height)
-//        }
-//    }
-    // MARK: - Refreshable Header -
-    
-//    open func heightForRefreshingState() -> CGFloat {
-//        return totalHegiht/2.0
-//    }
-//    open func heightForFireRefreshing()->CGFloat{
-//        return totalHegiht
-//    }
-
-//    open func didBeginEndRefershingAnimation(_ result:RefreshResult) {
-//        switch result {
-//        case .success:
-//
-//        case .failure:
-//            self.control.isHidden = true
-//            imageView.isHidden = false
-//            textLabel.isHidden = false
-//            textLabel.text = textDic[.refreshFailure]
-//            imageView.image = UIImage(named: "failure", in: Bundle(for: DefaultRefreshHeader.self), compatibleWith: nil)
-//        case .none:
-//            self.control.isHidden = false
-//            imageView.isHidden = true
-//            textLabel.isHidden = true
-//            textLabel.text = textDic[.pullToRefresh]
-//            imageView.image = nil
-//        }
-//    }
-//    open func didCompleteEndRefershingAnimation(_ result:RefreshResult) {
-    
-//
-//    }
 
 }

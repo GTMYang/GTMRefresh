@@ -33,12 +33,12 @@ extension UIScrollView {
     /// - Parameters:
     ///   - refreshHeader: 下拉刷新动效View必须继承GTMRefreshHeader并且要实现SubGTMRefreshHeaderProtocol，不传值的时候默认使用 DefaultGTMRefreshHeader
     ///   - refreshBlock: 刷新数据Block
-    public func gtm_addRefreshHeaderView(_ refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) {
-        if let _: SubGTMRefreshHeaderProtocol = self as? SubGTMRefreshHeaderProtocol {
+    public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) {
+        guard refreshHeader is SubGTMRefreshHeaderProtocol  else {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
         }
-        if let header: DefaultGTMRefreshHeader = refreshHeader as? DefaultGTMRefreshHeader {
-            header.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: 60.0)
+        if let header: GTMRefreshHeader = refreshHeader, let subProtocol = header.subProtocol {
+            header.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: subProtocol.contentHeith())
         }
         if gtmHeader != refreshHeader {
             gtmHeader?.removeFromSuperview()
@@ -56,11 +56,15 @@ extension UIScrollView {
     /// - Parameters:
     ///   - loadMoreFooter: 上拉加载动效View必须继承GTMLoadMoreFooter，不传值的时候默认使用 DefaultGTMLoadMoreFooter
     ///   - refreshBlock: 加载更多数据Block
-    public func gtm_addLoadMoreFooterView(_ loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) {
+    public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) {
         
-        if let _: SubGTMLoadMoreFooterProtocol = self as? SubGTMLoadMoreFooterProtocol {
+        guard loadMoreFooter is SubGTMLoadMoreFooterProtocol  else {
             fatalError("loadMoreFooter must implement SubGTMLoadMoreFooterProtocol")
         }
+        if let footer: GTMLoadMoreFooter = loadMoreFooter, let subProtocol = footer.subProtocol {
+            footer.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: subProtocol.contentHeith())
+        }
+        
         if gtmFooter != loadMoreFooter {
             gtmFooter?.removeFromSuperview()
             
@@ -74,6 +78,13 @@ extension UIScrollView {
     
     public func endRefreshing(isSuccess: Bool) {
         self.gtmHeader?.endRefresing(isSuccess: isSuccess)
+        if isSuccess {
+            // 重置footer状态（防止footer还处在数据加载完成状态）
+            self.gtmFooter?.state = .idle
+        }
+    }
+    public func endLoadMore(isNoMoreData: Bool) {
+        self.gtmFooter?.endLoadMore(isNoMoreData: isNoMoreData)
     }
 }
 

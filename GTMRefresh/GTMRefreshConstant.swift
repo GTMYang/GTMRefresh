@@ -16,7 +16,7 @@ class GTMRefreshConstant {
     static let keyPathContentOffset: String = "contentOffset"
     static let keyPathContentInset: String = "contentInset"
     static let keyPathContentSize: String = "contentSize"
-    static let keyPathPanState: String = "state"
+//    static let keyPathPanState: String = "state"
     
     
     static var associatedObjectGtmHeader = 0
@@ -36,8 +36,8 @@ public struct GTMRHeaderString{
 
 public struct GTMRFooterString{
     static public let pullUpToRefresh = GTMRLocalize("pullUpToRefresh")
-    static public let refreshing = GTMRLocalize("refreshing")
+    static public let loadding = GTMRLocalize("loadMore")
     static public let noMoreData = GTMRLocalize("noMoreData")
-    static public let tapToRefresh = GTMRLocalize("tapToRefresh")
+    static public let releaseLoadMore = GTMRLocalize("releaseLoadMore")
     static public let scrollAndTapToRefresh = GTMRLocalize("scrollAndTapToRefresh")
 }

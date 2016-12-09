@@ -25,34 +25,42 @@ class ViewController: UITableViewController {
                                     sectionTitle:"Customize",
                                     rowsTitles: ["YahooWeather","Curve Mask","Youku","TaoBao","QQ Video","DianPing"],
                                     rowsTargetControlerNames:["YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController"])
+        
+        let section2 = SectionModel(rowsCount: 8,
+                                    sectionTitle:"Test",
+                                    rowsTitles: ["YahooWeather","Curve Mask","Youku","TaoBao","QQ Video","DianPing","Boys","Girls"],
+                                    rowsTargetControlerNames:["YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController","DianpingTableviewController","DianpingTableviewController"])
         models.append(section0)
         models.append(section1)
+        models.append(section2)
         
         
         self.tableView.gtm_addRefreshHeaderView {
             [unowned self] in
-            print("custom refreshBlock")
             self.refresh()
         }
-        print("\(self.tableView.contentInset)")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("\(self.tableView.contentInset)")
+        
+        self.tableView.gtm_addLoadMoreFooterView {
+            [unowned self] in
+            self.loadMore()
+        }
     }
     
     
+    // MARK: Test
     func refresh() {
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
     func endRefresing() {
         self.tableView.endRefreshing(isSuccess: true)
+    }
+    func loadMore() {
+        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
+    }
+    
+    func endLoadMore() {
+        self.tableView.endLoadMore(isNoMoreData: false)
     }
 
     // MARK: Table View

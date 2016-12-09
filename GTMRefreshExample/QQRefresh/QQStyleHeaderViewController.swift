@@ -15,9 +15,8 @@ class QQStyleHeaderViewController: BaseTableViewController {
         //Setup
         //        self.tableView.backgroundColor = UIColor(red: 232.0/255.0, green: 234.0/255.0, blue: 235.0/255.0, alpha: 1.0)
         let qqHeader = QQStyleRefreshHeader()
-        self.tableView.gtm_addRefreshHeaderView(qqHeader) {
+        self.tableView.gtm_addRefreshHeaderView(refreshHeader: qqHeader) {
             [unowned self] in
-            print("custom refreshBlock")
             self.refresh()
         }
     }

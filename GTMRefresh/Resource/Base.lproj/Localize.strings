@@ -17,8 +17,12 @@ refreshing = "Refreshing...";
 
 pullUpToRefresh = "Scroll to load";
 
-noMoreData = "No more data";
+noMoreData = "No more data, daling!";
 
 tapToRefresh = "Tap to refresh";
 
 scrollAndTapToRefresh = "Scroll or tap to load";
+
+loadMore = "Loadding...";
+
+releaseLoadMore = "Release to load more";

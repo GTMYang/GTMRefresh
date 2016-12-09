@@ -17,8 +17,12 @@ refreshing = "正在刷新数据中...";
 
 pullUpToRefresh = "上拉加载更多数据";
 
-noMoreData = "数据加载完毕";
+noMoreData = "真没有了，哥!";
 
 tapToRefresh = "点击加载更多";
 
 scrollAndTapToRefresh = "上拉或点击加载更多";
+
+loadMore = "正在加载...";
+
+releaseLoadMore = "松开加载更多";
