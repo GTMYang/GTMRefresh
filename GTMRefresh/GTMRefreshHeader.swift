@@ -239,7 +239,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
         indicator.activityIndicatorViewStyle = .gray
-        indicator.backgroundColor = UIColor.white
+        //indicator.backgroundColor = UIColor.white
         
         return indicator
     }()
@@ -291,12 +291,14 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     
     func toNormalState() {
         self.loaddingIndicator.isHidden = true
+        self.pullingIndicator.isHidden = false
         self.loaddingIndicator.stopAnimating()
         
         messageLabel.text =  GTMRHeaderString.pullDownToRefresh
         pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
     }
     func toRefreshingState() {
+        self.pullingIndicator.isHidden = true
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
         messageLabel.text = GTMRHeaderString.refreshing
@@ -328,6 +330,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     }
     
     func willBeginEndRefershing(isSuccess: Bool) {
+        self.pullingIndicator.isHidden = false
         self.pullingIndicator.transform = CGAffineTransform.identity
         self.loaddingIndicator.isHidden = true
         
