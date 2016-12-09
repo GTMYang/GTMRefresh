@@ -45,6 +45,7 @@ class ViewController: UITableViewController {
             print("excute loadMoreBlock")
             self.loadMore()
         }
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     
@@ -84,7 +85,7 @@ class ViewController: UITableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-            cell?.backgroundColor = UIColor(colorLiteralRed: 249/255, green: 148/255, blue: 28/255, alpha: 1.0)
+          
         }
         let sectionModel = models[(indexPath as NSIndexPath).section]
         cell?.textLabel?.text = sectionModel.rowsTitles[(indexPath as NSIndexPath).row]

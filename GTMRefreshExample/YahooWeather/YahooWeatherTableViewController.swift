@@ -19,6 +19,8 @@ class YahooWeatherTableViewController: BaseTableViewController{
             print("excute refreshBlock")
             self.refresh()
         }
+        
+        self.tableView.backgroundColor = UIColor.lightGray
     }
     
     
