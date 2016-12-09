@@ -220,10 +220,11 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     /// 结束刷新
     final public func endRefresing(isSuccess: Bool) {
         subProtocol?.willBeginEndRefershing(isSuccess: isSuccess)
-        let deadlineTime = DispatchTime.now() + .seconds(1)
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-            self.state = .idle
-        }
+        self.state = .idle
+//        let deadlineTime = DispatchTime.now() + .seconds(1)
+//        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+//            self.state = .idle
+//        }
     }
     
 }
