@@ -74,16 +74,17 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
             case .refreshing:
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: GTMRefreshConstant.fastAnimationDuration, animations: {
+                        self.subProtocol?.toRefreshingState()
+                        
                         guard let originInset = self.scrollViewOriginalInset else {
                             return
                         }
-                        let top: CGFloat = originInset.top + self.mj_h
+                        let top: CGFloat = originInset.top + self.refreshingHoldHeith()
                         // 增加滚动区域top
                         self.scrollView?.mj_insetT = top
                         // 设置滚动位置
                         self.scrollView?.contentOffset = CGPoint(x: 0, y: -top)
                     }, completion: { (isFinish) in
-                        self.subProtocol?.toRefreshingState()
                         // 执行刷新操作
                         self.refreshBlock()
                     })
@@ -126,17 +127,10 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         self.contentView.frame = self.bounds
     }
     
-    /// 控件拖动到该高度处松开就刷新(特殊的控件需要重写该方法，返回不同的数值)
-    ///
-    /// - Returns: 触发刷新的高度
-    func triggerRefreshHeith() -> CGFloat {
-        return self.mj_h
-    }
-    
     /// Loadding动画显示区域的高度(特殊的控件需要重写该方法，返回不同的数值)
     ///
     /// - Returns: Loadding动画显示区域的高度
-    func refreshingHoldHeith() -> CGFloat {
+    open func refreshingHoldHeith() -> CGFloat {
        return self.mj_h
     }
     
@@ -278,10 +272,10 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         super.layoutSubviews()
         
         let center = CGPoint(x: frame.width * 0.5 - 70 - 20, y: frame.height * 0.5)
-        pullingIndicator.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        pullingIndicator.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         pullingIndicator.mj_center = center
         
-        loaddingIndicator.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        loaddingIndicator.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         loaddingIndicator.mj_center = center
         messageLabel.frame = self.bounds
     }

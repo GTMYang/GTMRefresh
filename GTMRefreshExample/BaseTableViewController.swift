@@ -24,6 +24,7 @@ class BaseTableViewController: UITableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+            cell?.backgroundColor = UIColor(colorLiteralRed: 0.2, green: 0.1, blue: 0.1, alpha: 1.0)
         }
         cell?.textLabel?.text = "\(models[(indexPath as NSIndexPath).row])"
         return cell!

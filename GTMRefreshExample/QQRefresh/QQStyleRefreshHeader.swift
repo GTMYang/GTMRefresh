@@ -15,7 +15,7 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     open let textLabel:UILabel = UILabel(frame: CGRect(x: 0,y: 0,width: 120,height: 40))
     open let imageView:UIImageView = UIImageView(frame: CGRect.zero)
     
-    fileprivate let totalHegiht:CGFloat = 80.0
+    // MARK: Life Cycle
     
     override public init(frame: CGRect) {
         control = QQStylePullingIndicator(frame: frame)
@@ -24,8 +24,8 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.autoresizingMask = .flexibleWidth
         self.backgroundColor = UIColor.white
         imageView.sizeToFit()
-        imageView.frame = CGRect(x: 0, y: 0, width: 16, height: 16)
-        textLabel.font = UIFont.systemFont(ofSize: 12)
+        imageView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        textLabel.font = UIFont.systemFont(ofSize: 15)
         textLabel.textAlignment = .center
         textLabel.textColor = UIColor.darkGray
         addSubview(control)
@@ -39,11 +39,24 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Layout
+    
     open override func layoutSubviews() {
         super.layoutSubviews()
         control.frame = self.bounds
+        
+        let totalHegiht = self.contentHeith()
         imageView.center = CGPoint(x: frame.width/2 - 40 - 40, y: totalHegiht * 0.75)
         textLabel.center = CGPoint(x: frame.size.width/2, y: totalHegiht * 0.75);
+    }
+    
+    // MARK: override
+    
+    /// Loadding动画显示区域的高度(特殊的控件需要重写该方法，返回不同的数值)
+    ///
+    /// - Returns: Loadding动画显示区域的高度
+    public override func refreshingHoldHeith() -> CGFloat {
+        return 35.0
     }
     
     

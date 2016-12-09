@@ -262,10 +262,10 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         super.layoutSubviews()
         
         let center = CGPoint(x: frame.width * 0.5 - 70 - 30, y: frame.height * 0.5)
-        pullingIndicator.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        pullingIndicator.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         pullingIndicator.mj_center = center
         
-        loaddingIndicator.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        loaddingIndicator.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         loaddingIndicator.mj_center = center
         messageLabel.frame = self.bounds
     }
