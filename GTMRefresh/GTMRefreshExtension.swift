@@ -38,7 +38,7 @@ extension UIScrollView {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
         }
         if let header: GTMRefreshHeader = refreshHeader, let subProtocol = header.subProtocol {
-            header.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: subProtocol.contentHeith())
+            header.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: subProtocol.contentHeight())
         }
         if gtmHeader != refreshHeader {
             gtmHeader?.removeFromSuperview()

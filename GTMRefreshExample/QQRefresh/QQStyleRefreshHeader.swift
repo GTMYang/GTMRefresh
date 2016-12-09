@@ -45,7 +45,7 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         super.layoutSubviews()
         control.frame = self.bounds
         
-        let totalHegiht = self.contentHeith()
+        let totalHegiht = self.contentHeight()
         imageView.center = CGPoint(x: frame.width/2 - 40 - 40, y: totalHegiht * 0.75)
         textLabel.center = CGPoint(x: frame.size.width/2, y: totalHegiht * 0.75);
     }
@@ -61,7 +61,7 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     
     
     // MARK: SubGTMRefreshHeaderProtocol
-    func contentHeith() -> CGFloat {
+    func contentHeight() -> CGFloat {
         return 80.0
     }
     
@@ -105,6 +105,9 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             textLabel.text = GTMRHeaderString.refreshFailure
             imageView.image = UIImage(named: "failure", in: Bundle(for: GTMRefreshHeader.self), compatibleWith: nil)
         }
+    }
+    func willCompleteEndRefershing() {
+        
     }
 
 }

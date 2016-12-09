@@ -23,6 +23,7 @@ class DefaultTableViewController:UITableViewController{
     var models = [1,2,3,4,5,6,7,8,9,10]
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.lightGray
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         self.tableView?.gtm_addRefreshHeaderView {

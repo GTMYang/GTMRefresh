@@ -15,11 +15,12 @@ public protocol SubGTMRefreshHeaderProtocol {
     func toWillRefreshState()
     func changePullingPercent(percent: CGFloat)
     func willBeginEndRefershing(isSuccess: Bool)
+    func willCompleteEndRefershing()
     
     /// 控件的高度
     ///
     /// - Returns: 控件的高度
-    func contentHeith() -> CGFloat
+    func contentHeight() -> CGFloat
 }
 
 open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
@@ -27,7 +28,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     /// 刷新数据Block
     var refreshBlock: () -> Void = { }
     
-    var contentView: UIView = {
+    public var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.clear
         return view
@@ -60,6 +61,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                 UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
                     self.scrollView?.mj_insetT += self.insetTDelta
                 }, completion: { (isFinish) in
+                    self.subProtocol?.willCompleteEndRefershing()
                     // 执行刷新操作
                     self.subProtocol?.toNormalState()
                 })
@@ -285,7 +287,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     /// 控件的高度
     ///
     /// - Returns: 控件的高度
-    func contentHeith() -> CGFloat {
+    func contentHeight() -> CGFloat {
         return 60.0
     }
     
@@ -341,6 +343,8 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             messageLabel.text =  GTMRHeaderString.refreshFailure
             pullingIndicator.image = UIImage(named: "failure", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
         }
+    }
+    func willCompleteEndRefershing() {
         
     }
 }

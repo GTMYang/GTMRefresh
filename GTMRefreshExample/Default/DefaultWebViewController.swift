@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
-class DefaultWebViewController: UIViewController,UIWebViewDelegate{
+class DefaultWebViewController: UIViewController, UIWebViewDelegate{
     var webview:UIWebView?
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.lightGray
         self.webview = UIWebView(frame:view.bounds)
         self.webview?.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         self.webview?.backgroundColor = UIColor.white

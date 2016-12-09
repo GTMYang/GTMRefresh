@@ -27,6 +27,7 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.view.backgroundColor = UIColor.lightGray
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
@@ -38,7 +39,7 @@ class BaseTableViewController: UITableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-            cell?.backgroundColor = UIColor(colorLiteralRed: 249/255, green: 148/255, blue: 28/255, alpha: 1.0)
+        //    cell?.backgroundColor = UIColor(colorLiteralRed: 249/255, green: 148/255, blue: 28/255, alpha: 1.0)
         }
         cell?.textLabel?.text = "\(models[(indexPath as NSIndexPath).row])"
         return cell!
