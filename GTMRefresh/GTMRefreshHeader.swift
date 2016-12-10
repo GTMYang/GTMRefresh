@@ -366,12 +366,3 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         
     }
 }
-
-
-
-
-
-
-
-
-

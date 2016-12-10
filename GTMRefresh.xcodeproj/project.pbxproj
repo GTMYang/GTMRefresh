@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		261A85381DFBA382009897CC /* Demo效果.gif in Resources */ = {isa = PBXBuildFile; fileRef = 261A85371DFBA382009897CC /* Demo效果.gif */; };
+		261A85381DFBA382009897CC /* Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 261A85371DFBA382009897CC /* Demo.gif */; };
 		2635564B1DFAA91700FD98BB /* DefaultScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556441DFAA91700FD98BB /* DefaultScrollViewController.swift */; };
 		2635564C1DFAA91700FD98BB /* DefaultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556451DFAA91700FD98BB /* DefaultTableViewController.swift */; };
 		2635564D1DFAA91700FD98BB /* DefaultWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556461DFAA91700FD98BB /* DefaultWebViewController.swift */; };
@@ -251,7 +251,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		261A85371DFBA382009897CC /* Demo效果.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Demo效果.gif"; sourceTree = "<group>"; };
+		261A85371DFBA382009897CC /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
 		263556441DFAA91700FD98BB /* DefaultScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultScrollViewController.swift; sourceTree = "<group>"; };
 		263556451DFAA91700FD98BB /* DefaultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewController.swift; sourceTree = "<group>"; };
 		263556461DFAA91700FD98BB /* DefaultWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWebViewController.swift; sourceTree = "<group>"; };
@@ -588,7 +588,7 @@
 		267115381DF6AE0D00F27CEA = {
 			isa = PBXGroup;
 			children = (
-				261A85371DFBA382009897CC /* Demo效果.gif */,
+				261A85371DFBA382009897CC /* Demo.gif */,
 				2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */,
 				2671154F1DF6AE4E00F27CEA /* LICENSE */,
 				267115501DF6AE4E00F27CEA /* README.md */,
@@ -938,7 +938,7 @@
 				267115521DF6AE4E00F27CEA /* LICENSE in Resources */,
 				2655CB511DF9638A001C50CF /* failure@3x.png in Resources */,
 				2655CB3B1DF94569001C50CF /* success@3x.png in Resources */,
-				261A85381DFBA382009897CC /* Demo效果.gif in Resources */,
+				261A85381DFBA382009897CC /* Demo.gif in Resources */,
 				2655CB3A1DF94569001C50CF /* arrow_down@3x.png in Resources */,
 				267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */,
 			);

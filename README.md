@@ -2,28 +2,18 @@ GTMRefresh
 ===================
 
 # Introduction
-`GTMRefresh` 是一个Loadding动画库
-
-本库是在 [NVActivityIndicatorView](https://github.com/gontovnik/DGActivityIndicatorView), 的基础上做了一些方便使用的改进
+`GTMRefresh` 用Swift重写的MJRefresh
 
 
-##改进了什么？
+##特点
+- 支持各种效果的自定义，自定义比较方便
+- 代码简介，总代码量不超过1000行
 
-###1. Animations代码不放到库里面（无用代码太多），用户可以通过实现NVActivityIndicatorAnimation定义任意的动画，原来已定义好的动画组件都在demo项目里面，用户可以根据自己的需求挑选想要的动画使用
-- 去掉了枚举enum NVActivityIndicatorType
-- 将protocol NVActivityIndicatorAnimationDelegate改成protocol NVActivityIndicatorAnimation
-
-###2. UIViewController 不需要写实现 NVActivityIndicatorViewable的代码
-- 去掉了NVActivityIndicatorViewable协议
-- 将原来针对实现NVActivityIndicatorViewable的UIViewController的扩展改成针对UIViewController的扩展
-
-# 申明
-如果[NVActivityIndicatorView](https://github.com/gontovnik/DGActivityIndicatorView)项目也作了类似本类库的调整，建议大家用回原库，尊重原创，我这里只做了一点点的工作
 
 # Demo
-直接下载代码，代码里面包含Demo
+直接下载代码，里面Demo里面有各种效果的自定义效果（因为时间比较紧，demo代码可能不够漂亮）
 
-![alt tag](https://raw.githubusercontent.com/ninjaprox/NVActivityIndicatorView/master/Demo.gif)
+![alt tag](https://github.com/GTMYang/GTMRefresh//master/Demo效果.gif)
 
 For first-hand experience, just open the project and run it.
 
