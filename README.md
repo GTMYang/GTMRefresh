@@ -6,8 +6,9 @@ GTMRefresh
 
 
 ##特点
-- 支持各种效果的自定义，自定义比较方便
-- 代码简介，总代码量不超过1000行
+- 自定义方便, Demo里面有国内主流App的下拉效果的模仿
+- 代码简洁，总代码量不超过1000行
+- 支持国际化
 
 
 # Demo
@@ -15,16 +16,14 @@ GTMRefresh
 
 ![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo.gif)
 
-For first-hand experience, just open the project and run it.
-
 # Demo模仿的下拉效果
 
-- "YahooWeather"
-- "Curve Mask"
-- "Youku"
-- "TaoBao" 
-- "QQ Video"
-- "DianPing"
+- YahooWeather
+- Curve Mask
+- Youku
+- TaoBao
+- QQ Video
+- DianPing
 
 # Installation
 
@@ -63,7 +62,7 @@ _**Note:** Make sure that all files in `GTMRefresh` included in Compile Sources 
 
 This version requires Xcode 8.0 and Swift 3.
 
-# Usage
+# 使用帮助
 
 Firstly, import `GTMRefresh`.
 
@@ -71,124 +70,14 @@ Firstly, import `GTMRefresh`.
 import GTMRefresh
 ```
 
-## Initialization
-
-Then, there are two ways you can create GTMRefresh:
+## 使用帮助
 
 
-- By code, using initializer. All parameters other than `frame` are optional and `GTMRefresh.DEFAULT_*` are used as default values.
-
-```swift
-GTMRefresh(frame: frame, type: type, color: color, padding: padding)
-```
-
-_**Note:** Check [DEFAULTS](#defaults) for default values._
-
-## Control
-
-Start animating.
-
-```swift
-activityIndicatorView.startAnimating()
-```
-
-Stop animating.
-
-```swift
-activityIndicatorView.stopAnimating()
-```
-
-Determine if it is animating.
-
-```swift
-animating = activityIndicatorView.animating
-```
+## 使用默认的下拉和上拉效果
 
 
-Start animating.
+## 自定义下拉刷新效果
 
-```swift
-showLoadding(size, message) // plus other parameters as in initializer.
-```
 
-Stop animating.
-
-```swift
-hideLoadding()
-```
-
-Or you can use `NVActivityIndicatorPresenter` to display UI blocker anywhere.
-
-Start animating.
-
-```swift
-let activityData = ActivityData()
-
-NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
-```
-
-_**Note:** Check documentation for detail of `ActivityData`._
-
-Stop animating.
-
-```swift
-NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
-```
-
-## DEFAULTS
-
-There are global defaults for all `GTMRefresh` instances.
-
-- Default animation type.
-
-```swift
-默认动画 NVActivityIndicatorAnimationBallSpinFadeLoader
-```
-
-- Default color of activity indicator view.
-
-```swift
-GTMRefresh.DEFAULT_COLOR = UIColor.whiteColor()
-```
-
-- Default padding of activity indicator view.
-
-```swift
-GTMRefresh.DEFAULT_PADDING = CGFloat(0)
-```
-
-- Default size of activity indicator view used in UI blocker.
-
-```swift
-GTMRefresh.DEFAULT_BLOCKER_SIZE = CGSizeMake(60, 60)
-```
-
-- Default display time threshold.
-
-> Default time that has to be elapsed (between calls of `startAnimating()` and `stopAnimating()`) in order to actually display UI blocker. It should be set thinking about what the minimum duration of an activity is to be worth showing it to the user. If the activity ends before this time threshold, then it will not be displayed at all.
-
-```swift
-GTMRefresh.DEFAULT_BLOCKER_DISPLAY_TIME_THRESHOLD = 0 // in milliseconds
-```
-
-- Default minimum display time.
-
-> Default minimum display time of UI blocker. Its main purpose is to avoid flashes showing and hiding it so fast. For instance, setting it to 200ms will force UI blocker to be shown for at least this time (regardless of calling `stopAnimating()` ealier).
-
-```swift
-GTMRefresh.DEFAULT_BLOCKER_MINIMUM_DISPLAY_TIME = 0 // in milliseconds
-```
-
-- Default message displayed in UI blocker.
-
-```swift
-GTMRefresh.DEFAULT_BLOCKER_MESSAGE: String? = nil
-```
-
-- Default font of message displayed in UI blocker.
-
-```swift
-GTMRefresh.DEFAULT_BLOCKER_MESSAGE_FONT = UIFont.boldSystemFont(ofSize: 20)
-```
 
 
