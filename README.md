@@ -9,6 +9,7 @@ GTMRefresh
 - 自定义方便, Demo里面有国内主流App的下拉效果的模仿
 - 代码简洁，总代码量不超过1000行
 - 支持国际化
+- 支持:```swift UITableView, UICollectionView, UIScrollView, UIWebView ```
 
 
 # Demo
@@ -72,7 +73,19 @@ import GTMRefresh
 ```
 
 ## 使用默认的下拉和上拉效果
+```swift
+    self.tableView.gtm_addRefreshHeaderView {
+        [unowned self] in
+        print("excute refreshBlock")
+        self.refresh()
+    }
 
+    self.tableView.gtm_addLoadMoreFooterView {
+        [unowned self] in
+        print("excute loadMoreBlock")
+        self.loadMore()
+    }
+```
 
 ## 自定义下拉刷新效果
 
