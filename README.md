@@ -58,7 +58,7 @@ _**Note:** Make sure that all files in `GTMRefresh` included in Compile Sources 
 
 # Migration
 
-## Vesrion 1.0
+## Vesrion 0.0.1
 
 This version requires Xcode 8.0 and Swift 3.
 
@@ -70,13 +70,46 @@ Firstly, import `GTMRefresh`.
 import GTMRefresh
 ```
 
-## 使用帮助
-
-
 ## 使用默认的下拉和上拉效果
 
 
 ## 自定义下拉刷新效果
+
+### 约定
+- 必须继承 GTMRefreshHeader
+- 必须实现 SubGTMRefreshHeaderProtocol
+
+### SubGTMRefreshHeaderProtocol
+
+```
+public protocol SubGTMRefreshHeaderProtocol {
+/// 状态变成.idle
+func toNormalState()
+/// 状态变成.refreshing
+func toRefreshingState()
+/// 状态变成.pulling
+func toPullingState()
+/// 状态变成.willRefresh
+func toWillRefreshState()
+/// 下拉高度／触发高度 值改变
+func changePullingPercent(percent: CGFloat)
+/// 开始结束动画前执行
+func willBeginEndRefershing(isSuccess: Bool)
+/// 结束动画完成后执行
+func willCompleteEndRefershing()
+
+/// 控件的高度
+///
+/// - Returns: 控件的高度
+func contentHeight() -> CGFloat
+}
+
+```
+
+### 特殊效果的实现
+
+
+## 自定义上拉加载效果
 
 
 

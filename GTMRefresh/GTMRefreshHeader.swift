@@ -9,12 +9,19 @@
 import UIKit
 
 public protocol SubGTMRefreshHeaderProtocol {
+    /// 状态变成.idle
     func toNormalState()
+    /// 状态变成.refreshing
     func toRefreshingState()
+    /// 状态变成.pulling
     func toPullingState()
+    /// 状态变成.willRefresh
     func toWillRefreshState()
+    /// 下拉高度／触发高度 值改变
     func changePullingPercent(percent: CGFloat)
+    /// 开始结束动画前执行
     func willBeginEndRefershing(isSuccess: Bool)
+    /// 结束动画完成后执行
     func willCompleteEndRefershing()
     
     /// 控件的高度
