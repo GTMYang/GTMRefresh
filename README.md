@@ -24,6 +24,7 @@ GTMRefresh
 - TaoBao
 - QQ Video
 - DianPing
+- QQ
 
 # Installation
 
@@ -83,31 +84,49 @@ SubGTMRefreshHeaderProtocol
 
 ```swift
 public protocol SubGTMRefreshHeaderProtocol {
-/// 状态变成.idle
-func toNormalState()
-/// 状态变成.refreshing
-func toRefreshingState()
-/// 状态变成.pulling
-func toPullingState()
-/// 状态变成.willRefresh
-func toWillRefreshState()
-/// 下拉高度／触发高度 值改变
-func changePullingPercent(percent: CGFloat)
-/// 开始结束动画前执行
-func willBeginEndRefershing(isSuccess: Bool)
-/// 结束动画完成后执行
-func willCompleteEndRefershing()
+    /// 状态变成.idle
+    func toNormalState()
+    /// 状态变成.refreshing
+    func toRefreshingState()
+    /// 状态变成.pulling
+    func toPullingState()
+    /// 状态变成.willRefresh
+    func toWillRefreshState()
+    /// 下拉高度／触发高度 值改变
+    func changePullingPercent(percent: CGFloat)
+    /// 开始结束动画前执行
+    func willBeginEndRefershing(isSuccess: Bool)
+    /// 结束动画完成后执行
+    func willCompleteEndRefershing()
 
-/// 控件的高度
-///
-/// - Returns: 控件的高度
-func contentHeight() -> CGFloat
+    /// 控件的高度
+    ///
+    /// - Returns: 控件的高度
+    func contentHeight() -> CGFloat
 }
 
 ```
 
 ### 特殊效果的实现
 
+- 当触发刷新的高度和控件高度不一样时重写willRefresHeight()，如Demo里的：Curve Mask
+```swift
+    /// 即将触发刷新的高度(特殊的控件需要重写该方法，返回不同的数值)
+    ///
+    /// - Returns: 触发刷新的高度
+    open func willRefresHeight() -> CGFloat {
+        return self.mj_h // 默认使用控件高度
+    }
+```
+- 当Loadding动画显示区域的高度和控件高度不一样时重写refreshingHoldHeight()，如Demo里的：QQ
+```swift
+    /// Loadding动画显示区域的高度(特殊的控件需要重写该方法，返回不同的数值)
+    ///
+    /// - Returns: Loadding动画显示区域的高度
+    open func refreshingHoldHeight() -> CGFloat {
+        return self.mj_h // 默认使用控件高度
+    }
+```
 
 ## 自定义上拉加载效果
 

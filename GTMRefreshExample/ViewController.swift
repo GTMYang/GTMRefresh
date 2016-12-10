@@ -20,18 +20,13 @@ class ViewController: UITableViewController {
                                     rowsTitles: ["Tableview","CollectionView","ScrollView","WebView"],
                                     rowsTargetControlerNames:["DefaultTableViewController","DefaultCollectionViewController","DefaultScrollViewController","DefaultWebViewController"])
         
-        let section1 = SectionModel(rowsCount: 1,
-                                    sectionTitle:"Build In",
-                                    rowsTitles: ["QQ Style",],
-                                    rowsTargetControlerNames:["QQStyleHeaderViewController"])
      
-        let section2 = SectionModel(rowsCount: 6,
+        let section1 = SectionModel(rowsCount: 8,
                                     sectionTitle:"Customize",
-                                    rowsTitles: ["YahooWeather","Curve Mask","Youku","TaoBao","QQ Video","DianPing"],
-                                    rowsTargetControlerNames:["YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController"])
+                                    rowsTitles: ["QQ","YahooWeather","Curve Mask","Youku","TaoBao","QQ Video","DianPing"],
+                                    rowsTargetControlerNames:["QQStyleHeaderViewController","YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController"])
         models.append(section0)
         models.append(section1)
-        models.append(section2)
         
         
         self.tableView.gtm_addRefreshHeaderView {

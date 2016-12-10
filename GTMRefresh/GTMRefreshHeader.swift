@@ -140,14 +140,14 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     ///
     /// - Returns: Loadding动画显示区域的高度
     open func refreshingHoldHeight() -> CGFloat {
-       return self.mj_h
+       return self.mj_h // 默认使用控件高度
     }
     
     /// 即将触发刷新的高度(特殊的控件需要重写该方法，返回不同的数值)
     ///
     /// - Returns: 触发刷新的高度
     open func willRefresHeight() -> CGFloat {
-        return self.mj_h
+        return self.mj_h // 默认使用控件高度
     }
     
     // MARK: SubGTMRefreshComponentProtocol
