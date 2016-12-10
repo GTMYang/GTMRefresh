@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
 
   s.source       = { :git => "https://github.com/GTMYang/GTMRefresh.git", :tag => s.version }
-  s.source_files = "GTMRefresh/*.{h,swift}, Resource/*.{png,strings}"
+  s.source_files = "GTMRefresh/*.{h,swift}, GTMRefresh/Resource/*.{png,strings}"
 
   s.ios.deployment_target = "8.0"
   s.frameworks = "UIKit"
