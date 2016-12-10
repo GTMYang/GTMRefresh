@@ -2,8 +2,8 @@
 //  DianpingTableviewController.swift
 //  PullToRefreshKit
 //
-//  Created by huangwenchen on 16/7/15.
-//  Copyright © 2016年 Leo. All rights reserved.
+//  Created by luoyang on 2016/12/8.
+//  Copyright © 2016年 luoyang. All rights reserved.
 //
 
 import Foundation
