@@ -1,3 +1,5 @@
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/logo.png)
+
 GTMRefresh
 ===================
 `GTMRefresh` 用Swift重写的MJRefresh
