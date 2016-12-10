@@ -75,11 +75,11 @@ import GTMRefresh
 
 ## 自定义下拉刷新效果
 
-### 约定
+约定
 - 必须继承 GTMRefreshHeader
 - 必须实现 SubGTMRefreshHeaderProtocol
 
-### SubGTMRefreshHeaderProtocol
+SubGTMRefreshHeaderProtocol
 
 ```swift
 public protocol SubGTMRefreshHeaderProtocol {
