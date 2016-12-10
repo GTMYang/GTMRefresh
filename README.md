@@ -1,11 +1,9 @@
 GTMRefresh
 ===================
-
-# Introduction
 `GTMRefresh` 用Swift重写的MJRefresh
 
+# Introduction
 
-##特点
 - 自定义方便, Demo里面有国内主流App的下拉效果的模仿
 - 代码简洁，总代码量不超过1000行
 - 支持国际化
