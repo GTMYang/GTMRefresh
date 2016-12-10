@@ -1,4 +1,4 @@
-![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/logo.png)
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Icon-512.png)
 
 GTMRefresh
 ===================

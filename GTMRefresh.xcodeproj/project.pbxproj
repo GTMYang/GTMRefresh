@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		261A85381DFBA382009897CC /* Demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 261A85371DFBA382009897CC /* Demo.gif */; };
 		262B917A1DFC4C87003D97EC /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 262B91791DFC4C87003D97EC /* logo.png */; };
+		262B917C1DFC55ED003D97EC /* Icon-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 262B917B1DFC55ED003D97EC /* Icon-512.png */; };
 		2635564B1DFAA91700FD98BB /* DefaultScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556441DFAA91700FD98BB /* DefaultScrollViewController.swift */; };
 		2635564C1DFAA91700FD98BB /* DefaultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556451DFAA91700FD98BB /* DefaultTableViewController.swift */; };
 		2635564D1DFAA91700FD98BB /* DefaultWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556461DFAA91700FD98BB /* DefaultWebViewController.swift */; };
@@ -254,6 +255,7 @@
 /* Begin PBXFileReference section */
 		261A85371DFBA382009897CC /* Demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo.gif; sourceTree = "<group>"; };
 		262B91791DFC4C87003D97EC /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		262B917B1DFC55ED003D97EC /* Icon-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-512.png"; sourceTree = "<group>"; };
 		263556441DFAA91700FD98BB /* DefaultScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultScrollViewController.swift; sourceTree = "<group>"; };
 		263556451DFAA91700FD98BB /* DefaultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewController.swift; sourceTree = "<group>"; };
 		263556461DFAA91700FD98BB /* DefaultWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWebViewController.swift; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 			isa = PBXGroup;
 			children = (
 				262B91791DFC4C87003D97EC /* logo.png */,
+				262B917B1DFC55ED003D97EC /* Icon-512.png */,
 				261A85371DFBA382009897CC /* Demo.gif */,
 				2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */,
 				2671154F1DF6AE4E00F27CEA /* LICENSE */,
@@ -944,6 +947,7 @@
 				262B917A1DFC4C87003D97EC /* logo.png in Resources */,
 				261A85381DFBA382009897CC /* Demo.gif in Resources */,
 				2655CB3A1DF94569001C50CF /* arrow_down@3x.png in Resources */,
+				262B917C1DFC55ED003D97EC /* Icon-512.png in Resources */,
 				267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
