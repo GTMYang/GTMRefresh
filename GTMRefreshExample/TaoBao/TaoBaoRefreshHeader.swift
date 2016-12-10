@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Leo. All rights reserved.
 //
 
-import GTMRefresh
 import UIKit
+import GTMRefresh
 
 
 class TaoBaoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
