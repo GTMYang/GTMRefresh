@@ -144,6 +144,16 @@ public protocol SubGTMRefreshHeaderProtocol {
     }
 ```
 
+### 自定义控件的使用
+
+```swift
+    self.tableView.gtm_addRefreshHeaderView(refreshHeader: CustomRefreshHeader()) {
+        [unowned self] in
+        print("excute refreshBlock")
+        self.refresh()
+    }
+```
+
 ## 自定义上拉加载效果
 
 约定
