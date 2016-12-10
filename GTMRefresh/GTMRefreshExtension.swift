@@ -33,7 +33,7 @@ extension UIScrollView {
     /// - Parameters:
     ///   - refreshHeader: 下拉刷新动效View必须继承GTMRefreshHeader并且要实现SubGTMRefreshHeaderProtocol，不传值的时候默认使用 DefaultGTMRefreshHeader
     ///   - refreshBlock: 刷新数据Block
-    public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) {
+    final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) {
         guard refreshHeader is SubGTMRefreshHeaderProtocol  else {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
         }
@@ -56,7 +56,7 @@ extension UIScrollView {
     /// - Parameters:
     ///   - loadMoreFooter: 上拉加载动效View必须继承GTMLoadMoreFooter，不传值的时候默认使用 DefaultGTMLoadMoreFooter
     ///   - refreshBlock: 加载更多数据Block
-    public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) {
+    final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) {
         
         guard loadMoreFooter is SubGTMLoadMoreFooterProtocol  else {
             fatalError("loadMoreFooter must implement SubGTMLoadMoreFooterProtocol")
@@ -76,14 +76,18 @@ extension UIScrollView {
         }
     }
     
-    public func endRefreshing(isSuccess: Bool) {
+    final public func autoRefreshing(){
+        self.gtmHeader?.autoRefreshing()
+    }
+    
+    final public func endRefreshing(isSuccess: Bool) {
         self.gtmHeader?.endRefresing(isSuccess: isSuccess)
         if isSuccess {
             // 重置footer状态（防止footer还处在数据加载完成状态）
             self.gtmFooter?.state = .idle
         }
     }
-    public func endLoadMore(isNoMoreData: Bool) {
+    final public func endLoadMore(isNoMoreData: Bool) {
         self.gtmFooter?.endLoadMore(isNoMoreData: isNoMoreData)
     }
 }

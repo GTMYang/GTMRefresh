@@ -56,7 +56,7 @@ open class GTMRefreshComponent: UIView {
         
         if self.state == .willRefresh {
             // 预防view还没显示出来就调用了beginRefreshing
-            self.state = .refreshing;
+            self.state = .refreshing
         }
     }
     

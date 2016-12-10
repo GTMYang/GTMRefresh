@@ -12,6 +12,7 @@ import UIKit
 class CurveMaskTableViewController:BaseTableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //Setup
         let curveHeader = CurveRefreshHeader()
         self.tableView.gtm_addRefreshHeaderView(refreshHeader: curveHeader) {
@@ -19,6 +20,7 @@ class CurveMaskTableViewController:BaseTableViewController{
             print("excute refreshBlock")
             self.refresh()
         }
+        self.tableView.autoRefreshing()
     }
     
     

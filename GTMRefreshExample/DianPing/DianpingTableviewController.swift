@@ -20,6 +20,7 @@ class DianpingTableviewController:BaseTableViewController{
             print("excute refreshBlock")
             self.refresh()
         }
+        self.tableView.autoRefreshing()
     }
     
     

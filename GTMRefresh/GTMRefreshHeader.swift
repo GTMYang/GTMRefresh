@@ -136,6 +136,13 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
        return self.mj_h
     }
     
+    /// 即将触发刷新的高度(特殊的控件需要重写该方法，返回不同的数值)
+    ///
+    /// - Returns: 触发刷新的高度
+    open func willRefresHeight() -> CGFloat {
+        return self.mj_h
+    }
+    
     // MARK: SubGTMRefreshComponentProtocol
     open func scollViewContentOffsetDidChange(change: [NSKeyValueChangeKey : Any]?) {
         
@@ -150,21 +157,21 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                 return
             }
             // 考虑SectionHeader停留时的高度
-            var insetT: CGFloat = -scrollV.mj_offsetY > originalInset.top ? -scrollV.mj_offsetY : originalInset.top;
-            insetT = insetT > self.refreshingHoldHeight() + originalInset.top ? self.refreshingHoldHeight() + originalInset.top : insetT;
+            var insetT: CGFloat = -scrollV.mj_offsetY > originalInset.top ? -scrollV.mj_offsetY : originalInset.top
+            insetT = insetT > self.refreshingHoldHeight() + originalInset.top ? self.refreshingHoldHeight() + originalInset.top : insetT
             
-            scrollV.mj_insetT = insetT;
-            self.insetTDelta = originalInset.top - insetT;
+            scrollV.mj_insetT = insetT
+            self.insetTDelta = originalInset.top - insetT
             
-            return;
+            return
         }
         // 跳转到下一个控制器时，contentInset可能会变
         self.scrollViewOriginalInset = scrollV.contentInset
         
         // 当前的contentOffset
-        let offsetY: CGFloat = scrollV.mj_offsetY;
+        let offsetY: CGFloat = scrollV.mj_offsetY
         // 头部控件刚好出现的offsetY
-        let headerInOffsetY: CGFloat = -originalInset.top;
+        let headerInOffsetY: CGFloat = -originalInset.top
         
         // 如果是向上滚动头部控件还没出现，直接返回
         guard offsetY <= headerInOffsetY else {
@@ -172,7 +179,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         }
         
         // 普通 和 即将刷新 的临界点
-        let idle2pullingOffsetY: CGFloat = headerInOffsetY - self.mj_h;
+        let idle2pullingOffsetY: CGFloat = headerInOffsetY - self.willRefresHeight()
         
         if scrollV.isDragging {
             switch state {
@@ -184,7 +191,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                 if offsetY <= idle2pullingOffsetY {
                     state = .willRefresh
                 } else {
-                    self.pullingPercent = (headerInOffsetY - offsetY) / self.mj_h;
+                    self.pullingPercent = (headerInOffsetY - offsetY) / self.willRefresHeight()
                 }
             case .willRefresh:
                 if offsetY > idle2pullingOffsetY {
@@ -196,7 +203,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
             // 停止Drag && 并且是即将刷新状态
             if state == .willRefresh {
                 // 开始刷新
-                self.pullingPercent = 1.0;
+                self.pullingPercent = 1.0
                 // 只要正在刷新，就完全显示
                 if self.window != nil {
                     state = .refreshing
@@ -215,7 +222,17 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         // here do nothing
     }
     
-    // MARK: Public
+    // MARK: Public API
+    
+    final public func autoRefreshing(){
+        if self.window != nil {
+            self.state = .refreshing
+        }else{
+            if state != .refreshing{
+                self.state = .willRefresh
+            }
+        }
+    }
     
     /// 结束刷新
     final public func endRefresing(isSuccess: Bool) {

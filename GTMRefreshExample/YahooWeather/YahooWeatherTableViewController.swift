@@ -12,6 +12,7 @@ import UIKit
 class YahooWeatherTableViewController: BaseTableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = UIColor.lightGray
         //Setup
         let yahooHeader = YahooWeatherRefreshHeader()
         self.tableView.gtm_addRefreshHeaderView(refreshHeader: yahooHeader) {
@@ -19,8 +20,7 @@ class YahooWeatherTableViewController: BaseTableViewController{
             print("excute refreshBlock")
             self.refresh()
         }
-        
-        self.tableView.backgroundColor = UIColor.lightGray
+        self.tableView.autoRefreshing()
     }
     
     
