@@ -81,7 +81,7 @@ import GTMRefresh
 
 ### SubGTMRefreshHeaderProtocol
 
-```
+```swift
 public protocol SubGTMRefreshHeaderProtocol {
 /// 状态变成.idle
 func toNormalState()
