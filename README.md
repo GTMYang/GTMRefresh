@@ -13,22 +13,18 @@ GTMRefresh
 # Demo
 直接下载代码，里面Demo里面有各种效果的自定义效果（因为时间比较紧，demo代码可能不够漂亮）
 
-![alt tag](https://github.com/GTMYang/GTMRefresh//master/Demo效果.gif)
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo.gif)
 
 For first-hand experience, just open the project and run it.
 
-# Animation types
+# Demo模仿的下拉效果
 
-| Type | Type | Type | Type |
-|---|---|---|---|
-1. BallPulse | 2. BallGridPulse | 3. BallClipRotate | 4. SquareSpin
-5. BallClipRotatePulse | 6. BallClipRotateMultiple | 7. BallPulseRise | 8. BallRotate
-9. CubeTransition | 10. BallZigZag | 11. BallZigZagDeflect | 12. BallTrianglePath
-13. BallScale | 14. LineScale | 15. LineScaleParty | 16. BallScaleMultiple
-17. BallPulseSync | 18. BallBeat | 19. LineScalePulseOut | 20. LineScalePulseOutRapid
-21. BallScaleRipple | 22. BallScaleRippleMultiple | 23. BallSpinFadeLoader | 24. LineSpinFadeLoader
-25. TriangleSkewSpin | 26. Pacman | 27. BallGridBeat | 28. SemiCircleSpin
-29. BallRotateChase | 30. Orbit | 31. AudioEqualizer
+- "YahooWeather"
+- "Curve Mask"
+- "Youku"
+- "TaoBao" 
+- "QQ Video"
+- "DianPing"
 
 # Installation
 
