@@ -7,9 +7,7 @@ GTMRefresh
 - 自定义方便, Demo里面有国内主流App的下拉效果的模仿
 - 代码简洁，总代码量不超过1000行
 - 支持国际化
-- 支持:```swift
-UITableView, UICollectionView, UIScrollView, UIWebView 
-```
+- 支持: UITableView, UICollectionView, UIScrollView, UIWebView 
 
 
 # Demo
@@ -58,7 +56,7 @@ Copy `GTMRefresh` folder to your project. That's it.
 
 _**Note:** Make sure that all files in `GTMRefresh` included in Compile Sources in Build Phases._
 
-# Migration
+# 版本
 
 ## Vesrion 0.0.1
 
@@ -85,6 +83,11 @@ import GTMRefresh
         print("excute loadMoreBlock")
         self.loadMore()
     }
+```
+
+## 代码触发刷新
+```swift
+    self.tableView.triggerRefreshing()
 ```
 
 ## 自定义下拉刷新效果
@@ -143,6 +146,26 @@ public protocol SubGTMRefreshHeaderProtocol {
 
 ## 自定义上拉加载效果
 
+约定
+- 必须继承 GTMLoadMoreFooter
+- 必须实现 SubGTMLoadMoreFooterProtocol
+
+SubGTMLoadMoreFooterProtocol
+
+```swift
+
+public protocol SubGTMLoadMoreFooterProtocol {
+    func toNormalState()
+    func toNoMoreDataState()
+    func toWillRefreshState()
+    func toRefreshingState()
+
+    /// 控件的高度(自定义控件通过该方法设置自定义高度)
+    ///
+    /// - Returns: 控件的高度
+    func contentHeith() -> CGFloat
+}
+```
 
 
 

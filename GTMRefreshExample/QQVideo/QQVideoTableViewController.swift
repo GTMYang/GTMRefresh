@@ -18,7 +18,7 @@ class QQVideoTableviewController:BaseTableViewController{
             print("excute refreshBlock")
             self.refresh()
         }
-        self.tableView.autoRefreshing()
+        self.tableView.triggerRefreshing()
     }
     
     

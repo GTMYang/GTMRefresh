@@ -76,7 +76,7 @@ extension UIScrollView {
         }
     }
     
-    final public func autoRefreshing(){
+    final public func triggerRefreshing(){
         self.gtmHeader?.autoRefreshing()
     }
     

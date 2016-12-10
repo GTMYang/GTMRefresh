@@ -13,7 +13,6 @@ public protocol SubGTMLoadMoreFooterProtocol {
     func toNoMoreDataState()
     func toWillRefreshState()
     func toRefreshingState()
-    //  func setPullingPrecent(precent: CGFloat)
     
     /// 控件的高度(自定义控件通过该方法设置自定义高度)
     ///
