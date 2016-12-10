@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
 
   s.name         = "GTMRefresh"
   s.version      = "0.0.1"
-  s.summary      = "swift3 实现的Loadding动画库"
+  s.summary      = "swift 实现的上拉刷新，下拉加载动效库"
 
   s.homepage     = "https://github.com/GTMYang/GTMRefresh"
 
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
 
 
   s.source       = { :git => "https://github.com/GTMYang/GTMRefresh.git", :tag => s.version }
-  s.source_files = "GTMRefresh/*.{h,swift}"
+  s.source_files = "GTMRefresh/*.{h,swift}, Resource/*.{png,strings}"
 
   s.ios.deployment_target = "8.0"
   s.frameworks = "UIKit"
