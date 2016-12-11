@@ -15,7 +15,11 @@ GTMRefresh
 # Demo
 直接下载代码，里面Demo里面有各种效果的自定义效果（因为时间比较紧，demo代码可能不够漂亮）
 
-![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo.gif)
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo/QQ.gif)
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo/CurveMask.gif)
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo/Taobao.gif)
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo/TXVideo.gif)
+![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/Demo/Youku.gif)
 
 # Demo模仿的下拉效果
 
