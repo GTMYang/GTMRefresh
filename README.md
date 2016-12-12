@@ -1,4 +1,3 @@
-![alt tag](https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/logo.png)
 
 <p align="center">
 <a href="https://github.com/GTMYang/GTMRefresh"><img src="https://raw.githubusercontent.com/GTMYang/GTMRefresh/master/logo.png"></a>
