@@ -34,7 +34,7 @@
 		267115651DF6AEAA00F27CEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 267115631DF6AEAA00F27CEA /* LaunchScreen.storyboard */; };
 		2671156D1DF6AEDD00F27CEA /* GTMRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 267115421DF6AE0D00F27CEA /* GTMRefresh.framework */; };
 		2671156E1DF6AEDD00F27CEA /* GTMRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 267115421DF6AE0D00F27CEA /* GTMRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2693577E1DFE2DCD00D32A63 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2693577D1DFE2DCD00D32A63 /* logo.png */; };
+		269357821DFE30C900D32A63 /* GTMRefresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 269357811DFE30C900D32A63 /* GTMRefresh.png */; };
 		26A767971DFB0FAF00A2ADD1 /* arrow_downWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A767941DFB0FAF00A2ADD1 /* arrow_downWhite.png */; };
 		26A767981DFB0FAF00A2ADD1 /* CurveMaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A767951DFB0FAF00A2ADD1 /* CurveMaskTableViewController.swift */; };
 		26A767991DFB0FAF00A2ADD1 /* CurveRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26A767961DFB0FAF00A2ADD1 /* CurveRefreshHeader.swift */; };
@@ -286,7 +286,7 @@
 		2671155F1DF6AEAA00F27CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		267115641DF6AEAA00F27CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		267115661DF6AEAA00F27CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2693577D1DFE2DCD00D32A63 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo.png; path = Demo/logo.png; sourceTree = "<group>"; };
+		269357811DFE30C900D32A63 /* GTMRefresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GTMRefresh.png; sourceTree = "<group>"; };
 		26A767941DFB0FAF00A2ADD1 /* arrow_downWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_downWhite.png; sourceTree = "<group>"; };
 		26A767951DFB0FAF00A2ADD1 /* CurveMaskTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurveMaskTableViewController.swift; sourceTree = "<group>"; };
 		26A767961DFB0FAF00A2ADD1 /* CurveRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurveRefreshHeader.swift; sourceTree = "<group>"; };
@@ -611,8 +611,8 @@
 			isa = PBXGroup;
 			children = (
 				26044DB81DFD7AB7006E82B3 /* Demo */,
-				2693577D1DFE2DCD00D32A63 /* logo.png */,
 				2671154E1DF6AE4E00F27CEA /* GTMRefresh.podspec */,
+				269357811DFE30C900D32A63 /* GTMRefresh.png */,
 				2671154F1DF6AE4E00F27CEA /* LICENSE */,
 				267115501DF6AE4E00F27CEA /* README.md */,
 				267115441DF6AE0D00F27CEA /* GTMRefresh */,
@@ -957,7 +957,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2693577E1DFE2DCD00D32A63 /* logo.png in Resources */,
 				26044DBF1DFD7AB7006E82B3 /* QQ.gif in Resources */,
 				26044DC21DFD7AB7006E82B3 /* Youku.gif in Resources */,
 				26044DBE1DFD7AB7006E82B3 /* CurveMask.gif in Resources */,
@@ -966,6 +965,7 @@
 				2655CB511DF9638A001C50CF /* failure@3x.png in Resources */,
 				2655CB3B1DF94569001C50CF /* success@3x.png in Resources */,
 				26044DC11DFD7AB7006E82B3 /* TXVideo.gif in Resources */,
+				269357821DFE30C900D32A63 /* GTMRefresh.png in Resources */,
 				26044DC01DFD7AB7006E82B3 /* Taobao.gif in Resources */,
 				2655CB3A1DF94569001C50CF /* arrow_down@3x.png in Resources */,
 				267115511DF6AE4E00F27CEA /* GTMRefresh.podspec in Resources */,
