@@ -4,11 +4,10 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/johnlui/Pitaya"><img src="https://img.shields.io/badge/platform-ios-lightgrey.svg"></a>
-<a href="https://github.com/johnlui/Pitaya"><img src="https://img.shields.io/github/license/johnlui/Pitaya.svg?style=flat"></a>
-<a href="https://github.com/johnlui/Pitaya"><img src="https://img.shields.io/badge/language-Swift%203-orange.svg"></a>
-<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat"></a>
-<a href="https://travis-ci.org/johnlui/Pitaya"><img src="https://img.shields.io/travis/johnlui/Pitaya.svg"></a>
+<a href="https://github.com/GTMYang/GTMRefresh"><img src="https://img.shields.io/badge/platform-ios-lightgrey.svg"></a>
+<a href="https://github.com/GTMYang/GTMRefresh"><img src="https://img.shields.io/github/license/johnlui/Pitaya.svg?style=flat"></a>
+<a href="https://github.com/GTMYang/GTMRefresh"><img src="https://img.shields.io/badge/language-Swift%203-orange.svg"></a>
+<a href="https://travis-ci.org/GTMYang/GTMRefresh"><img src="https://img.shields.io/travis/johnlui/Pitaya.svg"></a>
 </p>
 
 <br>
