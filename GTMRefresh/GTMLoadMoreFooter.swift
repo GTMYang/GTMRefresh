@@ -8,11 +8,11 @@
 
 import UIKit
 
-public protocol SubGTMLoadMoreFooterProtocol {
-    func toNormalState()
-    func toNoMoreDataState()
-    func toWillRefreshState()
-    func toRefreshingState()
+@objc public protocol SubGTMLoadMoreFooterProtocol {
+    @objc optional func toNormalState()
+    @objc optional func toNoMoreDataState()
+    @objc optional func toWillRefreshState()
+    @objc optional func toRefreshingState()
     
     /// 控件的高度(自定义控件通过该方法设置自定义高度)
     ///
@@ -51,7 +51,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                 UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
                     scrollV.mj_insetB -= self.lastBottomDelta
                 }, completion: { (isComplet) in
-                    self.state == .idle ? self.subProtocol?.toNormalState() : self.subProtocol?.toNoMoreDataState()
+                    self.state == .idle ? self.subProtocol?.toNormalState?() : self.subProtocol?.toNoMoreDataState?()
                 })
             case .refreshing:
                 // 展示正在加载动效
@@ -68,12 +68,12 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
                 }, completion: { (isComplet) in
                     self.loadMoreBlock()
-                    self.subProtocol?.toRefreshingState()
+                    self.subProtocol?.toRefreshingState?()
                 })
                 
             case .willRefresh:
                 DispatchQueue.main.async {
-                    self.subProtocol?.toWillRefreshState()
+                    self.subProtocol?.toWillRefreshState?()
                 }
                 
             default: break

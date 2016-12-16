@@ -27,8 +27,7 @@ class ViewController: UITableViewController {
                                     rowsTargetControlerNames:["QQStyleHeaderViewController","YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController"])
         models.append(section0)
         models.append(section1)
-        
-        
+       
         self.tableView.gtm_addRefreshHeaderView {
             [unowned self] in
             print("excute refreshBlock")

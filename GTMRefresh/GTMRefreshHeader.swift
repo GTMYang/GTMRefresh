@@ -8,21 +8,21 @@
 
 import UIKit
 
-public protocol SubGTMRefreshHeaderProtocol {
+@objc public protocol SubGTMRefreshHeaderProtocol {
     /// 状态变成.idle
-    func toNormalState()
+    @objc optional func toNormalState()
     /// 状态变成.refreshing
-    func toRefreshingState()
+    @objc optional func toRefreshingState()
     /// 状态变成.pulling
-    func toPullingState()
+    @objc optional func toPullingState()
     /// 状态变成.willRefresh
-    func toWillRefreshState()
+    @objc optional func toWillRefreshState()
     /// 下拉高度／触发高度 值改变
-    func changePullingPercent(percent: CGFloat)
+    @objc optional func changePullingPercent(percent: CGFloat)
     /// 开始结束动画前执行
-    func willBeginEndRefershing(isSuccess: Bool)
+    @objc optional func willBeginEndRefershing(isSuccess: Bool)
     /// 结束动画完成后执行
-    func willCompleteEndRefershing()
+    @objc optional func willCompleteEndRefershing()
     
     /// 控件的高度
     ///
@@ -49,7 +49,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     
     var pullingPercent: CGFloat = 0 {
         didSet {
-            subProtocol?.changePullingPercent(percent: pullingPercent)
+            subProtocol?.changePullingPercent?(percent: pullingPercent)
         }
     }
     
@@ -68,22 +68,22 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                 UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
                     self.scrollView?.mj_insetT += self.insetTDelta
                 }, completion: { (isFinish) in
-                    self.subProtocol?.willCompleteEndRefershing()
+                    self.subProtocol?.willCompleteEndRefershing?()
                     // 执行刷新操作
-                    self.subProtocol?.toNormalState()
+                    self.subProtocol?.toNormalState?()
                 })
             case .pulling:
                 DispatchQueue.main.async {
-                    self.subProtocol?.toPullingState()
+                    self.subProtocol?.toPullingState?()
                 }
             case .willRefresh:
                 DispatchQueue.main.async {
-                    self.subProtocol?.toWillRefreshState()
+                    self.subProtocol?.toWillRefreshState?()
                 }
             case .refreshing:
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: GTMRefreshConstant.fastAnimationDuration, animations: {
-                        self.subProtocol?.toRefreshingState()
+                        self.subProtocol?.toRefreshingState?()
                         
                         guard let originInset = self.scrollViewOriginalInset else {
                             return
@@ -243,7 +243,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     
     /// 结束刷新
     final public func endRefresing(isSuccess: Bool) {
-        subProtocol?.willBeginEndRefershing(isSuccess: isSuccess)
+        subProtocol?.willBeginEndRefershing?(isSuccess: isSuccess)
         self.state = .idle
 //        let deadlineTime = DispatchTime.now() + .seconds(1)
 //        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
