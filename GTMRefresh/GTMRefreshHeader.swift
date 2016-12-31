@@ -255,6 +255,12 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
 
 class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     
+    var pullDownToRefresh = GTMRLocalize("pullDownToRefresh")
+    var releaseToRefresh = GTMRLocalize("releaseToRefresh")
+    var refreshSuccess = GTMRLocalize("refreshSuccess")
+    var refreshFailure = GTMRLocalize("refreshFailure")
+    var refreshing = GTMRLocalize("refreshing")
+    
     lazy var pullingIndicator: UIImageView = {
         let pindicator = UIImageView()
         pindicator.image = UIImage(named: "arrow_down", in: Bundle(for: GTMRefreshHeader.self), compatibleWith: nil)
@@ -321,18 +327,18 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.pullingIndicator.isHidden = false
         self.loaddingIndicator.stopAnimating()
         
-        messageLabel.text =  GTMRHeaderString.pullDownToRefresh
+        messageLabel.text =  self.pullDownToRefresh
         pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
     }
     func toRefreshingState() {
         self.pullingIndicator.isHidden = true
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
-        messageLabel.text = GTMRHeaderString.refreshing
+        messageLabel.text = self.refreshing
     }
     func toPullingState() {
         self.loaddingIndicator.isHidden = true
-        messageLabel.text = GTMRHeaderString.pullDownToRefresh
+        messageLabel.text = self.pullDownToRefresh
         
         guard pullingIndicator.transform == CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))  else{
             return
@@ -342,7 +348,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         })
     }
     func toWillRefreshState() {
-        messageLabel.text = GTMRHeaderString.releaseToRefresh
+        messageLabel.text = self.releaseToRefresh
         self.loaddingIndicator.isHidden = true
         
         guard pullingIndicator.transform == CGAffineTransform.identity else{
@@ -362,10 +368,10 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.loaddingIndicator.isHidden = true
         
         if isSuccess {
-            messageLabel.text =  GTMRHeaderString.refreshSuccess
+            messageLabel.text =  self.refreshSuccess
             pullingIndicator.image = UIImage(named: "success", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
         } else {
-            messageLabel.text =  GTMRHeaderString.refreshFailure
+            messageLabel.text =  self.refreshFailure
             pullingIndicator.image = UIImage(named: "failure", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
         }
     }

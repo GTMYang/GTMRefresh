@@ -39,5 +39,5 @@ public struct GTMRFooterString{
     static public let loadding = GTMRLocalize("loadMore")
     static public let noMoreData = GTMRLocalize("noMoreData")
     static public let releaseLoadMore = GTMRLocalize("releaseLoadMore")
-    static public let scrollAndTapToRefresh = GTMRLocalize("scrollAndTapToRefresh")
+    //static public let scrollAndTapToRefresh = GTMRLocalize("scrollAndTapToRefresh")
 }

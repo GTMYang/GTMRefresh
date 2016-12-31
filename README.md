@@ -76,7 +76,7 @@ _**Note:** Make sure that all files in `GTMRefresh` included in Compile Sources 
 
 # 版本
 
-## Vesrion 0.0.3
+## Vesrion 1.0.0
 
 This version requires Xcode 8.0 and Swift 3.
 
@@ -101,6 +101,28 @@ import GTMRefresh
         print("excute loadMoreBlock")
         self.loadMore()
     }
+```
+
+## 自定义下拉和上拉文本
+```swift
+    self.tableView?.gtm_addRefreshHeaderView {
+        [unowned self] in
+        print("excute refreshBlock")
+        self.refresh()
+    }.setupHeaderText(pullDownToRefreshText: "下拉试试看",
+                    releaseToRefreshText: "松开现神奇",
+                    refreshSuccessText: "成功",
+                    refreshFailureText: "失败",
+                    refreshingText: "刷新...")
+
+    self.tableView?.gtm_addLoadMoreFooterView {
+        [unowned self] in
+        print("excute loadMoreBlock")
+        self.loadMore()
+    }.setupFooterText(pullUpToRefreshText: "用力往上拉",
+                    loaddingText: "努力加载中...",
+                    noMoreDataText: "没有更多了",
+                    releaseLoadMoreText: "轻轻一松，开始加载")
 ```
 
 ## 代码触发刷新

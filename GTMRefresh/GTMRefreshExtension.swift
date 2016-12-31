@@ -33,7 +33,8 @@ extension UIScrollView {
     /// - Parameters:
     ///   - refreshHeader: 下拉刷新动效View必须继承GTMRefreshHeader并且要实现SubGTMRefreshHeaderProtocol，不传值的时候默认使用 DefaultGTMRefreshHeader
     ///   - refreshBlock: 刷新数据Block
-    final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) {
+    @discardableResult
+    final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) -> UIScrollView {
         guard refreshHeader is SubGTMRefreshHeaderProtocol  else {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
         }
@@ -49,6 +50,34 @@ extension UIScrollView {
                 self.gtmHeader = header
             }
         }
+        return self
+    }
+    
+    // 自定义header文字
+    final public func setupHeaderText(pullDownToRefreshText: String? = nil,
+                                      releaseToRefreshText: String? = nil,
+                                      refreshSuccessText: String? = nil,
+                                      refreshFailureText: String? = nil,
+                                      refreshingText: String? = nil) {
+        guard let defaultFooter = self.gtmHeader, defaultFooter is DefaultGTMRefreshHeader else {
+            return
+        }
+        let header = defaultFooter as! DefaultGTMRefreshHeader
+        if let txt = pullDownToRefreshText {
+            header.pullDownToRefresh = txt
+        }
+        if let txt = releaseToRefreshText {
+            header.releaseToRefresh = txt
+        }
+        if let txt = refreshSuccessText {
+            header.refreshSuccess = txt
+        }
+        if let txt = refreshFailureText {
+            header.refreshFailure = txt
+        }
+        if let txt = refreshingText {
+            header.refreshing = txt
+        }
     }
     
     /// 添加上拉加载
@@ -56,7 +85,8 @@ extension UIScrollView {
     /// - Parameters:
     ///   - loadMoreFooter: 上拉加载动效View必须继承GTMLoadMoreFooter，不传值的时候默认使用 DefaultGTMLoadMoreFooter
     ///   - refreshBlock: 加载更多数据Block
-    final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) {
+    @discardableResult
+    final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) -> UIScrollView {
         
         guard loadMoreFooter is SubGTMLoadMoreFooterProtocol  else {
             fatalError("loadMoreFooter must implement SubGTMLoadMoreFooterProtocol")
@@ -73,6 +103,31 @@ extension UIScrollView {
                 self.insertSubview(footer, at: 0)
                 self.gtmFooter = footer
             }
+        }
+        return self
+    }
+    
+    // 自定义footer文字
+    final public func setupFooterText(pullUpToRefreshText: String? = nil,
+                                      loaddingText: String? = nil,
+                                      noMoreDataText: String? = nil,
+                                      releaseLoadMoreText: String? = nil) {
+        guard let defaultFooter = self.gtmFooter, defaultFooter is DefaultGTMLoadMoreFooter else {
+            return
+        }
+        let footer = defaultFooter as! DefaultGTMLoadMoreFooter
+        if let txt = pullUpToRefreshText {
+            footer.pullUpToRefreshText = txt
+            footer.messageLabel.text = txt
+        }
+        if let txt = loaddingText {
+            footer.loaddingText = txt
+        }
+        if let txt = noMoreDataText {
+            footer.noMoreDataText = txt
+        }
+        if let txt = releaseLoadMoreText {
+            footer.releaseLoadMoreText = txt
         }
     }
     

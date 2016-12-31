@@ -137,7 +137,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
             switch currentOffsetY {
             case footerCloseOffsetY...willLoadMoreOffsetY:
                 state = .pulling
-            case willLoadMoreOffsetY...1000:
+            case willLoadMoreOffsetY...(willLoadMoreOffsetY + 1000):
                 state = .willRefresh
             default: break
             }
@@ -207,6 +207,11 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
 
 class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol {
     
+     var pullUpToRefreshText: String = GTMRLocalize("pullUpToRefresh")
+    public var loaddingText: String = GTMRLocalize("loadMore")
+    public var noMoreDataText: String = GTMRLocalize("noMoreData")
+    public var releaseLoadMoreText: String = GTMRLocalize("releaseLoadMore")
+    
     lazy var pullingIndicator: UIImageView = {
         let pindicator = UIImageView()
         pindicator.image = UIImage(named: "arrow_down", in: Bundle(for: GTMLoadMoreFooter.self), compatibleWith: nil)
@@ -226,7 +231,6 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
-        label.text = GTMRFooterString.pullUpToRefresh
         
         return label
     }()
@@ -283,7 +287,7 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
         
-        messageLabel.text =  GTMRFooterString.pullUpToRefresh
+        messageLabel.text =  self.pullUpToRefreshText
         UIView.animate(withDuration: 0.4, animations: {
             self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
         })
@@ -293,10 +297,10 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
         
-        messageLabel.text =  GTMRFooterString.noMoreData
+        messageLabel.text =  self.noMoreDataText
     }
     func toWillRefreshState() {
-        messageLabel.text =  GTMRFooterString.releaseLoadMore
+        messageLabel.text =  self.releaseLoadMoreText
         UIView.animate(withDuration: 0.4, animations: {
             self.pullingIndicator.transform = CGAffineTransform.identity
         })    }
@@ -304,7 +308,7 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
         
-        messageLabel.text =  GTMRFooterString.loadding
+        messageLabel.text =  self.loaddingText
     }
 
 }

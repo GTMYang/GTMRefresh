@@ -20,23 +20,30 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 class DefaultTableViewController:UITableViewController{
-    var models = [1,2,3,4,5,6,7,8,9,10]
+    var models = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.lightGray
+        self.view.backgroundColor = UIColor.white
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
         self.tableView?.gtm_addRefreshHeaderView {
             [unowned self] in
             print("excute refreshBlock")
             self.refresh()
-        }
+        }.setupHeaderText(pullDownToRefreshText: "下拉试试看",
+                          releaseToRefreshText: "松开现神奇",
+                          refreshSuccessText: "成功",
+                          refreshFailureText: "失败",
+                          refreshingText: "刷新...")
         
         self.tableView?.gtm_addLoadMoreFooterView {
             [unowned self] in
             print("excute loadMoreBlock")
             self.loadMore()
-        }
+        }.setupFooterText(pullUpToRefreshText: "用力往上拉",
+                loaddingText: "努力加载中...",
+                noMoreDataText: "没有更多了",
+                releaseLoadMoreText: "轻轻一松，开始加载")
     }
     
     
@@ -53,7 +60,9 @@ class DefaultTableViewController:UITableViewController{
     }
     
     func endLoadMore() {
-        self.tableView?.endLoadMore(isNoMoreData: true)
+        self.models += [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+        self.tableView?.endLoadMore(isNoMoreData: models.count > 50)
+        self.tableView?.reloadData()
     }
     
     
