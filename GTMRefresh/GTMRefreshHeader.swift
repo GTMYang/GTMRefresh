@@ -299,6 +299,11 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    deinit {
+        print("Deinit of DefaultGTMRefreshHeader")
+    }
+    
     // MARK: Layout
     
     override func layoutSubviews() {

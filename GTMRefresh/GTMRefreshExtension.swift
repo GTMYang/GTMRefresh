@@ -11,6 +11,15 @@ import ObjectiveC
 
 extension UIScrollView {
     
+    override open func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+     //   print("table willMove toSuperview \(newSuperview)")
+        if newSuperview == nil {
+            self.gtmHeader?.observerOpen = false
+            self.gtmFooter?.observerOpen = false
+        }
+    }
+    
     private var gtmHeader: GTMRefreshHeader? {
         get {
             return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader) as? GTMRefreshHeader
