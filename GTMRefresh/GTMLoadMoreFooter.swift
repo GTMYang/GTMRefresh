@@ -20,10 +20,15 @@ import UIKit
     func contentHeith() -> CGFloat
 }
 
+public protocol GTMLoadMoreFooterDelegate: class {
+    func loadMore()
+}
+
 open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
     
+    weak var delegate: GTMLoadMoreFooterDelegate?
     /// 加载更多Block
-    var loadMoreBlock: () -> Void = {}
+   // var loadMoreBlock: () -> Void = {}
     
     var contentView: UIView = {
         let view = UIView()
@@ -67,7 +72,8 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     scrollV.mj_insetB = toInsetB
                     scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
                 }, completion: { (isComplet) in
-                    self.loadMoreBlock()
+                    //self.loadMoreBlock()
+                    self.delegate?.loadMore()
                     self.subProtocol?.toRefreshingState?()
                 })
                 

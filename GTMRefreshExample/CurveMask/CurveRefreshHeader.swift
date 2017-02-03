@@ -10,8 +10,9 @@ import GTMRefresh
 import UIKit
 
 class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
+    
     let pullingIndicator = UIImageView()
-    let bgColor = UIColor(red: 77.0/255.0, green: 184.0/255.0, blue: 255.0/255.0, alpha: 0.65)
+   // let bgColor = UIColor(red: 77.0/255.0, green: 184.0/255.0, blue: 255.0/255.0, alpha: 0.65)
     let totalHeight = UIScreen.main.bounds.size.height
     let maskLayer = CAShapeLayer()
     let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -22,7 +23,7 @@ class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         pullingIndicator.image = UIImage(named: "arrow_downWhite")
         
         self.contentView.layer.addSublayer(backgroundLayer)
-        backgroundLayer.backgroundColor = bgColor.cgColor
+        backgroundLayer.backgroundColor = UIColor(red: 77.0/255.0, green: 184.0/255.0, blue: 255.0/255.0, alpha: 0.65).cgColor
         backgroundLayer.mask = maskLayer
         
         self.contentView.addSubview(pullingIndicator)
@@ -76,8 +77,7 @@ class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
         })
     }
-    func toWillRefreshState() {
-    }
+  
     func changePullingPercent(percent: CGFloat) {
         let heightScrolled = 60 * percent;
         let adjustHeight = heightScrolled < 60 ? heightScrolled : 60;

@@ -30,10 +30,15 @@ import UIKit
     func contentHeight() -> CGFloat
 }
 
+public protocol GTMRefreshHeaderDelegate: class {
+    func refresh()
+}
+
 open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
     
     /// 刷新数据Block
-    var refreshBlock: () -> Void = { }
+   // var refreshBlock: () -> Void = { }
+    weak var delegate: GTMRefreshHeaderDelegate?
     
     public var contentView: UIView = {
         let view = UIView()
@@ -95,7 +100,8 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                         self.scrollView?.contentOffset = CGPoint(x: 0, y: -top)
                     }, completion: { (isFinish) in
                         // 执行刷新操作
-                        self.refreshBlock()
+                        //self.refreshBlock()
+                        self.delegate?.refresh()
                     })
                 }
             default: break

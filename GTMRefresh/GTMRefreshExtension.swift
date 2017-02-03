@@ -17,6 +17,9 @@ extension UIScrollView {
         if newSuperview == nil {
             self.gtmHeader?.observerOpen = false
             self.gtmFooter?.observerOpen = false
+            
+            self.gtmHeader = nil
+            self.gtmFooter = nil
         }
     }
     
@@ -25,7 +28,11 @@ extension UIScrollView {
             return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader) as? GTMRefreshHeader
         }
         set {
-           objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            if newValue == nil {
+                objc_removeAssociatedObjects(gtmHeader)
+            } else {
+                objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
         }
     }
     private var gtmFooter: GTMLoadMoreFooter? {
@@ -33,7 +40,11 @@ extension UIScrollView {
             return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter) as? GTMLoadMoreFooter
         }
         set {
-            objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            if newValue == nil {
+                objc_removeAssociatedObjects(gtmFooter)
+            } else {
+                objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
         }
     }
     
@@ -43,7 +54,7 @@ extension UIScrollView {
     ///   - refreshHeader: 下拉刷新动效View必须继承GTMRefreshHeader并且要实现SubGTMRefreshHeaderProtocol，不传值的时候默认使用 DefaultGTMRefreshHeader
     ///   - refreshBlock: 刷新数据Block
     @discardableResult
-    final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) -> UIScrollView {
+    final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), delegate:GTMRefreshHeaderDelegate?) -> UIScrollView {
         guard refreshHeader is SubGTMRefreshHeaderProtocol  else {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
         }
@@ -54,7 +65,8 @@ extension UIScrollView {
             gtmHeader?.removeFromSuperview()
             
             if let header:GTMRefreshHeader = refreshHeader {
-                header.refreshBlock = refreshBlock
+               // header.refreshBlock = refreshBlock
+                header.delegate = delegate
                 self.insertSubview(header, at: 0)
                 self.gtmHeader = header
             }
@@ -95,7 +107,7 @@ extension UIScrollView {
     ///   - loadMoreFooter: 上拉加载动效View必须继承GTMLoadMoreFooter，不传值的时候默认使用 DefaultGTMLoadMoreFooter
     ///   - refreshBlock: 加载更多数据Block
     @discardableResult
-    final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) -> UIScrollView {
+    final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), delegate:GTMLoadMoreFooterDelegate?) -> UIScrollView {
         
         guard loadMoreFooter is SubGTMLoadMoreFooterProtocol  else {
             fatalError("loadMoreFooter must implement SubGTMLoadMoreFooterProtocol")
@@ -108,7 +120,8 @@ extension UIScrollView {
             gtmFooter?.removeFromSuperview()
             
             if let footer:GTMLoadMoreFooter = loadMoreFooter {
-                footer.loadMoreBlock = loadMoreBlock
+               // footer.loadMoreBlock = loadMoreBlock
+                footer.delegate = delegate
                 self.insertSubview(footer, at: 0)
                 self.gtmFooter = footer
             }

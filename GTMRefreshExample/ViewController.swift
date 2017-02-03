@@ -27,36 +27,22 @@ class ViewController: UITableViewController {
                                     rowsTargetControlerNames:["QQStyleHeaderViewController","YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController"])
         models.append(section0)
         models.append(section1)
-       
-        self.tableView.gtm_addRefreshHeaderView {
-            [unowned self] in
-            print("excute refreshBlock")
-            self.refresh()
-        }
         
-        self.tableView.gtm_addLoadMoreFooterView {
-            [unowned self] in
-            print("excute loadMoreBlock")
-            self.loadMore()
-        }
-        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-    }
-    
-    
-    // MARK: Test
-    func refresh() {
-        perform(#selector(endRefresing), with: nil, afterDelay: 3)
-    }
-    
-    func endRefresing() {
-        self.tableView.endRefreshing(isSuccess: true)
-    }
-    func loadMore() {
-        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
-    }
-    
-    func endLoadMore() {
-        self.tableView.endLoadMore(isNoMoreData: true)
+        self.tableView.gtm_addRefreshHeaderView(delegate: self)
+        self.tableView.gtm_addLoadMoreFooterView(delegate: self)
+       
+//        self.tableView.gtm_addRefreshHeaderView {
+//            [unowned self] in
+//            print("excute refreshBlock")
+//            self.refresh()
+//        }
+//        
+//        self.tableView.gtm_addLoadMoreFooterView {
+//            [unowned self] in
+//            print("excute loadMoreBlock")
+//            self.loadMore()
+//        }
+//        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
     // MARK: Table View
@@ -95,6 +81,27 @@ class ViewController: UITableViewController {
             self.navigationController?.pushViewController(dvc, animated: true)
         }
         
+    }
+}
+
+extension ViewController: GTMRefreshHeaderDelegate, GTMLoadMoreFooterDelegate {
+    
+    // MARK: - GTMRefreshHeaderDelegate
+    func refresh() {
+        perform(#selector(endRefresing), with: nil, afterDelay: 3)
+    }
+    
+    func endRefresing() {
+        self.tableView.endRefreshing(isSuccess: true)
+    }
+    
+    // MARK: - GTMLoadMoreFooterDelegate
+    func loadMore() {
+        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
+    }
+    
+    func endLoadMore() {
+        self.tableView.endLoadMore(isNoMoreData: true)
     }
 }
 

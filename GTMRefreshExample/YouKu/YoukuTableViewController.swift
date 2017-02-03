@@ -26,23 +26,32 @@ class YoukuTableViewController:BaseTableViewController{
         let rightItem = UIBarButtonItem(customView: sw)
         sw.addTarget(self, action: #selector(YoukuTableViewController.switchValueChanged(_:)), for: UIControlEvents.valueChanged)
         self.navigationItem.rightBarButtonItem = rightItem
-        self.tableView.gtm_addRefreshHeaderView(refreshHeader: youkuHeader) {
-            [unowned self] in
-            print("excute refreshBlock")
-            self.refresh()
-        }
+        
+        self.tableView.gtm_addRefreshHeaderView(refreshHeader: youkuHeader, delegate: self)
+//        self.tableView.gtm_addRefreshHeaderView(refreshHeader: youkuHeader) {
+//            [unowned self] in
+//            print("excute refreshBlock")
+//            self.refresh()
+//        }
         self.tableView.triggerRefreshing()
     }
     
     
+    func switchValueChanged(_ sender:UISwitch){
+        refreshHeader?.backgroundImageView.isHidden = !sender.isOn
+    }
+}
+
+
+import GTMRefresh
+extension YoukuTableViewController: GTMRefreshHeaderDelegate {
+    
+    // MARK: - GTMRefreshHeaderDelegate
     func refresh() {
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
     func endRefresing() {
         self.tableView.endRefreshing(isSuccess: true)
-    }
-    func switchValueChanged(_ sender:UISwitch){
-        refreshHeader?.backgroundImageView.isHidden = !sender.isOn
     }
 }

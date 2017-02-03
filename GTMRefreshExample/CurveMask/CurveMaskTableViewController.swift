@@ -15,15 +15,22 @@ class CurveMaskTableViewController:BaseTableViewController{
         
         //Setup
         let curveHeader = CurveRefreshHeader()
-        self.tableView.gtm_addRefreshHeaderView(refreshHeader: curveHeader) {
-            [unowned self] in
-            print("excute refreshBlock")
-            self.refresh()
-        }
+        self.tableView.gtm_addRefreshHeaderView(refreshHeader: curveHeader, delegate: self)
+//        self.tableView.gtm_addRefreshHeaderView(refreshHeader: curveHeader) {
+//            [unowned self] in
+//            print("excute refreshBlock")
+//            self.refresh()
+//        }
         self.tableView.triggerRefreshing()
     }
+
+
+}
+
+import GTMRefresh
+extension CurveMaskTableViewController: GTMRefreshHeaderDelegate {
     
-    
+    // MARK: - GTMRefreshHeaderDelegate
     func refresh() {
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
@@ -31,5 +38,4 @@ class CurveMaskTableViewController:BaseTableViewController{
     func endRefresing() {
         self.tableView.endRefreshing(isSuccess: true)
     }
-
 }
