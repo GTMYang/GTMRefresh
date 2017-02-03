@@ -90,36 +90,37 @@ import GTMRefresh
 
 ## 使用默认的下拉和上拉效果
 ```swift
-    self.tableView.gtm_addRefreshHeaderView {
-        [unowned self] in
-        print("excute refreshBlock")
-        self.refresh()
+extension YourViewController: GTMRefreshHeaderDelegate, GTMLoadMoreFooterDelegate {
+
+    // MARK: - GTMRefreshHeaderDelegate
+    func refresh() {
+        perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
 
-    self.tableView.gtm_addLoadMoreFooterView {
-        [unowned self] in
-        print("excute loadMoreBlock")
-        self.loadMore()
+    // MARK: - GTMLoadMoreFooterDelegate
+    func loadMore() {
+        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
     }
+}
+
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    self.tableView.gtm_addRefreshHeaderView(delegate: self)
+    self.tableView.gtm_addLoadMoreFooterView(delegate: self)
+}
 ```
 
 ## 自定义下拉和上拉文本
 ```swift
-    self.tableView?.gtm_addRefreshHeaderView {
-        [unowned self] in
-        print("excute refreshBlock")
-        self.refresh()
-    }.setupHeaderText(pullDownToRefreshText: "下拉试试看",
+    self.tableView?.gtm_addRefreshHeaderView(delegate: self).setupHeaderText(pullDownToRefreshText: "下拉试试看",
                     releaseToRefreshText: "松开现神奇",
                     refreshSuccessText: "成功",
                     refreshFailureText: "失败",
                     refreshingText: "刷新...")
 
-    self.tableView?.gtm_addLoadMoreFooterView {
-        [unowned self] in
-        print("excute loadMoreBlock")
-        self.loadMore()
-    }.setupFooterText(pullUpToRefreshText: "用力往上拉",
+    self.tableView?.gtm_addLoadMoreFooterView(delegate: self).setupFooterText(pullUpToRefreshText: "用力往上拉",
                     loaddingText: "努力加载中...",
                     noMoreDataText: "没有更多了",
                     releaseLoadMoreText: "轻轻一松，开始加载")
