@@ -50,6 +50,9 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
             switch state {
             case .noMoreData, .idle:
                 guard oldValue == .refreshing else {
+                    if self.state == .noMoreData {
+                        self.subProtocol?.toNoMoreDataState?()
+                    }
                     return
                 }
                 // 结束加载

@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GTMRefresh"
-  s.version      = "1.1.1"
+  s.version      = "1.1.2"
   s.summary      = "swift 实现的上拉刷新，下拉加载动效库"
 
   s.homepage     = "https://github.com/GTMYang/GTMRefresh"
