@@ -5,3 +5,24 @@
   Created by luoyang on 2016/12/8.
   Copyright © 2016年 luoyang. All rights reserved.
 */
+pullDownToRefresh = "Pull to refresh";
+
+releaseToRefresh = "Release to refresh";
+
+refreshSuccess = "Update successful";
+
+refreshFailure = "Update failed";
+
+refreshing = "Refreshing...";
+
+pullUpToRefresh = "Scroll to load";
+
+noMoreData = "No more data, daling!";
+
+tapToRefresh = "Tap to refresh";
+
+scrollAndTapToRefresh = "Scroll or tap to load";
+
+loadMore = "Loadding...";
+
+releaseLoadMore = "Release to load more";

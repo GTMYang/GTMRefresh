@@ -261,6 +261,7 @@
 		26044DBB1DFD7AB7006E82B3 /* Taobao.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Taobao.gif; sourceTree = "<group>"; };
 		26044DBC1DFD7AB7006E82B3 /* TXVideo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = TXVideo.gif; sourceTree = "<group>"; };
 		26044DBD1DFD7AB7006E82B3 /* Youku.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Youku.gif; sourceTree = "<group>"; };
+		26330F2B1E5AD83A00C2810B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localize.strings; sourceTree = "<group>"; };
 		263556441DFAA91700FD98BB /* DefaultScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultScrollViewController.swift; sourceTree = "<group>"; };
 		263556451DFAA91700FD98BB /* DefaultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewController.swift; sourceTree = "<group>"; };
 		263556461DFAA91700FD98BB /* DefaultWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWebViewController.swift; sourceTree = "<group>"; };
@@ -1220,6 +1221,7 @@
 			children = (
 				2655CB3F1DF945A0001C50CF /* Base */,
 				2655CB421DF945DD001C50CF /* zh-Hans */,
+				26330F2B1E5AD83A00C2810B /* en */,
 			);
 			name = Localize.strings;
 			sourceTree = "<group>";
