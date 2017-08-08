@@ -74,7 +74,7 @@ class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     }
     func toPullingState() {
         UIView.animate(withDuration: 0.4, animations: {
-            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
+            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
     }
   

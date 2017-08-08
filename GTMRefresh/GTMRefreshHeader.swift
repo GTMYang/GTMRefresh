@@ -30,15 +30,10 @@ import UIKit
     func contentHeight() -> CGFloat
 }
 
-public protocol GTMRefreshHeaderDelegate: class {
-    func refresh()
-}
-
 open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
     
     /// 刷新数据Block
-   // var refreshBlock: () -> Void = { }
-    weak var delegate: GTMRefreshHeaderDelegate?
+    var refreshBlock: () -> Void = { }
     
     public var contentView: UIView = {
         let view = UIView()
@@ -100,15 +95,14 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                         self.scrollView?.contentOffset = CGPoint(x: 0, y: -top)
                     }, completion: { (isFinish) in
                         // 执行刷新操作
-                        //self.refreshBlock()
-                        self.delegate?.refresh()
+                        self.refreshBlock()
                     })
                 }
             default: break
             }
         }
     }
-
+    
     // MARK: Life Cycle
     
     override public init(frame: CGRect) {
@@ -146,7 +140,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     ///
     /// - Returns: Loadding动画显示区域的高度
     open func refreshingHoldHeight() -> CGFloat {
-       return self.mj_h // 默认使用控件高度
+        return self.mj_h // 默认使用控件高度
     }
     
     /// 即将触发刷新的高度(特殊的控件需要重写该方法，返回不同的数值)
@@ -251,10 +245,10 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     final public func endRefresing(isSuccess: Bool) {
         subProtocol?.willBeginEndRefershing?(isSuccess: isSuccess)
         self.state = .idle
-//        let deadlineTime = DispatchTime.now() + .seconds(1)
-//        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-//            self.state = .idle
-//        }
+        //        let deadlineTime = DispatchTime.now() + .seconds(1)
+        //        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+        //            self.state = .idle
+        //        }
     }
     
 }
@@ -266,6 +260,23 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     var refreshSuccess = GTMRLocalize("refreshSuccess")
     var refreshFailure = GTMRLocalize("refreshFailure")
     var refreshing = GTMRLocalize("refreshing")
+    
+    var txtColor: UIColor? {
+        didSet {
+            if let color = txtColor {
+                self.messageLabel.textColor = color
+            }
+        }
+    }
+    var idleImage: UIImage? {
+        didSet {
+            if let idleImg = idleImage {
+                self.pullingIndicator.image = idleImg
+            }
+        }
+    }
+    var sucImage: UIImage?
+    var failImage: UIImage?
     
     lazy var pullingIndicator: UIImageView = {
         let pindicator = UIImageView()
@@ -305,11 +316,6 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    deinit {
-        print("Deinit of DefaultGTMRefreshHeader")
-    }
-    
     // MARK: Layout
     
     override func layoutSubviews() {
@@ -339,7 +345,11 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.loaddingIndicator.stopAnimating()
         
         messageLabel.text =  self.pullDownToRefresh
-        pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+        if let img = self.idleImage {
+            pullingIndicator.image = img
+        } else {
+            pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+        }
     }
     func toRefreshingState() {
         self.pullingIndicator.isHidden = true
@@ -351,7 +361,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.loaddingIndicator.isHidden = true
         messageLabel.text = self.pullDownToRefresh
         
-        guard pullingIndicator.transform == CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))  else{
+        guard pullingIndicator.transform == CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))  else{
             return
         }
         UIView.animate(withDuration: 0.4, animations: {
@@ -366,7 +376,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             return
         }
         UIView.animate(withDuration: 0.4, animations: {
-            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
+            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
     }
     func changePullingPercent(percent: CGFloat) {
@@ -380,10 +390,18 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         
         if isSuccess {
             messageLabel.text =  self.refreshSuccess
-            pullingIndicator.image = UIImage(named: "success", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+            if let img = self.sucImage {
+                pullingIndicator.image = img
+            } else {
+                pullingIndicator.image = UIImage(named: "success", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+            }
         } else {
             messageLabel.text =  self.refreshFailure
-            pullingIndicator.image = UIImage(named: "failure", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+            if let img = self.failImage {
+                pullingIndicator.image = img
+            } else {
+                pullingIndicator.image = UIImage(named: "failure", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
+            }
         }
     }
     func willCompleteEndRefershing() {

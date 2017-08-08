@@ -20,15 +20,10 @@ import UIKit
     func contentHeith() -> CGFloat
 }
 
-public protocol GTMLoadMoreFooterDelegate: class {
-    func loadMore()
-}
-
 open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
     
-    weak var delegate: GTMLoadMoreFooterDelegate?
     /// 加载更多Block
-   // var loadMoreBlock: () -> Void = {}
+    var loadMoreBlock: () -> Void = {}
     
     var contentView: UIView = {
         let view = UIView()
@@ -75,8 +70,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     scrollV.mj_insetB = toInsetB
                     scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
                 }, completion: { (isComplet) in
-                    //self.loadMoreBlock()
-                    self.delegate?.loadMore()
+                    self.loadMoreBlock()
                     self.subProtocol?.toRefreshingState?()
                 })
                 
@@ -108,7 +102,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
         super.willMove(toSuperview: newSuperview)
         
         self.scollViewContentSizeDidChange(change: nil)
-
+        
     }
     
     // MARK: Layout
@@ -209,21 +203,41 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
             }
         }
     }
-
+    
 }
 
 
 
 class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol {
     
-     var pullUpToRefreshText: String = GTMRLocalize("pullUpToRefresh")
+    var pullUpToRefreshText: String = GTMRLocalize("pullUpToRefresh")
     public var loaddingText: String = GTMRLocalize("loadMore")
     public var noMoreDataText: String = GTMRLocalize("noMoreData")
     public var releaseLoadMoreText: String = GTMRLocalize("releaseLoadMore")
     
+    var txtColor: UIColor? {
+        didSet {
+            if let color = txtColor {
+                self.messageLabel.textColor = color
+            }
+        }
+    }
+    var idleImage: UIImage? {
+        didSet {
+            if let idleImg = idleImage {
+                self.pullingIndicator.image = idleImg
+            }
+        }
+    }
+    
+    
     lazy var pullingIndicator: UIImageView = {
         let pindicator = UIImageView()
-        pindicator.image = UIImage(named: "arrow_down", in: Bundle(for: GTMLoadMoreFooter.self), compatibleWith: nil)
+        if let img = self.idleImage {
+            pindicator.image = img
+        } else {
+            pindicator.image = UIImage(named: "arrow_down", in: Bundle(for: GTMLoadMoreFooter.self), compatibleWith: nil)
+        }
         return pindicator
     }()
     
@@ -265,7 +279,7 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
             return
         }
         
-        self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
+        self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
     }
     
     // MARK: Layout
@@ -298,7 +312,7 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         
         messageLabel.text =  self.pullUpToRefreshText
         UIView.animate(withDuration: 0.4, animations: {
-            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
+            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
     }
     func toNoMoreDataState() {
@@ -319,5 +333,5 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         
         messageLabel.text =  self.loaddingText
     }
-
+    
 }

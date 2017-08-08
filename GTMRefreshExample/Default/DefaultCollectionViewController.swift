@@ -9,24 +9,40 @@
 import Foundation
 import UIKit
 
-class DefaultCollectionViewController: UIViewController,UICollectionViewDataSource{
+class DefaultCollectionViewController:UIViewController,UICollectionViewDataSource{
     var collectionView:UICollectionView?
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.white
         self.setUpCollectionView()
         
-        self.collectionView?.gtm_addRefreshHeaderView(delegate: self)
-//        self.collectionView?.gtm_addRefreshHeaderView {
-//            [unowned self] in
-//            print("excute refreshBlock")
-//            self.refresh()
-//        }
-//        
-//        self.collectionView?.gtm_addLoadMoreFooterView {
-//            [unowned self] in
-//            print("excute loadMoreBlock")
-//            self.loadMore()
-//        }
+        self.collectionView?.gtm_addRefreshHeaderView {
+            [weak self] in
+            print("excute refreshBlock")
+            self?.refresh()
+        }
+        
+        self.collectionView?.gtm_addLoadMoreFooterView {
+            [weak self] in
+            print("excute loadMoreBlock")
+            self?.loadMore()
+        }
+    }
+    
+    
+    // MARK: Test
+    func refresh() {
+        perform(#selector(endRefresing), with: nil, afterDelay: 3)
+    }
+    
+    func endRefresing() {
+        self.collectionView?.endRefreshing(isSuccess: true)
+    }
+    func loadMore() {
+        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
+    }
+    
+    func endLoadMore() {
+        self.collectionView?.endLoadMore(isNoMoreData: true)
     }
     
     
@@ -52,18 +68,5 @@ class DefaultCollectionViewController: UIViewController,UICollectionViewDataSour
     }
     deinit{
         print("Deinit of DefaultCollectionViewController")
-    }
-}
-
-import GTMRefresh
-extension DefaultCollectionViewController: GTMRefreshHeaderDelegate {
-    
-    // MARK: - GTMRefreshHeaderDelegate
-    func refresh() {
-        perform(#selector(endRefresing), with: nil, afterDelay: 3)
-    }
-    
-    func endRefresing() {
-        self.collectionView?.endRefreshing(isSuccess: true)
     }
 }

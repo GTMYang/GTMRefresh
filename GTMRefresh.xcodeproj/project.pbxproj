@@ -43,6 +43,7 @@
 		26B9A97E1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A97D1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift */; };
 		26B9A9801DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A97F1DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift */; };
 		26B9A9821DF8088900D0BAA6 /* GTMRefreshConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B9A9811DF8088900D0BAA6 /* GTMRefreshConstant.swift */; };
+		26EEEF851F399BCF00A94AE5 /* GTMRefreshStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EEEF841F399BCF00A94AE5 /* GTMRefreshStyle.swift */; };
 		26F3498B1DFAF37E004C8CF1 /* YahooWeatherRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F3498A1DFAF37E004C8CF1 /* YahooWeatherRefreshHeader.swift */; };
 		26F3498D1DFAF39F004C8CF1 /* YahooWeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F3498C1DFAF39F004C8CF1 /* YahooWeatherTableViewController.swift */; };
 		26F349FE1DFAF3D5004C8CF1 /* sun_00000.png in Resources */ = {isa = PBXBuildFile; fileRef = 26F3498F1DFAF3D5004C8CF1 /* sun_00000.png */; };
@@ -296,6 +297,7 @@
 		26B9A97D1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMRefreshHeader.swift; sourceTree = "<group>"; };
 		26B9A97F1DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMLoadMoreFooter.swift; sourceTree = "<group>"; };
 		26B9A9811DF8088900D0BAA6 /* GTMRefreshConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMRefreshConstant.swift; sourceTree = "<group>"; };
+		26EEEF841F399BCF00A94AE5 /* GTMRefreshStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GTMRefreshStyle.swift; sourceTree = "<group>"; };
 		26F3498A1DFAF37E004C8CF1 /* YahooWeatherRefreshHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YahooWeatherRefreshHeader.swift; sourceTree = "<group>"; };
 		26F3498C1DFAF39F004C8CF1 /* YahooWeatherTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YahooWeatherTableViewController.swift; sourceTree = "<group>"; };
 		26F3498F1DFAF3D5004C8CF1 /* sun_00000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun_00000.png; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 				26B9A97D1DF7E1B200D0BAA6 /* GTMRefreshHeader.swift */,
 				26B9A97F1DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift */,
 				26B9A97B1DF7DD9900D0BAA6 /* GTMRefreshExtension.swift */,
+				26EEEF841F399BCF00A94AE5 /* GTMRefreshStyle.swift */,
 				2671154D1DF6AE2E00F27CEA /* Supporting Files */,
 			);
 			path = GTMRefresh;
@@ -1171,6 +1174,7 @@
 				26B9A9821DF8088900D0BAA6 /* GTMRefreshConstant.swift in Sources */,
 				26B9A9781DF7AFDA00D0BAA6 /* GTMRefreshComponent.swift in Sources */,
 				26B9A9801DF7E1C000D0BAA6 /* GTMLoadMoreFooter.swift in Sources */,
+				26EEEF851F399BCF00A94AE5 /* GTMRefreshStyle.swift in Sources */,
 				267115531DF6AE4E00F27CEA /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -67,7 +67,7 @@ class YoukuRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.iconImageView.isHidden = true
         self.rotatingImageView.isHidden = false
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
-        rotateAnimation.toValue = NSNumber(value: M_PI * 2.0 as Double)
+        rotateAnimation.toValue = NSNumber(value: Double.pi * 2.0 as Double)
         rotateAnimation.duration = 0.8
         rotateAnimation.isCumulative = true
         rotateAnimation.repeatCount = 10000000
@@ -75,7 +75,7 @@ class YoukuRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     }
     func toPullingState() {
         UIView.animate(withDuration: 0.4, animations: {
-            self.iconImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI+0.000001))
+            self.iconImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
     }
     func toWillRefreshState() {

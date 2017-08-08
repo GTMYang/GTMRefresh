@@ -16,7 +16,7 @@ class GTMRefreshConstant {
     static let keyPathContentOffset: String = "contentOffset"
     static let keyPathContentInset: String = "contentInset"
     static let keyPathContentSize: String = "contentSize"
-//    static let keyPathPanState: String = "state"
+    //    static let keyPathPanState: String = "state"
     
     
     static var associatedObjectGtmHeader = 0

@@ -11,40 +11,20 @@ import ObjectiveC
 
 extension UIScrollView {
     
-    override open func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-     //   print("table willMove toSuperview \(newSuperview)")
-        if newSuperview == nil {
-            self.gtmHeader?.observerOpen = false
-            self.gtmFooter?.observerOpen = false
-            
-            self.gtmHeader = nil
-            self.gtmFooter = nil
-        }
-    }
-    
-    private var gtmHeader: GTMRefreshHeader? {
+    internal var gtmHeader: GTMRefreshHeader? {
         get {
             return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader) as? GTMRefreshHeader
         }
         set {
-            if newValue == nil {
-                objc_removeAssociatedObjects(gtmHeader)
-            } else {
-                objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
+            objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    private var gtmFooter: GTMLoadMoreFooter? {
+    internal var gtmFooter: GTMLoadMoreFooter? {
         get {
             return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter) as? GTMLoadMoreFooter
         }
         set {
-            if newValue == nil {
-                objc_removeAssociatedObjects(gtmFooter)
-            } else {
-                objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            }
+            objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
@@ -54,7 +34,7 @@ extension UIScrollView {
     ///   - refreshHeader: 下拉刷新动效View必须继承GTMRefreshHeader并且要实现SubGTMRefreshHeaderProtocol，不传值的时候默认使用 DefaultGTMRefreshHeader
     ///   - refreshBlock: 刷新数据Block
     @discardableResult
-    final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), delegate:GTMRefreshHeaderDelegate?) -> UIScrollView {
+    final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) -> UIScrollView {
         guard refreshHeader is SubGTMRefreshHeaderProtocol  else {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
         }
@@ -65,8 +45,7 @@ extension UIScrollView {
             gtmHeader?.removeFromSuperview()
             
             if let header:GTMRefreshHeader = refreshHeader {
-               // header.refreshBlock = refreshBlock
-                header.delegate = delegate
+                header.refreshBlock = refreshBlock
                 self.insertSubview(header, at: 0)
                 self.gtmHeader = header
             }
@@ -74,32 +53,7 @@ extension UIScrollView {
         return self
     }
     
-    // 自定义header文字
-    final public func setupHeaderText(pullDownToRefreshText: String? = nil,
-                                      releaseToRefreshText: String? = nil,
-                                      refreshSuccessText: String? = nil,
-                                      refreshFailureText: String? = nil,
-                                      refreshingText: String? = nil) {
-        guard let defaultFooter = self.gtmHeader, defaultFooter is DefaultGTMRefreshHeader else {
-            return
-        }
-        let header = defaultFooter as! DefaultGTMRefreshHeader
-        if let txt = pullDownToRefreshText {
-            header.pullDownToRefresh = txt
-        }
-        if let txt = releaseToRefreshText {
-            header.releaseToRefresh = txt
-        }
-        if let txt = refreshSuccessText {
-            header.refreshSuccess = txt
-        }
-        if let txt = refreshFailureText {
-            header.refreshFailure = txt
-        }
-        if let txt = refreshingText {
-            header.refreshing = txt
-        }
-    }
+    
     
     /// 添加上拉加载
     ///
@@ -107,7 +61,7 @@ extension UIScrollView {
     ///   - loadMoreFooter: 上拉加载动效View必须继承GTMLoadMoreFooter，不传值的时候默认使用 DefaultGTMLoadMoreFooter
     ///   - refreshBlock: 加载更多数据Block
     @discardableResult
-    final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), delegate:GTMLoadMoreFooterDelegate?) -> UIScrollView {
+    final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) -> UIScrollView {
         
         guard loadMoreFooter is SubGTMLoadMoreFooterProtocol  else {
             fatalError("loadMoreFooter must implement SubGTMLoadMoreFooterProtocol")
@@ -120,37 +74,12 @@ extension UIScrollView {
             gtmFooter?.removeFromSuperview()
             
             if let footer:GTMLoadMoreFooter = loadMoreFooter {
-               // footer.loadMoreBlock = loadMoreBlock
-                footer.delegate = delegate
+                footer.loadMoreBlock = loadMoreBlock
                 self.insertSubview(footer, at: 0)
                 self.gtmFooter = footer
             }
         }
         return self
-    }
-    
-    // 自定义footer文字
-    final public func setupFooterText(pullUpToRefreshText: String? = nil,
-                                      loaddingText: String? = nil,
-                                      noMoreDataText: String? = nil,
-                                      releaseLoadMoreText: String? = nil) {
-        guard let defaultFooter = self.gtmFooter, defaultFooter is DefaultGTMLoadMoreFooter else {
-            return
-        }
-        let footer = defaultFooter as! DefaultGTMLoadMoreFooter
-        if let txt = pullUpToRefreshText {
-            footer.pullUpToRefreshText = txt
-            footer.messageLabel.text = txt
-        }
-        if let txt = loaddingText {
-            footer.loaddingText = txt
-        }
-        if let txt = noMoreDataText {
-            footer.noMoreDataText = txt
-        }
-        if let txt = releaseLoadMoreText {
-            footer.releaseLoadMoreText = txt
-        }
     }
     
     final public func triggerRefreshing(){

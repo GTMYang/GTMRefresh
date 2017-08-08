@@ -12,7 +12,7 @@ import GTMRefresh
 class ViewController: UITableViewController {
     
     var models = [SectionModel]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let section0 = SectionModel(rowsCount: 4,
@@ -20,7 +20,7 @@ class ViewController: UITableViewController {
                                     rowsTitles: ["Tableview","CollectionView","ScrollView","WebView"],
                                     rowsTargetControlerNames:["DefaultTableViewController","DefaultCollectionViewController","DefaultScrollViewController","DefaultWebViewController"])
         
-     
+        
         let section1 = SectionModel(rowsCount: 7,
                                     sectionTitle:"Customize",
                                     rowsTitles: ["QQ","YahooWeather","Curve Mask","Youku","TaoBao","QQ Video","DianPing"],
@@ -28,23 +28,50 @@ class ViewController: UITableViewController {
         models.append(section0)
         models.append(section1)
         
-        self.tableView.gtm_addRefreshHeaderView(delegate: self)
-        self.tableView.gtm_addLoadMoreFooterView(delegate: self)
-       
-//        self.tableView.gtm_addRefreshHeaderView {
-//            [unowned self] in
-//            print("excute refreshBlock")
-//            self.refresh()
-//        }
-//        
-//        self.tableView.gtm_addLoadMoreFooterView {
-//            [unowned self] in
-//            print("excute loadMoreBlock")
-//            self.loadMore()
-//        }
-//        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.tableView.gtm_addRefreshHeaderView {
+            [weak self] in
+            print("excute refreshBlock")
+            self?.refresh()
+        }
+        
+        self.tableView.gtm_addLoadMoreFooterView {
+            [weak self] in
+            print("excute loadMoreBlock")
+            self?.loadMore()
+        }
+        
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        // text
+        self.tableView.pullDownToRefreshText("亲，试试下拉会刷新的")
+        .releaseToRefreshText("亲，松开试试")
+        .refreshSuccessText("亲，成功了")
+        .refreshFailureText("亲，无果")
+        .refreshingText("亲，正在努力刷新")
+        // color 
+        self.tableView.headerTextColor(.red)
+        // icon
+        self.tableView.headerIdleImage(UIImage.init(named: "dropdown_anim__00048"))
+        
     }
-
+    
+    
+    // MARK: Test
+    func refresh() {
+        perform(#selector(endRefresing), with: nil, afterDelay: 3)
+    }
+    
+    func endRefresing() {
+        self.tableView.endRefreshing(isSuccess: true)
+    }
+    func loadMore() {
+        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
+    }
+    
+    func endLoadMore() {
+        self.tableView.endLoadMore(isNoMoreData: true)
+    }
+    
     // MARK: Table View
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -65,7 +92,7 @@ class ViewController: UITableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-          
+            
         }
         let sectionModel = models[(indexPath as NSIndexPath).section]
         cell?.textLabel?.text = sectionModel.rowsTitles[(indexPath as NSIndexPath).row]
@@ -81,27 +108,6 @@ class ViewController: UITableViewController {
             self.navigationController?.pushViewController(dvc, animated: true)
         }
         
-    }
-}
-
-extension ViewController: GTMRefreshHeaderDelegate, GTMLoadMoreFooterDelegate {
-    
-    // MARK: - GTMRefreshHeaderDelegate
-    func refresh() {
-        perform(#selector(endRefresing), with: nil, afterDelay: 3)
-    }
-    
-    func endRefresing() {
-        self.tableView.endRefreshing(isSuccess: true)
-    }
-    
-    // MARK: - GTMLoadMoreFooterDelegate
-    func loadMore() {
-        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
-    }
-    
-    func endLoadMore() {
-        self.tableView.endLoadMore(isNoMoreData: true)
     }
 }
 

@@ -30,17 +30,9 @@ public protocol SubGTMRefreshComponentProtocol {
 
 open class GTMRefreshComponent: UIView {
     
-    public weak var scrollView: UIScrollView?
+    public var scrollView: UIScrollView?
     
     public var scrollViewOriginalInset: UIEdgeInsets?
-    
-    public var observerOpen: Bool = false {
-        willSet {
-            if observerOpen != newValue {
-                newValue ? self.addObserver() : self.removeAbserver()
-            }
-        }
-    }
     
     var state: GTMRefreshState = .idle
     
@@ -59,10 +51,6 @@ open class GTMRefreshComponent: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        print("Deinit of GTMRefreshComponent")
-    }
-    
     override open func draw(_ rect: CGRect) {
         super.draw(rect)
         
@@ -75,11 +63,13 @@ open class GTMRefreshComponent: UIView {
     override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
-//        guard newSuperview == nil || newSuperview is UIScrollView else {
-//            return
-//        }
+        guard newSuperview is UIScrollView else {
+            return
+        }
         
-        guard newSuperview is UIScrollView, let superView = newSuperview else {
+        self.removeAbserver()
+        
+        guard let superView = newSuperview else {
             return
         }
         
@@ -91,24 +81,21 @@ open class GTMRefreshComponent: UIView {
         self.scrollView?.alwaysBounceVertical = true
         self.scrollViewOriginalInset = self.scrollView?.contentInset
         
-        self.observerOpen = true
+        self.addObserver()
     }
     
     
     // MARK: KVO
     
-    func addObserver() {
+    private func addObserver() {
         scrollView?.addObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset, options: .new, context: nil)
         scrollView?.addObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize, options: .new, context: nil)
     }
     
-    func removeAbserver() {
-        if let scrollV = scrollView {
-            scrollV.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset)
-            scrollV.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize)
-        }
+    private func removeAbserver() {
+        scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset)
+        scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize)
     }
-    
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard isUserInteractionEnabled else {
@@ -131,6 +118,6 @@ open class GTMRefreshComponent: UIView {
         }
     }
     
-   
-
+    
+    
 }

@@ -8,42 +8,55 @@
 
 import Foundation
 import UIKit
-import GTMRefresh
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+    switch (lhs, rhs) {
+    case let (l?, r?):
+        return l < r
+    case (nil, _?):
+        return true
+    default:
+        return false
+    }
+}
 
-class DefaultTableViewController: UITableViewController {
+class DefaultTableViewController:UITableViewController{
     var models = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  self.view.backgroundColor = UIColor.white
-        //self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.view.backgroundColor = UIColor.white
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-//        self.tableView?.gtm_addRefreshHeaderView {
-//            [unowned self] in
-//            print("excute refreshBlock")
-//            self.refresh()
-//        }
-//            .setupHeaderText(pullDownToRefreshText: "下拉试试看",
-//                          releaseToRefreshText: "松开现神奇",
-//                          refreshSuccessText: "成功",
-//                          refreshFailureText: "失败",
-//                          refreshingText: "刷新...")
+        self.tableView?.gtm_addRefreshHeaderView {
+            [weak self] in
+            print("excute refreshBlock")
+            self?.refresh()
+        }
         
-        self.tableView.gtm_addRefreshHeaderView(delegate: self)
-//
-//        self.tableView?.gtm_addLoadMoreFooterView {
-//            [unowned self] in
-//            print("excute loadMoreBlock")
-//            self.loadMore()
-//        }
-            //.setupFooterText(pullUpToRefreshText: "用力往上拉",
-//                loaddingText: "努力加载中...",
-//                noMoreDataText: "没有更多了",
-//                releaseLoadMoreText: "轻轻一松，开始加载")
-        self.tableView.gtm_addLoadMoreFooterView(delegate: self)
+        self.tableView?.gtm_addLoadMoreFooterView {
+            [weak self] in
+            print("excute loadMoreBlock")
+            self?.loadMore()
+        }
     }
     
     
+    // MARK: Test
+    func refresh() {
+        perform(#selector(endRefresing), with: nil, afterDelay: 3)
+    }
     
+    func endRefresing() {
+        self.tableView?.endRefreshing(isSuccess: true)
+    }
+    func loadMore() {
+        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
+    }
+    
+    func endLoadMore() {
+        self.models += [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+        self.tableView?.endLoadMore(isNoMoreData: models.count > 50)
+        self.tableView?.reloadData()
+    }
     
     
     
@@ -64,28 +77,5 @@ class DefaultTableViewController: UITableViewController {
     }
     deinit{
         print("Deinit of DefaultTableViewController")
-    }
-}
-
-extension DefaultTableViewController: GTMRefreshHeaderDelegate, GTMLoadMoreFooterDelegate {
-    
-    // MARK: - GTMRefreshHeaderDelegate
-    func refresh() {
-        perform(#selector(endRefresing), with: nil, afterDelay: 3)
-    }
-    
-    func endRefresing() {
-        self.tableView?.endRefreshing(isSuccess: true)
-    }
-    
-    // MARK: - GTMLoadMoreFooterDelegate
-    func loadMore() {
-        perform(#selector(endLoadMore), with: nil, afterDelay: 3)
-    }
-    
-    func endLoadMore() {
-        self.models += [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
-        self.tableView?.endLoadMore(isNoMoreData: models.count > 50)
-        self.tableView?.reloadData()
     }
 }
