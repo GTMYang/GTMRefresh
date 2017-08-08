@@ -91,13 +91,13 @@ import GTMRefresh
 ## 使用默认的下拉和上拉效果
 ```swift
 self.tableView.gtm_addRefreshHeaderView {
-[unowned self] in
+[weak self] in
 print("excute refreshBlock")
 self.refresh()
 }
 
 self.tableView.gtm_addLoadMoreFooterView {
-[unowned self] in
+[weak self] in
 print("excute loadMoreBlock")
 self.loadMore()
 }
@@ -313,7 +313,7 @@ CATransaction.commit()
 
 ```swift
 self.tableView.gtm_addRefreshHeaderView(refreshHeader: CustomRefreshHeader()) {
-[unowned self] in
+[weak self] in
 print("excute refreshBlock")
 self.refresh()
 }
