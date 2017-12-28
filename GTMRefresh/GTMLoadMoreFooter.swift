@@ -37,25 +37,35 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
         get { return self as? SubGTMLoadMoreFooterProtocol }
     }
     
+    public var isNoMoreData: Bool = false {
+        didSet {
+            if isNoMoreData {
+                state = .noMoreData
+            } else {
+                state = .idle
+            }
+        }
+    }
+    
     override var state: GTMRefreshState {
         didSet {
             guard oldValue != state, let scrollV = scrollView else {
                 return
             }
             switch state {
-            case .noMoreData, .idle:
-                guard oldValue == .refreshing else {
-                    if self.state == .noMoreData {
-                        self.subProtocol?.toNoMoreDataState?()
-                    }
-                    return
-                }
+            case .idle:
                 // 结束加载
                 UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
                     scrollV.mj_insetB -= self.lastBottomDelta
                 }, completion: { (isComplet) in
-                    self.state == .idle ? self.subProtocol?.toNormalState?() : self.subProtocol?.toNoMoreDataState?()
+                    DispatchQueue.main.async {
+                        self.subProtocol?.toNormalState?()
+                    }
                 })
+            case .noMoreData:
+                DispatchQueue.main.async {
+                    self.subProtocol?.toNoMoreDataState?()
+                }
             case .refreshing:
                 // 展示正在加载动效
                 UIView.animate(withDuration: GTMRefreshConstant.fastAnimationDuration, animations: {
@@ -71,7 +81,9 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
                 }, completion: { (isComplet) in
                     self.loadMoreBlock()
-                    self.subProtocol?.toRefreshingState?()
+                    DispatchQueue.main.async {
+                        self.subProtocol?.toRefreshingState?()
+                    }
                 })
                 
             case .willRefresh:
@@ -306,27 +318,29 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
     }
     
     func toNormalState() {
-        pullingIndicator.isHidden = false
+        self.pullingIndicator.isHidden = false
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
         
-        messageLabel.text =  self.pullUpToRefreshText
+        self.messageLabel.text =  self.pullUpToRefreshText
+        print(".........\(self.messageLabel.text ?? "")")
         UIView.animate(withDuration: 0.4, animations: {
             self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
     }
     func toNoMoreDataState() {
-        pullingIndicator.isHidden = true
+        self.pullingIndicator.isHidden = true
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
         
-        messageLabel.text =  self.noMoreDataText
+        self.messageLabel.text =  self.noMoreDataText
     }
     func toWillRefreshState() {
         messageLabel.text =  self.releaseLoadMoreText
         UIView.animate(withDuration: 0.4, animations: {
             self.pullingIndicator.transform = CGAffineTransform.identity
-        })    }
+        })
+    }
     func toRefreshingState() {
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
