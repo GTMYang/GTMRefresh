@@ -45,14 +45,14 @@ class DefaultTableViewController:UITableViewController{
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
-    func endRefresing() {
+    @objc func endRefresing() {
         self.tableView?.endRefreshing(isSuccess: true)
     }
     func loadMore() {
         perform(#selector(endLoadMore), with: nil, afterDelay: 3)
     }
     
-    func endLoadMore() {
+    @objc func endLoadMore() {
         self.models += [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
         self.tableView?.endLoadMore(isNoMoreData: models.count > 50)
         self.tableView?.reloadData()

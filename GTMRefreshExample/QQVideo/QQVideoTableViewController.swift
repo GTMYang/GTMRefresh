@@ -26,7 +26,7 @@ class QQVideoTableviewController:BaseTableViewController{
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
-    func endRefresing() {
+    @objc func endRefresing() {
         self.tableView.endRefreshing(isSuccess: true)
     }
 }

@@ -39,10 +39,10 @@ class YoukuTableViewController:BaseTableViewController{
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
-    func endRefresing() {
+    @objc func endRefresing() {
         self.tableView.endRefreshing(isSuccess: true)
     }
-    func switchValueChanged(_ sender:UISwitch){
+    @objc func switchValueChanged(_ sender:UISwitch){
         refreshHeader?.backgroundImageView.isHidden = !sender.isOn
     }
 }

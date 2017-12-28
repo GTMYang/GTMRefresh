@@ -164,16 +164,20 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                 return
             }
             // 考虑SectionHeader停留时的高度
-            var insetT: CGFloat = -scrollV.mj_offsetY > originalInset.top ? -scrollV.mj_offsetY : originalInset.top
-            insetT = insetT > self.refreshingHoldHeight() + originalInset.top ? self.refreshingHoldHeight() + originalInset.top : insetT
+            var insetT: CGFloat = (-scrollV.mj_offsetY > originalInset.top) ? -scrollV.mj_offsetY : originalInset.top
+            insetT = (insetT > self.refreshingHoldHeight() + originalInset.top) ? (self.refreshingHoldHeight() + originalInset.top) : insetT
             
             scrollV.mj_insetT = insetT
             self.insetTDelta = originalInset.top - insetT
+            if #available(iOS 11, *) {
+                let adjustInsetT = scrollV.adjustedContentInset.top
+                let contentInsetT = scrollV.contentInset.top
+            }
             
             return
         }
         // 跳转到下一个控制器时，contentInset可能会变
-        self.scrollViewOriginalInset = scrollV.contentInset
+        self.scrollViewOriginalInset = scrollV.mj_inset
         
         // 当前的contentOffset
         let offsetY: CGFloat = scrollV.mj_offsetY
@@ -232,23 +236,23 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     // MARK: Public API
     
     final public func autoRefreshing(){
-        if self.window != nil {
-            self.state = .refreshing
-        }else{
-            if state != .refreshing{
-                self.state = .willRefresh
+        DispatchQueue.main.async {
+            if self.window != nil {
+                self.state = .refreshing
+            }else{
+                if self.state != .refreshing{
+                    self.state = .willRefresh
+                }
             }
         }
     }
     
     /// 结束刷新
     final public func endRefresing(isSuccess: Bool) {
-        subProtocol?.willBeginEndRefershing?(isSuccess: isSuccess)
-        self.state = .idle
-        //        let deadlineTime = DispatchTime.now() + .seconds(1)
-        //        DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-        //            self.state = .idle
-        //        }
+        DispatchQueue.main.async {
+            self.subProtocol?.willBeginEndRefershing?(isSuccess: isSuccess)
+            self.state = .idle
+        }
     }
     
 }

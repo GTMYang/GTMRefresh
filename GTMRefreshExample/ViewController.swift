@@ -55,20 +55,30 @@ class ViewController: UITableViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if #available(iOS 11, *) {
+            let adjustInsetT = self.tableView.adjustedContentInset.top
+            let contentInsetT = self.tableView.contentInset.top
+            print("adjustInsetT = \(adjustInsetT)  contentInsetT = \(contentInsetT) ")
+        }
+    }
+    
     
     // MARK: Test
     func refresh() {
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
-    func endRefresing() {
+    @objc func endRefresing() {
         self.tableView.endRefreshing(isSuccess: true)
     }
     func loadMore() {
         perform(#selector(endLoadMore), with: nil, afterDelay: 3)
     }
     
-    func endLoadMore() {
+    @objc func endLoadMore() {
         self.tableView.endLoadMore(isNoMoreData: true)
     }
     

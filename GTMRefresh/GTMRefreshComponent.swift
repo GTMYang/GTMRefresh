@@ -79,7 +79,7 @@ open class GTMRefreshComponent: UIView {
         self.scrollView = newSuperview as! UIScrollView?
         // 设置永远支持垂直弹簧效果
         self.scrollView?.alwaysBounceVertical = true
-        self.scrollViewOriginalInset = self.scrollView?.contentInset
+        self.scrollViewOriginalInset = self.scrollView?.mj_inset
         
         self.addObserver()
     }

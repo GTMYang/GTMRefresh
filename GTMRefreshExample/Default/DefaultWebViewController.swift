@@ -38,14 +38,14 @@ class DefaultWebViewController: UIViewController, UIWebViewDelegate{
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
-    func endRefresing() {
+    @objc func endRefresing() {
         self.webview?.scrollView.endRefreshing(isSuccess: true)
     }
     func loadMore() {
         perform(#selector(endLoadMore), with: nil, afterDelay: 3)
     }
     
-    func endLoadMore() {
+    @objc func endLoadMore() {
         self.webview?.scrollView.endLoadMore(isNoMoreData: true)
     }
     

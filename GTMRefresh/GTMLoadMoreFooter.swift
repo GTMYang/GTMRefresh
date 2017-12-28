@@ -122,7 +122,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
             return
         }
         
-        self.scrollViewOriginalInset = scrollV.contentInset
+        self.scrollViewOriginalInset = scrollV.mj_inset
         
         let currentOffsetY = scrollV.mj_offsetY
         let footerCloseOffsetY = self.footerCloseOffsetY

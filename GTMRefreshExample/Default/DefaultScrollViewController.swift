@@ -37,14 +37,15 @@ class DefaultScrollViewController:UIViewController{
         perform(#selector(endRefresing), with: nil, afterDelay: 3)
     }
     
-    func endRefresing() {
+    @objc func endRefresing() {
         self.scrollView?.endRefreshing(isSuccess: true)
     }
+    
     func loadMore() {
         perform(#selector(endLoadMore), with: nil, afterDelay: 3)
     }
     
-    func endLoadMore() {
+    @objc func endLoadMore() {
         self.scrollView?.endLoadMore(isNoMoreData: true)
     }
     

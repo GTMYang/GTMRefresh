@@ -99,35 +99,56 @@ extension UIScrollView {
 }
 
 extension UIScrollView {
+    var mj_inset: UIEdgeInsets {
+        get {
+            if #available(iOS 11, *) {
+                return self.adjustedContentInset
+            } else {
+                return self.contentInset
+            }
+        }
+    }
     var mj_insetT: CGFloat {
-        get { return contentInset.top }
+        get { return mj_inset.top }
         set {
             var inset = self.contentInset
             inset.top = newValue
+            if #available(iOS 11, *) {
+                inset.top -= (self.adjustedContentInset.top - self.contentInset.top)
+            }
             self.contentInset = inset
         }
     }
     var mj_insetB: CGFloat {
-        get { return contentInset.bottom }
+        get { return mj_inset.bottom }
         set {
             var inset = self.contentInset
             inset.bottom = newValue
+            if #available(iOS 11, *) {
+                inset.bottom -= self.adjustedContentInset.bottom - self.contentInset.bottom
+            }
             self.contentInset = inset
         }
     }
     var mj_insetL: CGFloat {
-        get { return contentInset.left }
+        get { return mj_inset.left }
         set {
             var inset = self.contentInset
             inset.left = newValue
+            if #available(iOS 11, *) {
+                inset.left -= self.adjustedContentInset.left - self.contentInset.left
+            }
             self.contentInset = inset
         }
     }
     var mj_insetR: CGFloat {
-        get { return contentInset.right }
+        get { return mj_inset.right }
         set {
             var inset = self.contentInset
             inset.right = newValue
+            if #available(iOS 11, *) {
+                inset.right -= self.adjustedContentInset.right - self.contentInset.right
+            }
             self.contentInset = inset
         }
     }
