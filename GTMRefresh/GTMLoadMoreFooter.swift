@@ -67,6 +67,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     self.subProtocol?.toNoMoreDataState?()
                 }
             case .refreshing:
+                self.loadMoreBlock()
                 // 展示正在加载动效
                 UIView.animate(withDuration: GTMRefreshConstant.fastAnimationDuration, animations: {
                     let overflowHeight = self.contentOverflowHeight
@@ -80,7 +81,6 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     scrollV.mj_insetB = toInsetB
                     scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
                 }, completion: { (isComplet) in
-                    self.loadMoreBlock()
                     DispatchQueue.main.async {
                         self.subProtocol?.toRefreshingState?()
                     }
