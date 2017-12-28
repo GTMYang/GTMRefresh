@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GTMRefresh"
-  s.version      = "1.1.3"
+  s.version      = "1.2.0"
   s.summary      = "swift 实现的上拉刷新，下拉加载动效库"
 
   s.homepage     = "https://github.com/GTMYang/GTMRefresh"
@@ -19,6 +19,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.frameworks = "UIKit"
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 
 end

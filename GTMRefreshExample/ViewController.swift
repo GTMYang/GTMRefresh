@@ -55,16 +55,6 @@ class ViewController: UITableViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if #available(iOS 11, *) {
-            let adjustInsetT = self.tableView.adjustedContentInset.top
-            let contentInsetT = self.tableView.contentInset.top
-            print("adjustInsetT = \(adjustInsetT)  contentInsetT = \(contentInsetT) ")
-        }
-    }
-    
     
     // MARK: Test
     func refresh() {

@@ -169,10 +169,6 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
             
             scrollV.mj_insetT = insetT
             self.insetTDelta = originalInset.top - insetT
-            if #available(iOS 11, *) {
-                let adjustInsetT = scrollV.adjustedContentInset.top
-                let contentInsetT = scrollV.contentInset.top
-            }
             
             return
         }
