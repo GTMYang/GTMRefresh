@@ -220,7 +220,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
 
 
 
-class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol {
+public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol {
     
     var pullUpToRefreshText: String = GTMRLocalize("pullUpToRefresh")
     public var loaddingText: String = GTMRLocalize("loadMore")
@@ -284,7 +284,7 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func willMove(toSuperview newSuperview: UIView?) {
+    override public func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
         guard newSuperview != nil else {
@@ -296,7 +296,7 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
     
     // MARK: Layout
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         let center = CGPoint(x: frame.width * 0.5 - 70 - 30, y: frame.height * 0.5)
@@ -313,11 +313,11 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
     /// 控件的高度
     ///
     /// - Returns: 控件的高度
-    func contentHeith() -> CGFloat {
+    public func contentHeith() -> CGFloat {
         return 50.0
     }
     
-    func toNormalState() {
+    public func toNormalState() {
         self.pullingIndicator.isHidden = false
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
@@ -328,20 +328,20 @@ class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterProtocol 
             self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
     }
-    func toNoMoreDataState() {
+    public func toNoMoreDataState() {
         self.pullingIndicator.isHidden = true
         self.loaddingIndicator.isHidden = true
         self.loaddingIndicator.stopAnimating()
         
         self.messageLabel.text =  self.noMoreDataText
     }
-    func toWillRefreshState() {
+    public func toWillRefreshState() {
         messageLabel.text =  self.releaseLoadMoreText
         UIView.animate(withDuration: 0.4, animations: {
             self.pullingIndicator.transform = CGAffineTransform.identity
         })
     }
-    func toRefreshingState() {
+    public func toRefreshingState() {
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
         

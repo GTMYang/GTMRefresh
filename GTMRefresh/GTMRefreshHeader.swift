@@ -253,7 +253,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     
 }
 
-class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
+public class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     
     var pullDownToRefresh = GTMRLocalize("pullDownToRefresh")
     var releaseToRefresh = GTMRLocalize("releaseToRefresh")
@@ -318,7 +318,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     
     // MARK: Layout
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         let center = CGPoint(x: frame.width * 0.5 - 70 - 20, y: frame.height * 0.5)
@@ -335,11 +335,11 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     /// 控件的高度
     ///
     /// - Returns: 控件的高度
-    func contentHeight() -> CGFloat {
+    public func contentHeight() -> CGFloat {
         return 60.0
     }
     
-    func toNormalState() {
+    public func toNormalState() {
         self.loaddingIndicator.isHidden = true
         self.pullingIndicator.isHidden = false
         self.loaddingIndicator.stopAnimating()
@@ -351,13 +351,13 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
         }
     }
-    func toRefreshingState() {
+    public func toRefreshingState() {
         self.pullingIndicator.isHidden = true
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
         messageLabel.text = self.refreshing
     }
-    func toPullingState() {
+    public func toPullingState() {
         self.loaddingIndicator.isHidden = true
         messageLabel.text = self.pullDownToRefresh
         
@@ -368,7 +368,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             self.pullingIndicator.transform = CGAffineTransform.identity
         })
     }
-    func toWillRefreshState() {
+    public func toWillRefreshState() {
         messageLabel.text = self.releaseToRefresh
         self.loaddingIndicator.isHidden = true
         
@@ -379,11 +379,11 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
     }
-    func changePullingPercent(percent: CGFloat) {
+    public func changePullingPercent(percent: CGFloat) {
         // here do nothing
     }
     
-    func willBeginEndRefershing(isSuccess: Bool) {
+    public func willBeginEndRefershing(isSuccess: Bool) {
         self.pullingIndicator.isHidden = false
         self.pullingIndicator.transform = CGAffineTransform.identity
         self.loaddingIndicator.isHidden = true
@@ -404,7 +404,7 @@ class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             }
         }
     }
-    func willCompleteEndRefershing() {
+    public func willCompleteEndRefershing() {
         
     }
 }
