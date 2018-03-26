@@ -114,7 +114,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.top = newValue
             if #available(iOS 11, *) {
-                inset.top -= (self.adjustedContentInset.top - self.contentInset.top)
+                inset.top -= self.safeAreaInsets.top//(self.adjustedContentInset.top - self.contentInset.top)
             }
             self.contentInset = inset
         }
@@ -125,7 +125,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.bottom = newValue
             if #available(iOS 11, *) {
-                inset.bottom -= self.adjustedContentInset.bottom - self.contentInset.bottom
+                inset.bottom -= self.safeAreaInsets.bottom//(self.adjustedContentInset.bottom - self.contentInset.bottom)
             }
             self.contentInset = inset
         }
@@ -136,7 +136,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.left = newValue
             if #available(iOS 11, *) {
-                inset.left -= self.adjustedContentInset.left - self.contentInset.left
+                inset.left -= self.safeAreaInsets.left//(self.adjustedContentInset.left - self.contentInset.left)
             }
             self.contentInset = inset
         }
@@ -147,7 +147,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.right = newValue
             if #available(iOS 11, *) {
-                inset.right -= self.adjustedContentInset.right - self.contentInset.right
+                inset.right -= self.safeAreaInsets.right//(self.adjustedContentInset.right - self.contentInset.right)
             }
             self.contentInset = inset
         }

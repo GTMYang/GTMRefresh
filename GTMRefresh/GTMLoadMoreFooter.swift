@@ -56,7 +56,8 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
             case .idle:
                 // 结束加载
                 UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
-                    scrollV.mj_insetB -= self.lastBottomDelta
+                    scrollV.mj_insetB = self.lastBottomDelta
+                  //  print("self.lastBottomDelta = \(self.lastBottomDelta)")
                 }, completion: { (isComplet) in
                     DispatchQueue.main.async {
                         self.subProtocol?.toNormalState?()
@@ -77,7 +78,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                         toInsetB -= overflowHeight
                     }
                     
-                    self.lastBottomDelta = toInsetB - scrollV.mj_insetB
+                  //  self.lastBottomDelta = toInsetB - scrollV.mj_insetB
                     scrollV.mj_insetB = toInsetB
                     scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
                 }, completion: { (isComplet) in
@@ -148,6 +149,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
         if scrollV.isDragging {
             // 拖动状态
             let willLoadMoreOffsetY = footerCloseOffsetY + self.mj_h
+          //  print("footerCloseOffsetY = \(footerCloseOffsetY)  footerH = \(self.mj_h)")
             
             switch currentOffsetY {
             case footerCloseOffsetY...willLoadMoreOffsetY:
