@@ -59,14 +59,10 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     scrollV.mj_insetB = self.lastBottomDelta
                   //  print("self.lastBottomDelta = \(self.lastBottomDelta)")
                 }, completion: { (isComplet) in
-                    DispatchQueue.main.async {
-                        self.subProtocol?.toNormalState?()
-                    }
+                    self.subProtocol?.toNormalState?()
                 })
             case .noMoreData:
-                DispatchQueue.main.async {
-                    self.subProtocol?.toNoMoreDataState?()
-                }
+                self.subProtocol?.toNoMoreDataState?()
             case .refreshing:
                 self.loadMoreBlock()
                 // 展示正在加载动效
@@ -82,15 +78,11 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     scrollV.mj_insetB = toInsetB
                     scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
                 }, completion: { (isComplet) in
-                    DispatchQueue.main.async {
-                        self.subProtocol?.toRefreshingState?()
-                    }
                 })
+                self.subProtocol?.toRefreshingState?()
                 
             case .willRefresh:
-                DispatchQueue.main.async {
-                    self.subProtocol?.toWillRefreshState?()
-                }
+                self.subProtocol?.toWillRefreshState?()
                 
             default: break
             }
@@ -325,7 +317,7 @@ public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterPr
         self.loaddingIndicator.stopAnimating()
         
         self.messageLabel.text =  self.pullUpToRefreshText
-        print(".........\(self.messageLabel.text ?? "")")
+      //  print(".........\(self.messageLabel.text ?? "")")
         UIView.animate(withDuration: 0.4, animations: {
             self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
         })
