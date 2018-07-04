@@ -30,7 +30,7 @@ public protocol SubGTMRefreshComponentProtocol {
 
 open class GTMRefreshComponent: UIView {
     
-    public var scrollView: UIScrollView?
+    public weak var scrollView: UIScrollView?
     
     public var scrollViewOriginalInset: UIEdgeInsets?
     
