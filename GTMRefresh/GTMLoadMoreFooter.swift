@@ -251,7 +251,7 @@ public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterPr
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
         indicator.activityIndicatorViewStyle = .gray
-        indicator.backgroundColor = UIColor.white
+        //indicator.backgroundColor = UIColor.white
         
         return indicator
     }()
@@ -336,6 +336,7 @@ public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterPr
         })
     }
     public func toRefreshingState() {
+        self.pullingIndicator.isHidden = true
         self.loaddingIndicator.isHidden = false
         self.loaddingIndicator.startAnimating()
         
