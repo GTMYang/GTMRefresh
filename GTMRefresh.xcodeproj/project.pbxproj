@@ -16,6 +16,7 @@
 		2635564C1DFAA91700FD98BB /* DefaultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556451DFAA91700FD98BB /* DefaultTableViewController.swift */; };
 		2635564D1DFAA91700FD98BB /* DefaultWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556461DFAA91700FD98BB /* DefaultWebViewController.swift */; };
 		2635564F1DFAABB200FD98BB /* DefaultCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2635564E1DFAABB200FD98BB /* DefaultCollectionViewController.swift */; };
+		263B4340212EB2A50068A933 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263B433F212EB2A50068A933 /* NavigationController.swift */; };
 		2655CB3A1DF94569001C50CF /* arrow_down@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB381DF94569001C50CF /* arrow_down@3x.png */; };
 		2655CB3B1DF94569001C50CF /* success@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB391DF94569001C50CF /* success@3x.png */; };
 		2655CB3E1DF945A0001C50CF /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2655CB401DF945A0001C50CF /* Localize.strings */; };
@@ -267,6 +268,7 @@
 		263556451DFAA91700FD98BB /* DefaultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewController.swift; sourceTree = "<group>"; };
 		263556461DFAA91700FD98BB /* DefaultWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultWebViewController.swift; sourceTree = "<group>"; };
 		2635564E1DFAABB200FD98BB /* DefaultCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCollectionViewController.swift; sourceTree = "<group>"; };
+		263B433F212EB2A50068A933 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		2655CB381DF94569001C50CF /* arrow_down@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@3x.png"; sourceTree = "<group>"; };
 		2655CB391DF94569001C50CF /* success@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@3x.png"; sourceTree = "<group>"; };
 		2655CB3F1DF945A0001C50CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localize.strings; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 		267115591DF6AEAA00F27CEA /* GTMRefreshExample */ = {
 			isa = PBXGroup;
 			children = (
+				263B433F212EB2A50068A933 /* NavigationController.swift */,
 				2655CB481DF95617001C50CF /* YahooWeather */,
 				2655CB451DF95617001C50CF /* QQRefresh */,
 				2635563F1DFAA90B00FD98BB /* Default */,
@@ -1184,6 +1187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2635564C1DFAA91700FD98BB /* DefaultTableViewController.swift in Sources */,
+				263B4340212EB2A50068A933 /* NavigationController.swift in Sources */,
 				2655CB531DF9676E001C50CF /* BaseTableViewController.swift in Sources */,
 				26F34AFD1DFB007C004C8CF1 /* YoukuTableViewController.swift in Sources */,
 				26F34AEE1DFB0030004C8CF1 /* TaoBaoRefreshHeader.swift in Sources */,
