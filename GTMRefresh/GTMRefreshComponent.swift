@@ -41,7 +41,7 @@ open class GTMRefreshComponent: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.autoresizingMask = UIViewAutoresizing.flexibleWidth
+        self.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
         self.backgroundColor = UIColor.clear
         
         self.state = .idle

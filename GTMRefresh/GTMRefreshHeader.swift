@@ -109,7 +109,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         super.init(frame: frame)
         
         self.addSubview(self.contentView)
-        self.contentView.autoresizingMask = UIViewAutoresizing.flexibleWidth
+        self.contentView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -288,7 +288,7 @@ public class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProto
     lazy var loaddingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = .gray
+        indicator.style = .gray
         //indicator.backgroundColor = UIColor.white
         
         return indicator

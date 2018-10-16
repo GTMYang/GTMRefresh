@@ -39,7 +39,7 @@ class TaoBaoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.arrowLayer.strokeColor = UIColor.lightGray.cgColor
         self.arrowLayer.fillColor = UIColor.clear.cgColor
         self.arrowLayer.lineWidth = 1.0
-        self.arrowLayer.lineCap = kCALineCapRound
+        self.arrowLayer.lineCap = CAShapeLayerLineCap.round
         self.arrowLayer.bounds = CGRect(x: 0, y: 0,width: 40, height: 40)
         self.arrowLayer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.layer.addSublayer(self.arrowLayer)
@@ -56,7 +56,7 @@ class TaoBaoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.circleLayer.strokeStart = 0.05
         self.circleLayer.strokeEnd = 0.05
         self.circleLayer.lineWidth = 1.0
-        self.circleLayer.lineCap = kCALineCapRound
+        self.circleLayer.lineCap = CAShapeLayerLineCap.round
         self.circleLayer.bounds = CGRect(x: 0, y: 0,width: 40, height: 40)
         self.circleLayer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.layer.addSublayer(self.circleLayer)

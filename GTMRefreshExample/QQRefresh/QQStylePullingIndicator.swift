@@ -10,7 +10,7 @@ import UIKit
 
 class QQStylePullingIndicator: UIView {
 
-    open let spinner:UIActivityIndicatorView = UIActivityIndicatorView()
+    public let spinner:UIActivityIndicatorView = UIActivityIndicatorView()
     var radius:CGFloat{
         get{
             return totalHeight / 4 - margin
@@ -67,7 +67,7 @@ class QQStylePullingIndicator: UIView {
         addSubview(spinner)
         sizeToFit()
         spinner.hidesWhenStopped = true
-        spinner.activityIndicatorViewStyle = .gray
+        spinner.style = .gray
     }
     open override func layoutSubviews() {
         super.layoutSubviews()

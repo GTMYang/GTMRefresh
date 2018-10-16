@@ -24,7 +24,7 @@ class YoukuTableViewController:BaseTableViewController{
         let sw = UISwitch()
         sw.isOn = !refreshHeader!.backgroundImageView.isHidden
         let rightItem = UIBarButtonItem(customView: sw)
-        sw.addTarget(self, action: #selector(YoukuTableViewController.switchValueChanged(_:)), for: UIControlEvents.valueChanged)
+        sw.addTarget(self, action: #selector(YoukuTableViewController.switchValueChanged(_:)), for: UIControl.Event.valueChanged)
         self.navigationItem.rightBarButtonItem = rightItem
         self.tableView.gtm_addRefreshHeaderView(refreshHeader: youkuHeader) {
             [weak self] in

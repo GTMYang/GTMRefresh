@@ -15,7 +15,7 @@ class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
    // let bgColor = UIColor(red: 77.0/255.0, green: 184.0/255.0, blue: 255.0/255.0, alpha: 0.65)
     let totalHeight = UIScreen.main.bounds.size.height
     let maskLayer = CAShapeLayer()
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let spinner = UIActivityIndicatorView(style: .gray)
     let backgroundLayer = CALayer()
     
     override init(frame: CGRect) {

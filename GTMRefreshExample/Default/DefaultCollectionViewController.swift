@@ -49,7 +49,7 @@ class DefaultCollectionViewController:UIViewController,UICollectionViewDataSourc
     
     func setUpCollectionView(){
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = UICollectionViewScrollDirection.vertical
+        flowLayout.scrollDirection = UICollectionView.ScrollDirection.vertical
         flowLayout.itemSize = CGSize(width: 100, height: 100)
         self.collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: flowLayout)
         self.collectionView?.backgroundColor = UIColor.white

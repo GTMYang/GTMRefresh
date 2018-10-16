@@ -12,8 +12,8 @@ import GTMRefresh
 class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
 
     let control:QQStylePullingIndicator
-    open let textLabel:UILabel = UILabel(frame: CGRect(x: 0,y: 0,width: 120,height: 40))
-    open let imageView:UIImageView = UIImageView(frame: CGRect.zero)
+    public let textLabel:UILabel = UILabel(frame: CGRect(x: 0,y: 0,width: 120,height: 40))
+    public let imageView:UIImageView = UIImageView(frame: CGRect.zero)
     
     // MARK: Life Cycle
     
