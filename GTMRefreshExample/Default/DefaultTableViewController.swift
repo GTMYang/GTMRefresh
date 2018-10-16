@@ -76,6 +76,6 @@ class DefaultTableViewController:UITableViewController{
         return cell!
     }
     deinit{
-        print("Deinit of DefaultTableViewController")
+         print("Deinit of DefaultTableViewController")
     }
 }

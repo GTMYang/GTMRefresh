@@ -12,6 +12,7 @@ import UIKit
 class QQVideoTableviewController:BaseTableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let qqHeader = QQVideoRefreshHeader()
         self.tableView.gtm_addRefreshHeaderView(refreshHeader: qqHeader) {
             [weak self] in

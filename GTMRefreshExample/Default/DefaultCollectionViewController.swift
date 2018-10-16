@@ -67,6 +67,6 @@ class DefaultCollectionViewController:UIViewController,UICollectionViewDataSourc
         return cell
     }
     deinit{
-        print("Deinit of DefaultCollectionViewController")
+          print("Deinit of DefaultCollectionViewController")
     }
 }

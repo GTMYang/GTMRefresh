@@ -59,42 +59,52 @@ open class GTMRefreshComponent: UIView {
             self.state = .refreshing
         }
     }
+    deinit {
+        if GTMRefreshConstant.debug { print("GTMRefreshComponent excute deinit() ... ")}
+    }
     
     override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
-        guard newSuperview is UIScrollView else {
+        guard let superView = newSuperview as? UIScrollView else {
             return
         }
         
-        self.removeAbserver()
-        
-        guard let superView = newSuperview else {
-            return
-        }
         
         self.mj_w = superView.mj_w
         self.mj_x = 0
-        
-        self.scrollView = newSuperview as! UIScrollView?
+
+        self.scrollView = superView
         // 设置永远支持垂直弹簧效果
         self.scrollView?.alwaysBounceVertical = true
         self.scrollViewOriginalInset = self.scrollView?.mj_inset
         
-        self.addObserver()
+    }
+    
+    open override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        
+        if newWindow != nil {
+            self.addObserver()
+        } else {
+            self.removeAbserver()
+        }
     }
     
     
     // MARK: KVO
     
     private func addObserver() {
+        if GTMRefreshConstant.debug { print("GTMRefresh -> addObserver ... ")}
         scrollView?.addObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset, options: .new, context: nil)
         scrollView?.addObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize, options: .new, context: nil)
     }
     
     private func removeAbserver() {
+        if GTMRefreshConstant.debug { print("GTMRefresh -> removeAbserver ... ")}
         scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset)
         scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize)
+       // self.scrollView = nil
     }
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

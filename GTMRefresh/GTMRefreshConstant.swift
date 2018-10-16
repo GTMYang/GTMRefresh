@@ -21,6 +21,8 @@ class GTMRefreshConstant {
     
     static var associatedObjectGtmHeader = 0
     static var associatedObjectGtmFooter = 1
+    
+    static let debug = false
 }
 
 public func GTMRLocalize(_ string:String)->String{

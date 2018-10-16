@@ -27,6 +27,7 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.edgesForExtendedLayout = []
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return models.count
