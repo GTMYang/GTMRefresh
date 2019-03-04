@@ -15,6 +15,7 @@ import UIKit
     @objc optional func toRefreshingState()
     /// 状态变成.pulling
     @objc optional func toPullingState()
+    @objc optional func willBeginEndPullingState()
     /// 状态变成.willRefresh
     @objc optional func toWillRefreshState()
     /// 下拉高度／触发高度 值改变
@@ -222,6 +223,8 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                         self.setNeedsDisplay()
                     }
                 }
+            } else if state == .pulling {
+                self.subProtocol?.willBeginEndPullingState?()
             }
         }
     }
@@ -288,7 +291,7 @@ public class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProto
     lazy var loaddingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
-        indicator.style = .gray
+        indicator.activityIndicatorViewStyle = .gray
         //indicator.backgroundColor = UIColor.white
         
         return indicator

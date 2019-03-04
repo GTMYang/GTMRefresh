@@ -93,6 +93,15 @@ extension UIScrollView {
             self.gtmFooter?.state = .idle
         }
     }
+
+    final public func isHeaderRefreshing() -> Bool {
+        return self.gtmHeader?.state == .refreshing
+    }
+
+    final public func isFooterRefreshing() -> Bool {
+        return self.gtmFooter?.state == .refreshing
+    }
+
     final public func endLoadMore(isNoMoreData: Bool) {
         self.gtmFooter?.endLoadMore(isNoMoreData: isNoMoreData)
     }
