@@ -291,7 +291,7 @@ public class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProto
     lazy var loaddingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = .gray
+        indicator.style = .gray
         //indicator.backgroundColor = UIColor.white
         
         return indicator

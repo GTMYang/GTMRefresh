@@ -250,7 +250,7 @@ public class DefaultGTMLoadMoreFooter: GTMLoadMoreFooter, SubGTMLoadMoreFooterPr
     lazy var loaddingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = .gray
+        indicator.style = .gray
         //indicator.backgroundColor = UIColor.white
         
         return indicator
