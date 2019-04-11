@@ -11,7 +11,7 @@ import ObjectiveC
 
 extension UIScrollView {
     
-    internal var gtmHeader: GTMRefreshHeader? {
+    final public var gtmHeader: GTMRefreshHeader? {
         get {
             return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader) as? GTMRefreshHeader
         }
@@ -19,7 +19,7 @@ extension UIScrollView {
             objc_setAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmHeader, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    internal var gtmFooter: GTMLoadMoreFooter? {
+    final public var gtmFooter: GTMLoadMoreFooter? {
         get {
             return objc_getAssociatedObject(self, &GTMRefreshConstant.associatedObjectGtmFooter) as? GTMLoadMoreFooter
         }
@@ -83,27 +83,27 @@ extension UIScrollView {
     }
     
     final public func triggerRefreshing(){
-        self.gtmHeader?.autoRefreshing()
+        gtmHeader?.autoRefreshing()
     }
     
     final public func endRefreshing(isSuccess: Bool) {
-        self.gtmHeader?.endRefresing(isSuccess: isSuccess)
+        gtmHeader?.endRefresing(isSuccess: isSuccess)
         if isSuccess {
             // 重置footer状态（防止footer还处在数据加载完成状态）
-            self.gtmFooter?.state = .idle
+            gtmFooter?.state = .idle
         }
     }
 
     final public func isHeaderRefreshing() -> Bool {
-        return self.gtmHeader?.state == .refreshing
+        return gtmHeader?.state == .refreshing
     }
 
     final public func isFooterRefreshing() -> Bool {
-        return self.gtmFooter?.state == .refreshing
+        return gtmFooter?.state == .refreshing
     }
 
     final public func endLoadMore(isNoMoreData: Bool) {
-        self.gtmFooter?.endLoadMore(isNoMoreData: isNoMoreData)
+        gtmFooter?.endLoadMore(isNoMoreData: isNoMoreData)
     }
 }
 
