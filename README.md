@@ -75,9 +75,9 @@ _**Note:** Make sure that all files in `GTMRefresh` included in Compile Sources 
 
 # 版本
 
-## Vesrion 1.3.6
+## Vesrion 1.3.7
 
-This version requires Xcode 9.0 and Swift 4.
+This version requires Xcode 9.0 and Swift 5.
 
 # 使用帮助
 
