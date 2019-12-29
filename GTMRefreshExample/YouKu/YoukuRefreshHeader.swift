@@ -82,14 +82,14 @@ class YoukuRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     }
     func changePullingPercent(percent: CGFloat) {
     }
-    func willBeginEndRefershing(isSuccess: Bool) {
+    func willEndRefreshing(isSuccess: Bool) {
         self.rotatingImageView.isHidden = true
         self.iconImageView.isHidden = false
         self.iconImageView.layer.removeAllAnimations()
         self.iconImageView.layer.transform = CATransform3DIdentity
         self.iconImageView.image = UIImage(named: "youku_down")
     }
-    func willCompleteEndRefershing() {
+    func didEndRefreshing() {
     }
     func contentHeight()->CGFloat{
         return 60

@@ -102,12 +102,12 @@ class TaoBaoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         }
         self.circleLayer.strokeEnd = 0.05 + 0.9 * adjustPercent
     }
-    func willBeginEndRefershing(isSuccess: Bool) {
+    func willEndRefreshing(isSuccess: Bool) {
 //        transitionWithOutAnimation {
 //            self.circleLayer.strokeEnd = 0.05
 //        };
     }
-    func willCompleteEndRefershing() {
+    func didEndRefreshing() {
         transitionWithOutAnimation {
             self.circleLayer.strokeEnd = 0.05
         };

@@ -47,8 +47,8 @@ class QQVideoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     }
     func toWillRefreshState() {}
     func changePullingPercent(percent: CGFloat) {}
-    func willBeginEndRefershing(isSuccess: Bool) {}
-    func willCompleteEndRefershing() {
+    func willEndRefreshing(isSuccess: Bool) {}
+    func didEndRefreshing() {
         imageView.animationImages = nil
         imageView.stopAnimating()
         imageView.image = UIImage(named: "loading15")

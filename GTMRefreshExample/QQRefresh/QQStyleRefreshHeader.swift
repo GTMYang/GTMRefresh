@@ -91,7 +91,7 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
     func toWillRefreshState() {
     }
     
-    func willBeginEndRefershing(isSuccess: Bool) {
+    func willEndRefreshing(isSuccess: Bool) {
         if isSuccess {
             self.control.isHidden = true
             imageView.isHidden = false
@@ -106,7 +106,7 @@ class QQStyleRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
             imageView.image = UIImage(named: "failure", in: Bundle(for: GTMRefreshHeader.self), compatibleWith: nil)
         }
     }
-    func willCompleteEndRefershing() {
+    func didEndRefreshing() {
         
     }
 

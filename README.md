@@ -6,7 +6,7 @@
 <p align="center">
 <a href="https://github.com/GTMYang/GTMRefresh"><img src="https://img.shields.io/badge/platform-ios-lightgrey.svg"></a>
 <a href="https://github.com/GTMYang/GTMRefresh"><img src="https://img.shields.io/github/license/johnlui/Pitaya.svg?style=flat"></a>
-<a href="https://github.com/GTMYang/GTMRefresh"><img src="https://img.shields.io/badge/language-Swift%204-orange.svg"></a>
+<a href="https://github.com/GTMYang/GTMRefresh"><img src="https://img.shields.io/badge/language-Swift%205-orange.svg"></a>
 </p>
 
 <br>

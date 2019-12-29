@@ -86,12 +86,12 @@ class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         let bezierPath = createLayerWithY(adjustHeight,controlPoint: controlPoint)
         self.maskLayer.path = bezierPath.cgPath
     }
-    func willBeginEndRefershing(isSuccess: Bool) {
+    func willEndRefreshing(isSuccess: Bool) {
         spinner.stopAnimating()
         pullingIndicator.transform = CGAffineTransform.identity
       //  imageView.image = UIImage(named: "success")
     }
-    func willCompleteEndRefershing() {
+    func didEndRefreshing() {
         pullingIndicator.image = UIImage(named: "arrow_downWhite")
     }
     func contentHeight()->CGFloat{

@@ -50,8 +50,8 @@ class DianpingRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         let image = UIImage(named: imageName)
         imageView.image = image
     }
-    func willBeginEndRefershing(isSuccess: Bool) {}
-    func willCompleteEndRefershing() {
+    func willEndRefreshing(isSuccess: Bool) {}
+    func didEndRefreshing() {
         imageView.animationImages = nil
         imageView.stopAnimating()
         imageView.isHidden = true

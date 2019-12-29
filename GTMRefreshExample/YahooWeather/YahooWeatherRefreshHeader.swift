@@ -89,10 +89,10 @@ class YahooWeatherRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         startTransitionAnimation()
     }
     
-    func willBeginEndRefershing(isSuccess: Bool) {
+    func willEndRefreshing(isSuccess: Bool) {
         
     }
-    func willCompleteEndRefershing() {
+    func didEndRefreshing() {
         imageView.stopAnimating()
         imageView.animationImages = nil
         imageView.image = UIImage(named: "sun_000000")

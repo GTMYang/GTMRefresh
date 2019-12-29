@@ -40,15 +40,19 @@ open class GTMRefreshComponent: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        setup()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    func setup() {
         self.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
         self.backgroundColor = UIColor.clear
         
         self.state = .idle
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override open func draw(_ rect: CGRect) {
@@ -59,6 +63,7 @@ open class GTMRefreshComponent: UIView {
             self.state = .refreshing
         }
     }
+    
     deinit {
         if GTMRefreshConstant.debug { print("GTMRefreshComponent excute deinit() ... ")}
     }
