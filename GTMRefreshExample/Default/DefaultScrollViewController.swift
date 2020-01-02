@@ -56,4 +56,9 @@ class DefaultScrollViewController:UIViewController{
         self.scrollView?.contentSize = CGSize(width: 300,height: 600)
         self.view.addSubview(self.scrollView!)
     }
+    
+    
+    deinit{
+        print("Deinit of \(NSStringFromClass(type(of: self)))")
+    }
 }

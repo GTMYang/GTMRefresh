@@ -30,6 +30,7 @@ import UIKit
     func contentHeight() -> CGFloat
 }
 
+// MARK: -
 open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol {
     
     /// 刷新数据Block
@@ -41,16 +42,19 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         return view
     }()
     
-    var insetTDelta: CGFloat = 0
+    var insetTDelta: CGFloat = 0  // inset top 差值
     
-    public var headerImp: SubGTMRefreshHeaderProtocol? {
+    public var headerProtocolImp: SubGTMRefreshHeaderProtocol? {
         get { return self as? SubGTMRefreshHeaderProtocol }
     }
     
     var pullingPercent: CGFloat = 0 {
         didSet {
-            headerImp?.changePullingPercent?(percent: pullingPercent)
+            headerProtocolImp?.changePullingPercent?(percent: pullingPercent)
         }
+    }
+    var isRefreshing: Bool {
+        return state == .refreshing
     }
     
     override var state: GTMRefreshState {
@@ -58,32 +62,41 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
             guard oldValue != state else {
                 return
             }
-            
-            switch state {
-            case .idle:
-                guard oldValue == GTMRefreshState.refreshing else {
+            switch self.state {
+            case .idle:   // refreshing -> idle
+                guard oldValue == .refreshing else {
                     return
                 }
-                // 恢复Inset
-                UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
-                    self.scrollView?.mj_insetT += self.insetTDelta
-                }, completion: { (isFinish) in
-                    self.headerImp?.didEndRefreshing?()
-                    // 执行刷新操作
-                    self.headerImp?.toNormalState?()
-                })
-            case .pulling:
                 DispatchQueue.main.async {
-                    self.headerImp?.toPullingState?()
+                    UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
+                        self.scrollView?.mj_insetT += self.insetTDelta
+                    }, completion: { (isFinish) in
+                        self.headerProtocolImp?.didEndRefreshing?()
+                        // 执行刷新操作
+                        self.headerProtocolImp?.toNormalState?()
+                    })
+                }
+            case .pulling:
+                guard oldValue != .pulling else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.headerProtocolImp?.toPullingState?()
                 }
             case .willRefresh:
+                guard oldValue != .willRefresh else {
+                    return
+                }
                 DispatchQueue.main.async {
-                    self.headerImp?.toWillRefreshState?()
+                    self.headerProtocolImp?.toWillRefreshState?()
                 }
             case .refreshing:
+                guard oldValue != .refreshing else {
+                    return
+                }
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: GTMRefreshConstant.fastAnimationDuration, animations: {
-                        self.headerImp?.toRefreshingState?()
+                        self.headerProtocolImp?.toRefreshingState?()
                         
                         guard let originInset = self.scrollViewOriginalInset else {
                             return
@@ -100,21 +113,23 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                 }
             default: break
             }
+            
+            
         }
     }
     
-    // MARK: Life Cycle
+    // MARK: - Life Cycle
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        
-        self.addSubview(self.contentView)
-        self.contentView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
+        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+        setup()
+    }
+    override func setup() {
         self.addSubview(self.contentView)
         self.contentView.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
     }
@@ -122,7 +137,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
-        guard newSuperview != nil else {
+        guard let _ = newSuperview else {
             // newSuperview == nil 被移除的时候
             return
         }
@@ -131,7 +146,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         self.mj_y = -self.mj_h
     }
     
-    // MARK: Layout
+    // MARK: - Layout
     
     override open func layoutSubviews() {
         super.layoutSubviews()
@@ -153,7 +168,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         return self.mj_h // 默认使用控件高度
     }
     
-    // MARK: SubGTMRefreshComponentProtocol
+    // MARK: - SubGTMRefreshComponentProtocol
     open func scollViewContentOffsetDidChange(change: [NSKeyValueChangeKey : Any]?) {
         
         guard let scrollV = self.scrollView else {
@@ -162,62 +177,73 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         
         let originalInset = self.scrollViewOriginalInset!
         
+        // 下拉时 offsetY 都是负值, 值越小表示下拉的距离越大
         if state == .refreshing {
             guard let _ = self.window else {
                 return
             }
             // 考虑SectionHeader停留时的高度
+            let holdInsetT = self.refreshingHoldHeight() + originalInset.top
             var insetT: CGFloat = (-scrollV.mj_offsetY > originalInset.top) ? -scrollV.mj_offsetY : originalInset.top
-            insetT = (insetT > self.refreshingHoldHeight() + originalInset.top) ? (self.refreshingHoldHeight() + originalInset.top) : insetT
+            insetT = (insetT > holdInsetT) ? holdInsetT : insetT
             
             scrollV.mj_insetT = insetT
             self.insetTDelta = originalInset.top - insetT
             
             return
         }
+        
         // 跳转到下一个控制器时，contentInset可能会变
         self.scrollViewOriginalInset = scrollV.mj_inset
         
-        // 当前的contentOffset
-        let offsetY: CGFloat = scrollV.mj_offsetY
-        // 头部控件刚好出现的offsetY
-        let headerInOffsetY: CGFloat = -originalInset.top
+        let offsetY: CGFloat = scrollV.mj_offsetY // 当前的contentOffset
+        let headerAllShowOffsetY: CGFloat = -originalInset.top // 头部控件全部展示的offsetY
         
-        // 如果是向上滚动头部控件还没出现，直接返回
-        guard offsetY <= headerInOffsetY else {
+        // 头部控件还没完全出现，直接返回
+        guard offsetY <= headerAllShowOffsetY else {
             return
         }
         
-        // 普通 和 即将刷新 的临界点
-        let idle2pullingOffsetY: CGFloat = headerInOffsetY - self.willRefresHeight()
+        // 下拉时 offsetY 都是负值, 值越小表示下拉的距离越大
+        // idle 和 pulling 的临界点
+        let idle2pullingOffsetY = headerAllShowOffsetY
+        // pulling 和 willRefresh 的临界点
+        let pulling2willRefreshOffsetY: CGFloat = headerAllShowOffsetY - self.willRefresHeight()
         
         if scrollV.isDragging {
             switch state {
             case .idle:
-                if offsetY <= headerInOffsetY {
+                // idle -> pulling
+                if offsetY <= idle2pullingOffsetY {
                     state = .pulling
                 }
             case .pulling:
-                if offsetY <= idle2pullingOffsetY {
+                if offsetY <= pulling2willRefreshOffsetY {
+                    // pulling -> willRefresh
                     state = .willRefresh
+                } else if offsetY <= idle2pullingOffsetY {
+                    // pulling -> pulling # do precent change
+                    self.pullingPercent = -(offsetY - idle2pullingOffsetY) / self.willRefresHeight()
                 } else {
-                    self.pullingPercent = (headerInOffsetY - offsetY) / self.willRefresHeight()
+                    // pulling -> idle
+                    state = .idle
                 }
             case .willRefresh:
-                if offsetY > idle2pullingOffsetY {
-                    state = .idle
+                // willRefresh -> pulling
+                if offsetY > pulling2willRefreshOffsetY {
+                    state = .pulling
                 }
             default: break
             }
         } else {
             // 停止Drag && 并且是即将刷新状态
             if state == .willRefresh {
-                // 开始刷新
                 self.pullingPercent = 1.0
-                // 只要正在刷新，就完全显示
                 if self.window != nil {
+                    // willRefresh -> refreshing
                     state = .refreshing
-                } else {
+                }
+                else {
                     // 预防正在刷新中时，调用本方法使得header inset回置失败
                     if state != .refreshing {
                         state = .willRefresh
@@ -232,7 +258,7 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
         // here do nothing
     }
     
-    // MARK: Public API
+    // MARK: - Public API
     
     final public func autoRefreshing(){
         DispatchQueue.main.async {
@@ -249,165 +275,10 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     /// 结束刷新
     final public func endRefresing(isSuccess: Bool) {
         DispatchQueue.main.async {
-            self.headerImp?.willEndRefreshing?(isSuccess: isSuccess)
+            self.headerProtocolImp?.willEndRefreshing?(isSuccess: isSuccess)
             self.state = .idle
         }
     }
     
 }
 
-public class DefaultGTMRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
-    
-    var pullDownToRefresh = GTMRLocalize("pullDownToRefresh")
-    var releaseToRefresh = GTMRLocalize("releaseToRefresh")
-    var refreshSuccess = GTMRLocalize("refreshSuccess")
-    var refreshFailure = GTMRLocalize("refreshFailure")
-    var refreshing = GTMRLocalize("refreshing")
-    
-    var txtColor: UIColor? {
-        didSet {
-            if let color = txtColor {
-                self.messageLabel.textColor = color
-            }
-        }
-    }
-    var idleImage: UIImage? {
-        didSet {
-            if let idleImg = idleImage {
-                self.pullingIndicator.image = idleImg
-            }
-        }
-    }
-    var sucImage: UIImage?
-    var failImage: UIImage?
-    
-    lazy var pullingIndicator: UIImageView = {
-        let pindicator = UIImageView()
-        pindicator.image = UIImage(named: "arrow_down", in: Bundle(for: GTMRefreshHeader.self), compatibleWith: nil)
-        
-        return pindicator
-    }()
-    
-    lazy var loaddingIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView()
-        indicator.hidesWhenStopped = true
-        indicator.style = .gray
-        //indicator.backgroundColor = UIColor.white
-        
-        return indicator
-    }()
-    
-    lazy var messageLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 15)
-        
-        return label
-    }()
-    
-    // MARK: Life Cycle
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.contentView.addSubview(self.messageLabel)
-        self.contentView.addSubview(self.pullingIndicator)
-        self.contentView.addSubview(self.loaddingIndicator)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: Layout
-    
-    override public func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let center = CGPoint(x: frame.width * 0.5 - 70 - 20, y: frame.height * 0.5)
-        pullingIndicator.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        pullingIndicator.mj_center = center
-        
-        loaddingIndicator.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        loaddingIndicator.mj_center = center
-        messageLabel.frame = self.bounds
-    }
-    
-    // MARK: SubGTMRefreshHeaderProtocol
-    
-    /// 控件的高度
-    ///
-    /// - Returns: 控件的高度
-    public func contentHeight() -> CGFloat {
-        return 60.0
-    }
-    
-    public func toNormalState() {
-        self.loaddingIndicator.isHidden = true
-        self.pullingIndicator.isHidden = false
-        self.loaddingIndicator.stopAnimating()
-        
-        messageLabel.text =  self.pullDownToRefresh
-        if let img = self.idleImage {
-            pullingIndicator.image = img
-        } else {
-            pullingIndicator.image = UIImage(named: "arrow_down", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
-        }
-    }
-    public func toRefreshingState() {
-        self.pullingIndicator.isHidden = true
-        self.loaddingIndicator.isHidden = false
-        self.loaddingIndicator.startAnimating()
-        messageLabel.text = self.refreshing
-    }
-    public func toPullingState() {
-        self.loaddingIndicator.isHidden = true
-        messageLabel.text = self.pullDownToRefresh
-        
-        guard pullingIndicator.transform == CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))  else{
-            return
-        }
-        UIView.animate(withDuration: 0.4, animations: {
-            self.pullingIndicator.transform = CGAffineTransform.identity
-        })
-    }
-    public func toWillRefreshState() {
-        messageLabel.text = self.releaseToRefresh
-        self.loaddingIndicator.isHidden = true
-        
-        guard pullingIndicator.transform == CGAffineTransform.identity else{
-            return
-        }
-        UIView.animate(withDuration: 0.4, animations: {
-            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
-        })
-    }
-    public func changePullingPercent(percent: CGFloat) {
-        // here do nothing
-    }
-    
-    public func willEndRefreshing(isSuccess: Bool) {
-        self.pullingIndicator.isHidden = false
-        self.pullingIndicator.transform = CGAffineTransform.identity
-        self.loaddingIndicator.isHidden = true
-        
-        if isSuccess {
-            messageLabel.text =  self.refreshSuccess
-            if let img = self.sucImage {
-                pullingIndicator.image = img
-            } else {
-                pullingIndicator.image = UIImage(named: "success", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
-            }
-        } else {
-            messageLabel.text =  self.refreshFailure
-            if let img = self.failImage {
-                pullingIndicator.image = img
-            } else {
-                pullingIndicator.image = UIImage(named: "failure", in: Bundle(for: DefaultGTMRefreshHeader.self), compatibleWith: nil)
-            }
-        }
-    }
-    public func didEndRefreshing() {
-        
-    }
-}

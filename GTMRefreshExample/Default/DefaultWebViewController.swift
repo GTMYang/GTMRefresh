@@ -53,4 +53,9 @@ class DefaultWebViewController: UIViewController, UIWebViewDelegate{
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.webview?.scrollView.endRefreshing(isSuccess: true)
     }
+    
+    
+    deinit{
+        print("Deinit of \(NSStringFromClass(type(of: self)))")
+    }
 }

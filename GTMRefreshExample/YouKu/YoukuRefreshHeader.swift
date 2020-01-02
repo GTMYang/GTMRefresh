@@ -74,13 +74,14 @@ class YoukuRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.rotatingImageView.layer.add(rotateAnimation, forKey: "rotate")
     }
     func toPullingState() {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.iconImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
-        })
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.iconImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
+//        })
     }
     func toWillRefreshState() {
     }
     func changePullingPercent(percent: CGFloat) {
+        self.iconImageView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+Double.pi*2*Double(percent)))
     }
     func willEndRefreshing(isSuccess: Bool) {
         self.rotatingImageView.isHidden = true

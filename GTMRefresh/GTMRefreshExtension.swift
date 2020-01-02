@@ -35,21 +35,23 @@ extension UIScrollView {
     ///   - refreshBlock: 刷新数据Block
     @discardableResult
     final public func gtm_addRefreshHeaderView(refreshHeader: GTMRefreshHeader? = DefaultGTMRefreshHeader(), refreshBlock:@escaping () -> Void) -> UIScrollView {
-        guard refreshHeader is SubGTMRefreshHeaderProtocol  else {
+        
+        guard let newHeader = refreshHeader else { return self }
+        
+        guard newHeader is SubGTMRefreshHeaderProtocol  else {
             fatalError("refreshHeader must implement SubGTMRefreshHeaderProtocol")
         }
-        if let header: GTMRefreshHeader = refreshHeader, let subProtocol = header.headerImp {
-            header.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: subProtocol.contentHeight())
+        
+        newHeader.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: newHeader.headerProtocolImp!.contentHeight())
+        
+        if let oldHeader = gtmHeader {
+            oldHeader.removeFromSuperview()
         }
-        if gtmHeader != refreshHeader {
-            gtmHeader?.removeFromSuperview()
-            
-            if let header:GTMRefreshHeader = refreshHeader {
-                header.refreshBlock = refreshBlock
-                self.insertSubview(header, at: 0)
-                self.gtmHeader = header
-            }
-        }
+        
+        newHeader.refreshBlock = refreshBlock
+        self.insertSubview(newHeader, at: 0)
+        self.gtmHeader = newHeader
+        
         return self
     }
     
@@ -63,22 +65,20 @@ extension UIScrollView {
     @discardableResult
     final public func gtm_addLoadMoreFooterView(loadMoreFooter: GTMLoadMoreFooter? = DefaultGTMLoadMoreFooter(), loadMoreBlock:@escaping () -> Void) -> UIScrollView {
         
+        guard let newFooter = loadMoreFooter else { return self }
+        
         guard loadMoreFooter is SubGTMLoadMoreFooterProtocol  else {
             fatalError("loadMoreFooter must implement SubGTMLoadMoreFooterProtocol")
         }
-        if let footer: GTMLoadMoreFooter = loadMoreFooter, let subProtocol = footer.subProtocol {
-            footer.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: subProtocol.contentHeith())
+        newFooter.frame = CGRect(x: 0, y: 0, width: self.mj_w, height: newFooter.subProtocol!.contentHeith())
+        
+        if let oldFooter = gtmFooter {
+            oldFooter.removeFromSuperview()
         }
         
-        if gtmFooter != loadMoreFooter {
-            gtmFooter?.removeFromSuperview()
-            
-            if let footer:GTMLoadMoreFooter = loadMoreFooter {
-                footer.loadMoreBlock = loadMoreBlock
-                self.insertSubview(footer, at: 0)
-                self.gtmFooter = footer
-            }
-        }
+        newFooter.loadMoreBlock = loadMoreBlock
+        self.insertSubview(newFooter, at: 0)
+        self.gtmFooter = newFooter
         return self
     }
     
@@ -86,14 +86,12 @@ extension UIScrollView {
         self.gtmHeader?.autoRefreshing()
     }
     
-    final public func endRefreshing(isSuccess: Bool) {
+    final public func endRefreshing(isSuccess: Bool = true) {
         self.gtmHeader?.endRefresing(isSuccess: isSuccess)
-        if isSuccess {
-            // 重置footer状态（防止footer还处在数据加载完成状态）
-            self.gtmFooter?.state = .idle
-        }
+        // 重置footer状态（防止footer还处在数据加载完成状态）
+        self.gtmFooter?.state = .idle
     }
-    final public func endLoadMore(isNoMoreData: Bool) {
+    final public func endLoadMore(isNoMoreData: Bool = false) {
         self.gtmFooter?.endLoadMore(isNoMoreData: isNoMoreData)
     }
 }
@@ -114,7 +112,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.top = newValue
             if #available(iOS 11, *) {
-                inset.top -= self.safeAreaInsets.top//(self.adjustedContentInset.top - self.contentInset.top)
+                inset.top -= self.safeAreaInsets.top
             }
             self.contentInset = inset
         }
@@ -125,7 +123,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.bottom = newValue
             if #available(iOS 11, *) {
-                inset.bottom -= self.safeAreaInsets.bottom//(self.adjustedContentInset.bottom - self.contentInset.bottom)
+                inset.bottom -= self.safeAreaInsets.bottom
             }
             self.contentInset = inset
         }
@@ -136,7 +134,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.left = newValue
             if #available(iOS 11, *) {
-                inset.left -= self.safeAreaInsets.left//(self.adjustedContentInset.left - self.contentInset.left)
+                inset.left -= self.safeAreaInsets.left
             }
             self.contentInset = inset
         }
@@ -147,7 +145,7 @@ extension UIScrollView {
             var inset = self.contentInset
             inset.right = newValue
             if #available(iOS 11, *) {
-                inset.right -= self.safeAreaInsets.right//(self.adjustedContentInset.right - self.contentInset.right)
+                inset.right -= self.safeAreaInsets.right
             }
             self.contentInset = inset
         }

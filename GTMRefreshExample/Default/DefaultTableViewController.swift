@@ -75,7 +75,9 @@ class DefaultTableViewController:UITableViewController{
         cell?.textLabel?.text = "\(models[(indexPath as NSIndexPath).row])"
         return cell!
     }
+    
+    
     deinit{
-         print("Deinit of DefaultTableViewController")
+        print("Deinit of \(NSStringFromClass(type(of: self)))")
     }
 }

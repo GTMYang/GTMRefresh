@@ -16,11 +16,11 @@ import UIKit
 /// - willRefresh:  即将刷新
 /// - noMoreData:   没有更多数据
 public enum GTMRefreshState {
-    case idle
-    case pulling
-    case refreshing
-    case willRefresh
-    case noMoreData
+    case idle           // 闲置
+    case pulling        // 可以进行刷新
+    case refreshing     // 正在刷新
+    case willRefresh    // 即将刷新
+    case noMoreData     // 没有更多数据
 }
 
 public protocol SubGTMRefreshComponentProtocol {
@@ -71,18 +71,17 @@ open class GTMRefreshComponent: UIView {
     override open func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         
-        guard let superView = newSuperview as? UIScrollView else {
+        guard let scrollView = newSuperview as? UIScrollView else {
             return
         }
         
-        
-        self.mj_w = superView.mj_w
         self.mj_x = 0
+        self.mj_w = scrollView.mj_w
 
-        self.scrollView = superView
+        self.scrollView = scrollView
         // 设置永远支持垂直弹簧效果
         self.scrollView?.alwaysBounceVertical = true
-        self.scrollViewOriginalInset = self.scrollView?.mj_inset
+        self.scrollViewOriginalInset = scrollView.mj_inset
         
     }
     
@@ -109,7 +108,6 @@ open class GTMRefreshComponent: UIView {
         if GTMRefreshConstant.debug { print("GTMRefresh -> removeAbserver ... ")}
         scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentOffset)
         scrollView?.removeObserver(self, forKeyPath: GTMRefreshConstant.keyPathContentSize)
-       // self.scrollView = nil
     }
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -122,7 +120,7 @@ open class GTMRefreshComponent: UIView {
                 sub.scollViewContentSizeDidChange(change: change)
             }
             
-            guard !self.isHidden else {
+            if self.isHidden {
                 return
             }
             

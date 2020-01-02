@@ -23,6 +23,6 @@ tapToRefresh = "Tap to refresh";
 
 scrollAndTapToRefresh = "Scroll or tap to load";
 
-loadMore = "Loadding...";
+loadMore = "Loading...";
 
 releaseLoadMore = "Release to load more";

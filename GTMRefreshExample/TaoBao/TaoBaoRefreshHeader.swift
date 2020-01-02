@@ -6,8 +6,8 @@
 //  Copyright © 2016年 luoyang. All rights reserved.
 //
 
-import UIKit
 import GTMRefresh
+import UIKit
 
 
 class TaoBaoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
@@ -35,11 +35,13 @@ class TaoBaoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         bezierPath.addLine(to: CGPoint(x: 25,y: 20))
         bezierPath.move(to: CGPoint(x: 20, y: 25))
         bezierPath.addLine(to: CGPoint(x: 15, y: 20))
+       
         self.arrowLayer.path = bezierPath.cgPath
         self.arrowLayer.strokeColor = UIColor.lightGray.cgColor
         self.arrowLayer.fillColor = UIColor.clear.cgColor
-        self.arrowLayer.lineWidth = 1.0
+        self.arrowLayer.lineWidth = 2.0
         self.arrowLayer.lineCap = CAShapeLayerLineCap.round
+        self.arrowLayer.lineJoin = CAShapeLayerLineJoin.round
         self.arrowLayer.bounds = CGRect(x: 0, y: 0,width: 40, height: 40)
         self.arrowLayer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.layer.addSublayer(self.arrowLayer)
@@ -48,7 +50,7 @@ class TaoBaoRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         let bezierPath = UIBezierPath(arcCenter: CGPoint(x: 20, y: 20),
                                       radius: 12.0,
                                       startAngle:CGFloat(-Double.pi/2),
-                                      endAngle: CGFloat(Double.pi * 3),
+                                      endAngle: CGFloat(Double.pi/2 * 3),
                                       clockwise: true)
         self.circleLayer.path = bezierPath.cgPath
         self.circleLayer.strokeColor = UIColor.lightGray.cgColor

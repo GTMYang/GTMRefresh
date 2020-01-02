@@ -73,9 +73,9 @@ class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         self.maskLayer.path = createLayerWithY(60, controlPoint: controPoint).cgPath
     }
     func toPullingState() {
-        UIView.animate(withDuration: 0.4, animations: {
-            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
-        })
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+0.000001))
+//        })
     }
   
     func changePullingPercent(percent: CGFloat) {
@@ -85,6 +85,8 @@ class CurveRefreshHeader: GTMRefreshHeader, SubGTMRefreshHeaderProtocol {
         let controlPoint = CGPoint(x: self.bounds.width/2, y: self.bounds.height + adjustHeight)
         let bezierPath = createLayerWithY(adjustHeight,controlPoint: controlPoint)
         self.maskLayer.path = bezierPath.cgPath
+        
+        self.pullingIndicator.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi+Double.pi*2*Double(percent)))
     }
     func willEndRefreshing(isSuccess: Bool) {
         spinner.stopAnimating()
