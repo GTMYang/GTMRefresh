@@ -12,6 +12,9 @@
 		26044DC01DFD7AB7006E82B3 /* Taobao.gif in Resources */ = {isa = PBXBuildFile; fileRef = 26044DBB1DFD7AB7006E82B3 /* Taobao.gif */; };
 		26044DC11DFD7AB7006E82B3 /* TXVideo.gif in Resources */ = {isa = PBXBuildFile; fileRef = 26044DBC1DFD7AB7006E82B3 /* TXVideo.gif */; };
 		26044DC21DFD7AB7006E82B3 /* Youku.gif in Resources */ = {isa = PBXBuildFile; fileRef = 26044DBD1DFD7AB7006E82B3 /* Youku.gif */; };
+		260C238423BDA4CE0076EF9F /* wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = 260C238323BDA4CE0076EF9F /* wechat.png */; };
+		260C238623BDA5090076EF9F /* WechatRefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C238523BDA5090076EF9F /* WechatRefreshHeader.swift */; };
+		260C238823BDA5F30076EF9F /* WechatRefreshHeaderTestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260C238723BDA5F30076EF9F /* WechatRefreshHeaderTestVC.swift */; };
 		2635564B1DFAA91700FD98BB /* DefaultScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556441DFAA91700FD98BB /* DefaultScrollViewController.swift */; };
 		2635564C1DFAA91700FD98BB /* DefaultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556451DFAA91700FD98BB /* DefaultTableViewController.swift */; };
 		2635564D1DFAA91700FD98BB /* DefaultWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263556461DFAA91700FD98BB /* DefaultWebViewController.swift */; };
@@ -265,6 +268,9 @@
 		26044DBB1DFD7AB7006E82B3 /* Taobao.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Taobao.gif; sourceTree = "<group>"; };
 		26044DBC1DFD7AB7006E82B3 /* TXVideo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = TXVideo.gif; sourceTree = "<group>"; };
 		26044DBD1DFD7AB7006E82B3 /* Youku.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Youku.gif; sourceTree = "<group>"; };
+		260C238323BDA4CE0076EF9F /* wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wechat.png; sourceTree = "<group>"; };
+		260C238523BDA5090076EF9F /* WechatRefreshHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatRefreshHeader.swift; sourceTree = "<group>"; };
+		260C238723BDA5F30076EF9F /* WechatRefreshHeaderTestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatRefreshHeaderTestVC.swift; sourceTree = "<group>"; };
 		26330F2B1E5AD83A00C2810B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localize.strings; sourceTree = "<group>"; };
 		263556441DFAA91700FD98BB /* DefaultScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultScrollViewController.swift; sourceTree = "<group>"; };
 		263556451DFAA91700FD98BB /* DefaultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewController.swift; sourceTree = "<group>"; };
@@ -523,6 +529,16 @@
 			path = Demo;
 			sourceTree = "<group>";
 		};
+		260C238223BDA4AA0076EF9F /* Wechat */ = {
+			isa = PBXGroup;
+			children = (
+				260C238323BDA4CE0076EF9F /* wechat.png */,
+				260C238523BDA5090076EF9F /* WechatRefreshHeader.swift */,
+				260C238723BDA5F30076EF9F /* WechatRefreshHeaderTestVC.swift */,
+			);
+			path = Wechat;
+			sourceTree = "<group>";
+		};
 		2635563F1DFAA90B00FD98BB /* Default */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,7 +683,7 @@
 		267115591DF6AEAA00F27CEA /* GTMRefreshExample */ = {
 			isa = PBXGroup;
 			children = (
-				263B433F212EB2A50068A933 /* NavigationController.swift */,
+				260C238223BDA4AA0076EF9F /* Wechat */,
 				2655CB481DF95617001C50CF /* YahooWeather */,
 				2655CB451DF95617001C50CF /* QQRefresh */,
 				2635563F1DFAA90B00FD98BB /* Default */,
@@ -677,6 +693,7 @@
 				2655CB471DF95617001C50CF /* TaoBao */,
 				2655CB491DF95617001C50CF /* YouKu */,
 				2671155A1DF6AEAA00F27CEA /* AppDelegate.swift */,
+				263B433F212EB2A50068A933 /* NavigationController.swift */,
 				2671155C1DF6AEAA00F27CEA /* ViewController.swift */,
 				2655CB521DF9676E001C50CF /* BaseTableViewController.swift */,
 				2655CB4A1DF9564B001C50CF /* SectionModel.swift */,
@@ -1054,6 +1071,7 @@
 				26F34AED1DFB0030004C8CF1 /* taobaoLogo.png in Resources */,
 				26F34A191DFAF3D5004C8CF1 /* sun_00027.png in Resources */,
 				26F34A431DFAF3D5004C8CF1 /* sun_00069.png in Resources */,
+				260C238423BDA4CE0076EF9F /* wechat.png in Resources */,
 				26F34ADE1DFB0000004C8CF1 /* loading24@2x.png in Resources */,
 				26F34ABA1DFB0000004C8CF1 /* loading06@2x.png in Resources */,
 				26F34ABB1DFB0000004C8CF1 /* loading06@3x.png in Resources */,
@@ -1208,8 +1226,10 @@
 				26F34AEF1DFB0030004C8CF1 /* TaobaoTableViewController.swift in Sources */,
 				26F34AF21DFB004C004C8CF1 /* DianpingRefreshHeader.swift in Sources */,
 				2635564D1DFAA91700FD98BB /* DefaultWebViewController.swift in Sources */,
+				260C238823BDA5F30076EF9F /* WechatRefreshHeaderTestVC.swift in Sources */,
 				26F3498B1DFAF37E004C8CF1 /* YahooWeatherRefreshHeader.swift in Sources */,
 				2655CB4B1DF9564B001C50CF /* SectionModel.swift in Sources */,
+				260C238623BDA5090076EF9F /* WechatRefreshHeader.swift in Sources */,
 				26A767991DFB0FAF00A2ADD1 /* CurveRefreshHeader.swift in Sources */,
 				26F34A6F1DFAFF7C004C8CF1 /* QQVideoRefreshHeader.swift in Sources */,
 				26A767981DFB0FAF00A2ADD1 /* CurveMaskTableViewController.swift in Sources */,

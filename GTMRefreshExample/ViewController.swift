@@ -21,10 +21,10 @@ class ViewController: UITableViewController {
                                     rowsTargetControlerNames:["DefaultTableViewController","DefaultCollectionViewController","DefaultScrollViewController","DefaultWebViewController"])
         
         
-        let section1 = SectionModel(rowsCount: 7,
+        let section1 = SectionModel(rowsCount: 8,
                                     sectionTitle:"Customize",
-                                    rowsTitles: ["QQ","YahooWeather","Curve Mask","Youku","TaoBao","QQ Video","DianPing"],
-                                    rowsTargetControlerNames:["QQStyleHeaderViewController","YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController"])
+                                    rowsTitles: ["QQ","YahooWeather","Curve Mask","Youku","TaoBao","QQ Video","DianPing", "Wechat"],
+                                    rowsTargetControlerNames:["QQStyleHeaderViewController","YahooWeatherTableViewController","CurveMaskTableViewController","YoukuTableViewController","TaobaoTableViewController","QQVideoTableviewController","DianpingTableviewController", "WechatRefreshHeaderTestVC"])
         models.append(section0)
         models.append(section1)
         

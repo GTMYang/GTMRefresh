@@ -59,22 +59,27 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
     
     override var state: GTMRefreshState {
         didSet {
+            print("GTMRefresh -> header state = \(state) ")
             guard oldValue != state else {
                 return
             }
             switch self.state {
             case .idle:   // refreshing -> idle
-                guard oldValue == .refreshing else {
+                guard oldValue != .idle else {
                     return
                 }
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
-                        self.scrollView?.mj_insetT += self.insetTDelta
-                    }, completion: { (isFinish) in
-                        self.headerProtocolImp?.didEndRefreshing?()
-                        // 执行刷新操作
-                        self.headerProtocolImp?.toNormalState?()
-                    })
+                if oldValue == .refreshing {
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: GTMRefreshConstant.slowAnimationDuration, animations: {
+                            self.scrollView?.mj_insetT += self.insetTDelta
+                        }, completion: { (isFinish) in
+                            self.headerProtocolImp?.didEndRefreshing?()
+                            // 执行刷新操作
+                            self.headerProtocolImp?.toNormalState?()
+                        })
+                    }
+                } else {
+                    self.headerProtocolImp?.toNormalState?()
                 }
             case .pulling:
                 guard oldValue != .pulling else {
@@ -214,14 +219,14 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
             switch state {
             case .idle:
                 // idle -> pulling
-                if offsetY <= idle2pullingOffsetY {
+                if offsetY <= idle2pullingOffsetY-5 {
                     state = .pulling
                 }
             case .pulling:
                 if offsetY <= pulling2willRefreshOffsetY {
                     // pulling -> willRefresh
                     state = .willRefresh
-                } else if offsetY <= idle2pullingOffsetY {
+                } else if offsetY <= idle2pullingOffsetY-5 {
                     // pulling -> pulling # do precent change
                     self.pullingPercent = -(offsetY - idle2pullingOffsetY) / self.willRefresHeight()
                 } else {
@@ -251,6 +256,9 @@ open class GTMRefreshHeader: GTMRefreshComponent, SubGTMRefreshComponentProtocol
                         self.setNeedsDisplay()
                     }
                 }
+            }
+            if state == .pulling {
+                state = .idle
             }
         }
     }

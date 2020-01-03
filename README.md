@@ -41,6 +41,7 @@ GTMRefresh
 - QQ Video
 - DianPing
 - QQ
+- Wechat
 
 # Installation
 
