@@ -82,7 +82,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
                     
                     //  self.lastBottomDelta = toInsetB - scrollV.mj_insetB
                     scrollV.mj_insetB = toInsetB
-                    scrollV.mj_offsetY = self.footerCloseOffsetY + self.mj_h
+                    scrollV.mj_offsetY = self.footerWillShowOffsetY + self.mj_h
                 }, completion: { (isComplet) in
                 })
                 self.subProtocol?.toRefreshingState?()
@@ -124,6 +124,13 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
         self.contentView.frame = self.bounds
     }
     
+    /// 即将触发加载的高度(特殊的控件需要重写该方法，返回不同的数值)
+    ///
+    /// - Returns: 触发刷新的高度
+    open func willLoadMoreHeight() -> CGFloat {
+        return self.mj_h // 默认使用控件高度
+    }
+    
     
     // MARK: - SubGTMRefreshComponentProtocol
     
@@ -136,21 +143,20 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
         self.scrollViewOriginalInset = scrollV.mj_inset
         
         let currentOffsetY = scrollV.mj_offsetY
-        let footerCloseOffsetY = self.footerCloseOffsetY
+        let footerWillShowOffsetY = self.footerWillShowOffsetY
         
         
-        guard currentOffsetY >= footerCloseOffsetY else {
+        guard currentOffsetY >= footerWillShowOffsetY else {
             // footer还没出现， 直接返回
             return
         }
         
         if scrollV.isDragging {
             // 拖动状态
-            let willLoadMoreOffsetY = footerCloseOffsetY + self.mj_h
-            //  print("footerCloseOffsetY = \(footerCloseOffsetY)  footerH = \(self.mj_h)")
+            let willLoadMoreOffsetY = footerWillShowOffsetY + self.willLoadMoreHeight()
             
             switch currentOffsetY {
-            case footerCloseOffsetY...willLoadMoreOffsetY:
+            case footerWillShowOffsetY...willLoadMoreOffsetY:
                 state = .pulling
             case willLoadMoreOffsetY...(willLoadMoreOffsetY + 1000):
                 state = .willRefresh
@@ -202,7 +208,7 @@ open class GTMLoadMoreFooter: GTMRefreshComponent, SubGTMRefreshComponentProtoco
         }
     }
     /// 上拉刷新控件即将出现时的OffsetY
-    private var footerCloseOffsetY: CGFloat {
+    private var footerWillShowOffsetY: CGFloat {
         get {
             guard let _ = scrollView, let originInset = scrollViewOriginalInset else {
                 return 0.0
