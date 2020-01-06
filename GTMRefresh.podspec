@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "GTMRefresh"
-  s.version      = "1.3.8"
+  s.version      = "1.3.9"
   s.summary      = "swift 实现的上拉刷新，下拉加载动效库"
   s.swift_version= "5.1"
 

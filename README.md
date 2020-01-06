@@ -76,7 +76,7 @@ _**Note:** Make sure that all files in `GTMRefresh` included in Compile Sources 
 
 # 版本
 
-## Vesrion 1.3.8
+## Vesrion 1.3.9
 
 This version requires Xcode 11.0 and Swift 5.
 
@@ -173,6 +173,16 @@ return self.mj_h // 默认使用控件高度
 /// - Returns: Loadding动画显示区域的高度
 open func refreshingHoldHeight() -> CGFloat {
 return self.mj_h // 默认使用控件高度
+}
+```
+- 当 footer 触发加载更多的高度和控件高度不一样时重写willLoadMoreHeight()
+```swift
+/// 即将触发加载的高度(特殊的控件需要重写该方法，返回不同的数值)
+  ///
+  /// - Returns: 触发刷新的高度
+  open func willLoadMoreHeight() -> CGFloat {
+      return self.mj_h // 默认使用控件高度
+  }
 }
 ```
 
